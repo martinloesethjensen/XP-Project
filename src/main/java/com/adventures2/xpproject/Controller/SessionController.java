@@ -28,7 +28,7 @@ public class SessionController {
     @PostMapping("/login")
     public String login() {
 
-        return "/login";
+        return "/index";
     }
 
 
