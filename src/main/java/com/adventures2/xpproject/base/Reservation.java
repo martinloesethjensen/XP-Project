@@ -1,4 +1,4 @@
 package com.adventures2.xpproject.base;
 
-public class Reservationgit  {
+public class Reservation  {
 }
