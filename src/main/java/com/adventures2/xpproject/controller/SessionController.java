@@ -14,10 +14,7 @@ public class SessionController {
 
     @GetMapping("/")
     public String view(HttpSession session) {
-        if(Authenticate.isLoggedIn(session)) {
-            return "/index";
-        }
-        return "redirect:/login";
+        return "/index";
     }
 
     @GetMapping("/logout")
@@ -32,10 +29,13 @@ public class SessionController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) throws SQLException {
-        Authenticate.login(username, password, session);
+    public String login(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            @RequestParam("action") String action,
+            HttpSession session) throws SQLException {
+        if(action.equals("Log Ind"))
+            Authenticate.login(username, password, session);
         return "redirect:/";
     }
-
-
 }
