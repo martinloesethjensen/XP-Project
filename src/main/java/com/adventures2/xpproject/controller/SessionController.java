@@ -20,9 +20,10 @@ public class SessionController {
         return "redirect:/login";
     }
 
-    @GetMapping("/homepage")
-    public String viewHomepage() {
-        return "/homepage";
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        Authenticate.logout(session);
+        return "redirect:/";
     }
 
     @GetMapping("/login")
