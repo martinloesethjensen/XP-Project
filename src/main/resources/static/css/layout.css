@@ -6,3 +6,9 @@
     margin: auto;
 
 }
+
+/*To avoid horizontal overflow with row, so the scroll bar appears.*/
+.row {
+    margin: 0;
+    padding: 0
+}
