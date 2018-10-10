@@ -41,8 +41,6 @@ public class DatabaseConnection {
             return statement.executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeConnetion();
         }
 
         return null;
