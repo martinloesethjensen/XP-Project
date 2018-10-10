@@ -1,4 +1,4 @@
-package com.adventures2.xpproject.Controller;
+package com.adventures2.xpproject.controller;
 
 import com.adventures2.xpproject.DatabaseConnection;
 import org.springframework.stereotype.Controller;
