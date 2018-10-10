@@ -12,11 +12,6 @@ import java.sql.SQLException;
 @Controller
 public class SessionController {
 
-    @GetMapping("/")
-    public String view(HttpSession session) {
-        return "/index";
-    }
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         Authenticate.logout(session);
