@@ -34,6 +34,11 @@ public class DatabaseConnection {
         }
     }
 
+    private static Connection getConnection(){
+        createConnection();
+        return connection;
+    }
+
     public static ResultSet query(String sql) {
         createConnection();
 
@@ -41,8 +46,6 @@ public class DatabaseConnection {
             return statement.executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeConnetion();
         }
 
         return null;
