@@ -53,6 +53,7 @@ public class DatabaseConnection {
 
         try {
             preparedStatement.executeUpdate();
+            connection.commit();
             return preparedStatement.getGeneratedKeys().getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -68,6 +69,7 @@ public class DatabaseConnection {
 
         try {
             preparedStatement.executeUpdate();
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
