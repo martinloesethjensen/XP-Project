@@ -14,6 +14,7 @@ public class CalendarController {
     public String view(HttpSession session, Model model) {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
+        model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         return "/index";
     }
 }
