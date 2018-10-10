@@ -34,6 +34,11 @@ public class DatabaseConnection {
         }
     }
 
+    public static Connection getConnection(){
+        createConnection();
+        return connection;
+    }
+
     public static ResultSet query(String sql) {
         createConnection();
 
