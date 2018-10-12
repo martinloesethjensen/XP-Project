@@ -56,10 +56,13 @@ public class DatabaseConnection {
 
         try {
             preparedStatement.executeUpdate();
-            connection.commit();
-            return preparedStatement.getGeneratedKeys().getInt(1);
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if(rs.next())
+                return rs.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeConnetion();
         }
 
         return 0;
@@ -70,7 +73,6 @@ public class DatabaseConnection {
 
         try {
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }

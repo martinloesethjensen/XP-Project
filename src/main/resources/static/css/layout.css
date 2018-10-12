@@ -12,3 +12,16 @@
     margin: 0;
     padding: 0
 }
+
+
+.btnMargin {
+    margin-left: 10px;
+}
+
+.card img {
+    width: 100%;
+}
+
+.card a {
+    display: block;
+}
