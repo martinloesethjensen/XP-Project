@@ -17,7 +17,6 @@ public class DatabaseConnection {
         try {
             Class.forName(CLASS_NAME);
             connection = DriverManager.getConnection(DB_HOST, DB_USER, DB_PASSWORD);
-            connection.setAutoCommit(false);
             statement = connection.createStatement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,14 +56,13 @@ public class DatabaseConnection {
 
         try {
             preparedStatement.executeUpdate();
-            connection.commit();
-            System.out.println(preparedStatement.toString());
             ResultSet rs = preparedStatement.getGeneratedKeys();
             if(rs.next())
-                System.out.println(rs.getInt(1));
                 return rs.getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeConnetion();
         }
 
         return 0;
@@ -75,7 +73,6 @@ public class DatabaseConnection {
 
         try {
             preparedStatement.executeUpdate();
-            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }

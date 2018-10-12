@@ -18,8 +18,6 @@ public class ReservationLogic {
         else
             id = customer.getId();
 
-        System.out.println("ID: "+id);
-
         try {
             PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(
                     "INSERT INTO reservations (start,end,customDiscount,peopleAmount,fk_customer_id,fk_activity_id,fk_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)"
