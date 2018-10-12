@@ -21,6 +21,16 @@ public class Activity {
     this.discount = discount;
   }
 
+  @Override
+  public String toString() {
+    return "Activity{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", price=" + price +
+            ", discount=" + discount +
+            '}';
+  }
+
   public int getId() {
     return id;
   }

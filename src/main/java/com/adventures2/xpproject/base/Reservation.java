@@ -4,7 +4,7 @@ public class Reservation  {
   private int id;
   private String start;
   private String end;
-  private int discount;
+  private int customDiscount;
   private int peopleAmount;
   private int fk_customer_id;
   private int fk_activity_id;
@@ -13,25 +13,39 @@ public class Reservation  {
   public Reservation() {
   }
 
-  public Reservation(String start, String end, int discount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
+  public Reservation(String start, String end, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
     this.start = start;
     this.end = end;
-    this.discount = discount;
+    this.customDiscount = customDiscount;
     this.peopleAmount = peopleAmount;
     this.fk_customer_id = fk_customer_id;
     this.fk_activity_id = fk_activity_id;
     this.fk_user_id = fk_user_id;
   }
 
-  public Reservation(int id, String start, String end, int discount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
+  public Reservation(int id, String start, String end, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
     this.id = id;
     this.start = start;
     this.end = end;
-    this.discount = discount;
+    this.customDiscount = customDiscount;
     this.peopleAmount = peopleAmount;
     this.fk_customer_id = fk_customer_id;
     this.fk_activity_id = fk_activity_id;
     this.fk_user_id = fk_user_id;
+  }
+
+  @Override
+  public String toString() {
+    return "Reservation{" +
+            "id=" + id +
+            ", start='" + start + '\'' +
+            ", end='" + end + '\'' +
+            ", customDiscount=" + customDiscount +
+            ", peopleAmount=" + peopleAmount +
+            ", fk_customer_id=" + fk_customer_id +
+            ", fk_activity_id=" + fk_activity_id +
+            ", fk_user_id=" + fk_user_id +
+            '}';
   }
 
   public int getId() {
@@ -54,12 +68,12 @@ public class Reservation  {
     this.end = end;
   }
 
-  public int getDiscount() {
-    return discount;
+  public int getCustomDiscount() {
+    return customDiscount;
   }
 
-  public void setDiscount(int discount) {
-    this.discount = discount;
+  public void setCustomDiscount(int customDiscount) {
+    this.customDiscount = customDiscount;
   }
 
   public int getPeopleAmount() {

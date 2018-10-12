@@ -1,10 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/layout.css">
 </head>
 <body>
-    <h1>Hej</h1>
+<div th:replace="/includes/menu::menu"></div>
+<div class="row">
+    <div class="col-md-3"></div>
+
+    <div class="col-md-6">
+        <form method="post">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input class=" btn btn-block btn-primary " value="Forrige" type="submit"
+                               name="action">
+                    </div>
+                    <div class="col-md-6">
+                        <input class=" text-center form-control" value="11/11/2018 - 17/11/2018"
+                               type="text" disabled>
+                    </div>
+                    <div class="col-md-3">
+                        <input class=" btn btn-block btn-primary " value="Næste" type="submit"
+                               name="action">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3">
+        <input class=" btn btn-success float-right" value="Opret Reservation" type="submit" name="action">
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Dato</th>
+                <th scope="col">Tid</th>
+                <th scope="col">Aktivitet</th>
+                <th scope="col">Medarbejder</th>
+                <th scope="col">Antal personer</th>
+                <th scope="col">Kundekontakt</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <!--/*@thymesVar id="dataList" type="java.util.ArrayList"*/-->
+            <tr th:each="data: ${dataList}">
+                <td th:text="${data.start}"></td>
+                <td th:text="${data.end}"></td>
+                <td th:text="${data.end}"></td>
+                <td>Medarbejder</td>
+                <td>Antal personer</td>
+                <td>Kundekontakt</td>
+                <td>
+                    <div class="form-group">
+                        <div class="row float-right">
+                            <form method="post">
+                                <button class="btn btn-danger float-right btnMargin" type="submit"
+                                        name="deleteReservation">
+                                    Slet
+                                </button>
+                                <button class="btn btn-primary float-right" type="submit" name="editReservation">
+                                    Rediger
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
 </body>
 </html>
