@@ -132,4 +132,9 @@ public class ReservationController {
 	public String landingpageEmployer() {
 		return "/employer/landingpage_employer";
 	}
+
+	@GetMapping("/ReservationFillOut")
+	public String reservationFillOut(){
+		return "reservationFillOut";
+	}
 }
