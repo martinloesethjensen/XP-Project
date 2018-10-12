@@ -8,10 +8,8 @@ public class Customer {
 	private boolean newsmail;
 	private String companyName;
 
-	//Constructor for SPRING when creating a new customer
 	public Customer() {}
 
-	//Constructor for DATABASE when retrieving all Customers
 	public Customer(int id, String name, String telephone, String email, boolean newsmail, String companyName) {
 		this.id = id;
 		this.name = name;
@@ -21,7 +19,6 @@ public class Customer {
 		this.companyName = companyName;
 	}
 
-	//Constructor for SPRING when a new Customer is created before inserted to database
 	public Customer(String name, String telephone, String email, boolean newsmail, String companyName) {
 		this.name = name;
 		this.telephone = telephone;
