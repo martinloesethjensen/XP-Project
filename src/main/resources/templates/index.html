@@ -11,6 +11,8 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="/includes/menu::menu"></div>
@@ -38,7 +40,18 @@
         </form>
     </div>
     <div class="col-md-3">
-        <input class=" btn btn-success float-right" value="Opret Reservation" type="submit" name="action" th:if="${IS_LOGGED_IN} AND ${NIVEAU} == 2">
+        <div id="imaginary_container">
+            <div class="input-group stylish-input-group">
+                <input type="date" class="form-control" placeholder="Søg på dag fx. mandag">
+                <span class="input-group-addon">
+                        <button class="btn" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                </span>
+            </div>
+        </div>
+        <input class=" btn btn-success float-right" value="Opret Reservation" type="submit" name="action"
+               th:if="${IS_LOGGED_IN} AND ${NIVEAU} == 2">
     </div>
 </div>
 <table class="table table-striped">
