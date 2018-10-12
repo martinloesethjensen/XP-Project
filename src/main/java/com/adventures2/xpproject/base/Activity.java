@@ -1,24 +1,34 @@
 package com.adventures2.xpproject.base;
 
-public class Acitivity {
+public class Activity {
   private int id;
   private String name;
   private double price;
   private int discount;
 
-  public Acitivity() {}
+  public Activity() {}
 
-  public Acitivity(int id, String name, double price, int discount) {
+  public Activity(int id, String name, double price, int discount) {
     this.id = id;
     this.name = name;
     this.price = price;
     this.discount = discount;
   }
 
-  public Acitivity(String name, double price, int discount) {
+  public Activity(String name, double price, int discount) {
     this.name = name;
     this.price = price;
     this.discount = discount;
+  }
+
+  @Override
+  public String toString() {
+    return "Activity{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", price=" + price +
+            ", discount=" + discount +
+            '}';
   }
 
   public int getId() {

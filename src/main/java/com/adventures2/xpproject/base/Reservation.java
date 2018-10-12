@@ -34,6 +34,20 @@ public class Reservation  {
     this.fk_user_id = fk_user_id;
   }
 
+  @Override
+  public String toString() {
+    return "Reservation{" +
+            "id=" + id +
+            ", start='" + start + '\'' +
+            ", end='" + end + '\'' +
+            ", customDiscount=" + customDiscount +
+            ", peopleAmount=" + peopleAmount +
+            ", fk_customer_id=" + fk_customer_id +
+            ", fk_activity_id=" + fk_activity_id +
+            ", fk_user_id=" + fk_user_id +
+            '}';
+  }
+
   public int getId() {
     return id;
   }

@@ -1,6 +1,6 @@
 //package com.adventures2.xpproject.logic;
 //
-//import com.adventures2.xpproject.base.Acitivity;
+//import com.adventures2.xpproject.base.Activity;
 //
 //import java.sql.Connection;
 //import java.sql.PreparedStatement;
@@ -10,7 +10,7 @@
 //public class ActivityLogic {
 //
 //
-//public void createActivity(Acitivity acitivity){
+//public void createActivity(Activity acitivity){
 //    PreparedStatement preparedStatement;
 //
 //    try { //count returnerer et antal rækker, der matcher et kriterie,

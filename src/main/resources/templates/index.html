@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -58,10 +58,11 @@
             </thead>
             <tbody>
 
-            <tr>
-                <td>Dato</td>
-                <td>Tid</td>
-                <td>Aktivitet</td>
+            <!--/*@thymesVar id="dataList" type="java.util.ArrayList"*/-->
+            <tr th:each="data: ${dataList}">
+                <td th:text="${data.start}"></td>
+                <td th:text="${data.end}"></td>
+                <td th:text="${data.end}"></td>
                 <td>Medarbejder</td>
                 <td>Antal personer</td>
                 <td>Kundekontakt</td>
