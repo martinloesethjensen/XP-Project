@@ -1,4 +1,4 @@
-//package com.adventures2.xpproject.aktivityLogic;
+//package com.adventures2.xpproject.logic;
 //
 //import com.adventures2.xpproject.base.Acitivity;
 //
