@@ -1,0 +1,85 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title> Hotel Reservation Form </title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/ReservationFillOutCSS.css">
+
+    <script>
+        function finalCost(){
+            var roomType = document.getElementById("room_type").value;
+            var roomNum = document.getElementById("room_number").value;
+            var personNum = document.getElementById("person_number").value;
+            var childNum = document.getElementById("child_number").value;
+            var resFacilities = document.getElementById("res_facilities").value;
+
+            var total = (parseInt(roomType)*10) + ((roomNum)*2) + ((personNum)*3) + ((childNum)*2) + ((resFacilities)*5)
+
+            document.getElementById("result").innerHTML = total;
+        }
+    </script>
+
+
+</head>
+<body>
+<div class="hotel_reserve_box">
+    <h3> Udfyld oplysninger</h3><br>
+    <form>
+        <div class="col-sm-1"></div>
+        <div class="form-group col-sm-5">
+            <label>Fornavn*</label>
+            <br/>
+            <input type="FirstName" class="form-control inputDetails" id="inputFirstName">
+            </div>
+
+
+            <div class="form-group col-sm-5">
+                <label>Efternavn*</label>
+                <br/>
+                <input type="LastName" class="form-control" id="inputLastName">
+
+            </div>
+        <div class="col-sm-1"></div>
+
+        <div class="form-group">
+            <label>Telefon*</label>
+            <input type="tlf" class="form-control" id="inputTlfNumber">
+
+        </div>
+
+        <div class="form-group">
+            <label>Email*</label>
+            <input type="Email" class="form-control" id="inputEmail">
+
+        </div>
+
+        <div class="form-group">
+        <label>Firma</label>
+        <input type="firm" class="form-control" id="inputFirm">
+
+    </div>
+        <div class="form-group">
+            <label>Medarbejder ansvarlig for kunden*</label>
+            <select class="form-control" id="assignWorker"/>
+                <option value="0" selected> Do you want restaurant facilities? </option>
+            </select>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox">Ønsker kunden at modtage fra os?</label>
+        </div><br>
+
+    </form>
+</div>
+
+</body>
+</html>
