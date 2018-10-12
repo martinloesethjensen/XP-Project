@@ -23,11 +23,24 @@ public class ReservationController {
         return "/index";
     }
 
+    @GetMapping("/reservation/create")
+    public String create(HttpSession session) {
+        //if(Authenticate.isLoggedIn(session)) {
+            session.setAttribute("ID", 1);
+            Customer customer = new Customer("Marco Bang Romeri", "28673631", "marco@romeri.dk", true, "");
+            Reservation reservation = new Reservation("123", "123", 0, 10, 0, 2, 1);
+
+            ReservationLogic.create(reservation, customer, session);
+            return "/test";
+        //}
+        //return "redirect:/login";
+    }
+
     @PostMapping("/reservation/create")
     public String create(HttpSession session, Reservation reservation, Customer customer) {
-        if(Authenticate.isLoggedIn(session)) {
+
             ReservationLogic.create(reservation, customer, session);
-        }
+
         return "redirect:/reservation/create";
     }
 }

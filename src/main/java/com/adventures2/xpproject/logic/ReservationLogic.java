@@ -15,10 +15,13 @@ public class ReservationLogic {
         //If a new customer is made
         if(customer.getId() == 0)
             id = CustomerLogic.create(customer);
+        else
+            id = customer.getId();
 
-        PreparedStatement preparedStatement = null;
+        System.out.println("ID: "+id);
+
         try {
-            preparedStatement = DatabaseConnection.getConnection().prepareStatement(
+            PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(
                     "INSERT INTO reservations (start,end,customDiscount,peopleAmount,fk_customer_id,fk_activity_id,fk_user_id) VALUES(?, ?, ?, ?, ?, ?, ?)"
             );
             preparedStatement.setString(1, reservation.getStart());
