@@ -5,6 +5,7 @@ import com.adventures2.xpproject.base.Activity;
 import com.adventures2.xpproject.base.Customer;
 import com.adventures2.xpproject.base.Employee;
 import com.adventures2.xpproject.base.Reservation;
+import com.adventures2.xpproject.logic.ActivityLogic;
 import com.adventures2.xpproject.logic.ReservationLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +38,8 @@ public class ReservationController {
         Reservation r3 = new Reservation(3, "Mandag 14:00", "Mandag 15:00", 1, 5, 3, 1, 1);
         Reservation r4 = new Reservation(4, "Mandag 15:00", "Mandag 16:00", 1, 6, 4, 2, 1);
 
-        Activity activity1 = new Activity(1, "Go-kart", 10, 2);
-        Activity activity2 = new Activity(2, "Paint-ball", 10, 2);
+        //Activity activity1 = new Activity(1, "Go-kart", 10, 2);
+        //Activity activity2 = new Activity(2, "Paint-ball", 10, 2);
 
         Employee employee = new Employee(1, "Martin");
 
@@ -50,8 +51,6 @@ public class ReservationController {
         hashMapCustomer.put(6, c2);
         hashMapCustomer.put(3, c3);
         hashMapCustomer.put(4, c4);
-        hashMapActivity.put(1, activity1);
-        hashMapActivity.put(2,activity2);
         hashMapEmployee.put(1, employee);
 
         System.out.println(hashMapActivity.get(reservations.get(1).getFk_activity_id()).getName());
@@ -60,8 +59,8 @@ public class ReservationController {
 
     @GetMapping("/")
     public String view(HttpSession session, Model model) {
-        populate();
-        model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
+        //populate();
+        /*model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         model.addAttribute("dataMapCustomer", hashMapCustomer);
@@ -69,18 +68,30 @@ public class ReservationController {
         model.addAttribute("dataMapAct", hashMapActivity);
         model.addAttribute("dataMapEmp", hashMapEmployee);
 
-        System.out.println(reservations);
+        System.out.println(reservations);*/
         return "/index";
     }
 
 
 
     @GetMapping("/reservation/create")
-    public String create(HttpSession session) {
-        if(Authenticate.isLoggedIn(session)) {
-            //return "/reservation/create";
-        }
-        return "redirect:/";
+    public String createStepOne(HttpSession session, Model model) {
+        //if(Authenticate.isLoggedIn(session)) {
+            model.addAttribute("activities", ActivityLogic.getActivities());
+            model.addAttribute("totalActivities", ActivityLogic.getTotalActivities()-1);
+            return "/reservation/create_step_1";
+        //}
+        //return "redirect:/";
+    }
+
+    @GetMapping("/reservation/create/{id}")
+    public String createStepTwo(HttpSession session, Model model) {
+        //if(Authenticate.isLoggedIn(session)) {
+        model.addAttribute("activities", ActivityLogic.getActivities());
+        model.addAttribute("totalActivities", ActivityLogic.getTotalActivities()-1);
+        return "/reservation/create_step_2";
+        //}
+        //return "redirect:/";
     }
 
     @PostMapping("/reservation/create")
