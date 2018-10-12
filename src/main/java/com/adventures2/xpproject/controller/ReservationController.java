@@ -1,6 +1,7 @@
 package com.adventures2.xpproject.controller;
 
 import com.adventures2.xpproject.auth.Authenticate;
+import com.adventures2.xpproject.base.Activity;
 import com.adventures2.xpproject.base.Customer;
 import com.adventures2.xpproject.base.Reservation;
 import com.adventures2.xpproject.logic.ReservationLogic;
@@ -62,22 +63,15 @@ public class ReservationController {
 
     @GetMapping("/reservation/create")
     public String create(HttpSession session) {
-        //if(Authenticate.isLoggedIn(session)) {
-            session.setAttribute("ID", 1);
-            Customer customer = new Customer("Marco Bang Romeri", "28673631", "marco@romeri.dk", true, "");
-            Reservation reservation = new Reservation("123", "123", 0, 10, 0, 2, 1);
-
-            ReservationLogic.create(reservation, customer, session);
-            return "/test";
-        //}
-        //return "redirect:/login";
+        if(Authenticate.isLoggedIn(session)) {
+            //return "/reservation/create";
+        }
+        return "redirect:/";
     }
 
     @PostMapping("/reservation/create")
     public String create(HttpSession session, Reservation reservation, Customer customer) {
-
-            ReservationLogic.create(reservation, customer, session);
-
+        ReservationLogic.create(reservation, customer, session);
         return "redirect:/reservation/create";
     }
 
