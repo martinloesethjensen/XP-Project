@@ -4,6 +4,7 @@ import com.adventures2.xpproject.auth.Authenticate;
 import com.adventures2.xpproject.base.Activity;
 import com.adventures2.xpproject.base.Customer;
 import com.adventures2.xpproject.base.Reservation;
+import com.adventures2.xpproject.base.User;
 import com.adventures2.xpproject.logic.ReservationLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ public class ReservationController {
 
     HashMap<Integer,Customer> hashMapCustomer = new HashMap<>();
     HashMap<Integer, Activity> hashMapActivity = new HashMap<>();
+    HashMap<Integer, User> hashMapUser = new HashMap<>();
     ArrayList<Reservation> reservations = new ArrayList<>();
     public void populate() {
 
@@ -31,9 +33,14 @@ public class ReservationController {
         Customer c4 = new Customer(4, "Bent", "28712544", "alsk@email.dk", false, "apple");
 
         Reservation r1 = new Reservation(1, "Mandag 12:00", "mandag 13:00", 1, 3, 1, 1, 1);
-        Reservation r2 = new Reservation(2, "start", "end", 1, 4, 6, 1, 1);
-        Reservation r3 = new Reservation(3, "start", "end", 1, 5, 3, 1, 1);
-        Reservation r4 = new Reservation(4, "start", "end", 1, 6, 4, 1, 1);
+        Reservation r2 = new Reservation(2, "Mandag 12:00", "Mandag 13:00", 1, 4, 6, 2, 1);
+        Reservation r3 = new Reservation(3, "Mandag 14:00", "Mandag 15:00", 1, 5, 3, 1, 1);
+        Reservation r4 = new Reservation(4, "Mandag 15:00", "Mandag 16:00", 1, 6, 4, 2, 1);
+
+        Activity activity1 = new Activity(1, "Go-kart", 10, 2);
+        Activity activity2 = new Activity(2, "Paint-ball", 10, 2);
+
+        User user = new User(1, "mart", "martttttt", 1, "Martin");
 
         reservations.add(r1);
         reservations.add(r2);
@@ -43,6 +50,11 @@ public class ReservationController {
         hashMapCustomer.put(6, c2);
         hashMapCustomer.put(3, c3);
         hashMapCustomer.put(4, c4);
+        hashMapActivity.put(1, activity1);
+        hashMapActivity.put(2,activity2);
+        hashMapUser.put(1, user);
+
+        System.out.println(hashMapActivity.get(reservations.get(1).getFk_activity_id()).getName());
 
     }
 
@@ -52,8 +64,10 @@ public class ReservationController {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-        model.addAttribute("dataMap", hashMapCustomer);
+        model.addAttribute("dataMapCustomer", hashMapCustomer);
         model.addAttribute("dataList", reservations);
+        model.addAttribute("dataMapAct", hashMapActivity);
+        model.addAttribute("dataMapUser", hashMapUser);
 
         System.out.println(reservations);
         return "/index";

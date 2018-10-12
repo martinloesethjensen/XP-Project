@@ -14,7 +14,7 @@
 </head>
 <body>
 <div th:replace="/includes/menu::menu"></div>
-<div class="row">
+<div class="row pt-3">
     <div class="col-md-3"></div>
 
     <div class="col-md-6">
@@ -40,53 +40,52 @@
     <div class="col-md-3">
         <input class=" btn btn-success float-right" value="Opret Reservation" type="submit" name="action">
     </div>
-
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Dato</th>
-                <th scope="col">Tid</th>
-                <th scope="col">Aktivitet</th>
-                <th scope="col">Medarbejder</th>
-                <th scope="col">Antal personer</th>
-                <th scope="col">Kundekontakt</th>
-                <th scope="col">&nbsp;</th>
-            </tr>
-            </thead>
-            <tbody>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Start</th>
+        <th scope="col">Slut</th>
+        <th scope="col">Aktivitet</th>
+        <th scope="col">Medarbejder</th>
+        <th scope="col">Antal personer</th>
+        <th scope="col">Kundekontakt</th>
+        <th scope="col">&nbsp;</th>
+    </tr>
+    </thead>
+    <tbody>
 
-            <!--/*@thymesVar id="dataList" type="java.util.ArrayList"*/-->
-            <tr th:each="data: ${dataList}">
-                <td th:text="${data.start}"></td>
-                <td th:text="${data.end}"></td>
-                <td th:text="${data.end}"></td>
-                <td>Medarbejder</td>
-                <td>Antal personer</td>
-                <td>Kundekontakt</td>
-                <td>
-                    <div class="form-group">
-                        <div class="row float-right">
-                            <form method="post">
-                                <button class="btn btn-danger float-right btnMargin" type="submit"
-                                        name="deleteReservation">
-                                    Slet
-                                </button>
-                                <button class="btn btn-primary float-right" type="submit" name="editReservation">
-                                    Rediger
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+    <!--/*@thymesVar id="dataList" type="java.util.ArrayList"*/-->
+    <tr th:each="data: ${dataList}">
+        <td th:text="${data.start}"></td>
+        <td th:text="${data.end}"></td>
+        <td th:text="${dataMapAct.get(data.fk_activity_id).getName()}"></td>
+        <td th:text="${dataMapUser.get(data.fk_user_id).getRealname()}"></td>
+        <td th:text="${data.peopleAmount}"></td>
+        <td th:utext="${dataMapCustomer.get(data.fk_customer_id).getName()} + '<br/>' +
+                     ${dataMapCustomer.get(data.fk_customer_id).getTelephone()} + '<br/>' +
+                     ${dataMapCustomer.get(data.fk_customer_id).getEmail()} + '<br/>' +
+                     ${dataMapCustomer.get(data.fk_customer_id).getCompanyName()}">
 
-            </tbody>
-        </table>
-    </div>
-</div>
+        </td>
+        <td>
+            <div class="form-group">
+                <div class="row float-right">
+                    <form method="post">
+                        <button class="btn btn-danger float-right btnMargin" type="submit"
+                                name="deleteReservation">
+                            Slet
+                        </button>
+                        <button class="btn btn-primary float-right" type="submit" name="editReservation">
+                            Rediger
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </td>
+    </tr>
 
+    </tbody>
+</table>
 </body>
 </html>
