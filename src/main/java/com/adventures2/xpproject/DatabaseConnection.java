@@ -60,8 +60,6 @@ public class DatabaseConnection {
             return preparedStatement.getGeneratedKeys().getInt(1);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeConnetion();
         }
 
         return 0;
@@ -75,8 +73,6 @@ public class DatabaseConnection {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            closeConnetion();
         }
     }
 }

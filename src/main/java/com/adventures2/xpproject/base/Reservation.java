@@ -4,7 +4,6 @@ public class Reservation  {
   private int id;
   private String start;
   private String end;
-  private int discount;
   private int customDiscount;
   private int peopleAmount;
   private int fk_customer_id;
@@ -14,10 +13,9 @@ public class Reservation  {
   public Reservation() {
   }
 
-  public Reservation(String start, String end, int discount, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
+  public Reservation(String start, String end, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
     this.start = start;
     this.end = end;
-    this.discount = discount;
     this.customDiscount = customDiscount;
     this.peopleAmount = peopleAmount;
     this.fk_customer_id = fk_customer_id;
@@ -25,11 +23,10 @@ public class Reservation  {
     this.fk_user_id = fk_user_id;
   }
 
-  public Reservation(int id, String start, String end, int discount, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
+  public Reservation(int id, String start, String end, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
     this.id = id;
     this.start = start;
     this.end = end;
-    this.discount = discount;
     this.customDiscount = customDiscount;
     this.peopleAmount = peopleAmount;
     this.fk_customer_id = fk_customer_id;
@@ -55,14 +52,6 @@ public class Reservation  {
 
   public void setEnd(String end) {
     this.end = end;
-  }
-
-  public int getDiscount() {
-    return discount;
-  }
-
-  public void setDiscount(int discount) {
-    this.discount = discount;
   }
 
   public int getCustomDiscount() {
