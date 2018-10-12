@@ -3,8 +3,8 @@ package com.adventures2.xpproject.controller;
 import com.adventures2.xpproject.auth.Authenticate;
 import com.adventures2.xpproject.base.Activity;
 import com.adventures2.xpproject.base.Customer;
+import com.adventures2.xpproject.base.Employee;
 import com.adventures2.xpproject.base.Reservation;
-import com.adventures2.xpproject.base.User;
 import com.adventures2.xpproject.logic.ReservationLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +21,7 @@ public class ReservationController {
 
     HashMap<Integer,Customer> hashMapCustomer = new HashMap<>();
     HashMap<Integer, Activity> hashMapActivity = new HashMap<>();
-    HashMap<Integer, User> hashMapUser = new HashMap<>();
+    HashMap<Integer, Employee> hashMapEmployee = new HashMap<>();
     ArrayList<Reservation> reservations = new ArrayList<>();
     public void populate() {
 
@@ -40,7 +40,7 @@ public class ReservationController {
         Activity activity1 = new Activity(1, "Go-kart", 10, 2);
         Activity activity2 = new Activity(2, "Paint-ball", 10, 2);
 
-        User user = new User(1, "mart", "martttttt", 1, "Martin");
+        Employee employee = new Employee(1, "Martin");
 
         reservations.add(r1);
         reservations.add(r2);
@@ -52,7 +52,7 @@ public class ReservationController {
         hashMapCustomer.put(4, c4);
         hashMapActivity.put(1, activity1);
         hashMapActivity.put(2,activity2);
-        hashMapUser.put(1, user);
+        hashMapEmployee.put(1, employee);
 
         System.out.println(hashMapActivity.get(reservations.get(1).getFk_activity_id()).getName());
 
@@ -67,7 +67,7 @@ public class ReservationController {
         model.addAttribute("dataMapCustomer", hashMapCustomer);
         model.addAttribute("dataList", reservations);
         model.addAttribute("dataMapAct", hashMapActivity);
-        model.addAttribute("dataMapUser", hashMapUser);
+        model.addAttribute("dataMapEmp", hashMapEmployee);
 
         System.out.println(reservations);
         return "/index";
@@ -84,8 +84,8 @@ public class ReservationController {
     }
 
     @PostMapping("/reservation/create")
-    public String create(HttpSession session, Reservation reservation, Customer customer) {
-        ReservationLogic.create(reservation, customer, session);
+    public String create(HttpSession session, Reservation reservation, Customer customer, Employee employee) {
+        ReservationLogic.create(reservation, customer, employee, session);
         return "redirect:/reservation/create";
     }
 

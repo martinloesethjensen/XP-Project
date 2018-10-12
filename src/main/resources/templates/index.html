@@ -60,7 +60,7 @@
         <td th:text="${data.start}"></td>
         <td th:text="${data.end}"></td>
         <td th:text="${dataMapAct.get(data.fk_activity_id).getName()}"></td>
-        <td th:text="${dataMapUser.get(data.fk_user_id).getRealname()}"></td>
+        <td th:text="${dataMapEmp.get(data.fk_user_id).getRealname()}"></td>
         <td th:text="${data.peopleAmount}"></td>
         <td th:utext="${dataMapCustomer.get(data.fk_customer_id).getName()} + '<br/>' +
                      ${dataMapCustomer.get(data.fk_customer_id).getTelephone()} + '<br/>' +
