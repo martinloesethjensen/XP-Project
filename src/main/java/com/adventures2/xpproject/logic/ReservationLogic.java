@@ -1,13 +1,17 @@
 package com.adventures2.xpproject.logic;
 
 import com.adventures2.xpproject.DatabaseConnection;
+import com.adventures2.xpproject.base.Activity;
 import com.adventures2.xpproject.base.Customer;
 import com.adventures2.xpproject.base.Employee;
 import com.adventures2.xpproject.base.Reservation;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.transform.Result;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ReservationLogic {
     public static void create(Reservation reservation, Customer customer, Employee employee, HttpSession session) {

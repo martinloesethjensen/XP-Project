@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adventure Alley | Startpage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+<form class="form-signin">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo" style="width: 100%">
+        <h1 class="h3 mb-3 font-weight-normal">Adventure Alley</h1>
+    </div>
+</form>
+<div class="form-group">
+    <form class="form-signin" method="post" th:action="${'landingpage_employer'}">
+        <button type="submit" class="btn btn-lg btn-block">Oversigt</button>
+    </form>
+    <form class="form-signin" method="post" th:action="${'createReservation'}">
+        <button type="submit" class="btn btn-lg btn-block">Opret reservation</button>
+    </form>
+    <form class="form-signin" method="post" th:action="${'createActivity'}">
+        <button type="submit" class="btn btn-lg btn-block">Aktiviteter</button>
+    </form>
+</div>
+<br/>
+<form class="form-signin">
+    <div class="form-group">
+        <button type="submit" class="btn btn-lg btn-block btn-secondary">Log ud</button>
+    </div>
+</form>
+</body>
+</html>
