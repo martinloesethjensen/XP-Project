@@ -1,4 +1,4 @@
-#output {
+/*#output {
     background-color: #c5edf3;
     color: #463c39;
     font-size: 17px;
@@ -98,9 +98,22 @@
     color: #614136;
     font-size: 26px;
     text-align: center;
-}
+}*/
 
 .inputDetails {
-    width: 200px; @important
+    width: 300px; @important
 
+}
+.paragraph-center {
+    text-align: center;
+}
+.vertical-center-checkbox {
+    padding-top: 35px;
+}
+.header-center{
+    text-align: center;
+}
+.btn-right{
+    margin-left: 20px;
+    @important;
 }
