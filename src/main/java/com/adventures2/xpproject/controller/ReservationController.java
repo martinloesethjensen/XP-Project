@@ -25,7 +25,10 @@ public class ReservationController {
     ArrayList<Reservation> reservations = new ArrayList<>();
     public void populate() {
 
-
+        hashMapActivity.clear();
+        hashMapCustomer.clear();
+        hashMapEmployee.clear();
+        reservations.clear();
 
         Customer c1 = new Customer(1, "Bent", "28712544", "alsk@email.dk", false, "apple");
         Customer c2 = new Customer(6, "Bent", "28712544", "alsk@email.dk", false, "apple");
