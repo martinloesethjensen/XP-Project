@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -16,6 +16,7 @@
 <div th:replace="/includes/menu::menu"></div>
 <div class="row">
     <div class="col-md-3"></div>
+
     <div class="col-md-6">
         <form method="post">
             <div class="form-group">
@@ -37,8 +38,9 @@
         </form>
     </div>
     <div class="col-md-3">
-                <input class=" btn btn-success float-right" value="Opret Reservation" type="submit" name="action">
+        <input class=" btn btn-success float-right" value="Opret Reservation" type="submit" name="action">
     </div>
+
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -55,33 +57,32 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Dato</td>
-                <td>Tid</td>
-                <td>Aktivitet</td>
+
+            <!--/*@thymesVar id="dataList" type="java.util.ArrayList"*/-->
+            <tr th:each="data: ${dataList}">
+                <td th:text="${data.start}"></td>
+                <td th:text="${data.end}"></td>
+                <td th:text="${data.end}"></td>
                 <td>Medarbejder</td>
                 <td>Antal personer</td>
                 <td>Kundekontakt</td>
-                <td>button</td>
+                <td>
+                    <div class="form-group">
+                        <div class="row float-right">
+                            <form method="post">
+                                <button class="btn btn-danger float-right btnMargin" type="submit"
+                                        name="deleteReservation">
+                                    Slet
+                                </button>
+                                <button class="btn btn-primary float-right" type="submit" name="editReservation">
+                                    Rediger
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
             </tr>
-            <tr>
-                <td>Dato</td>
-                <td>Tid</td>
-                <td>Aktivitet</td>
-                <td>Medarbejder</td>
-                <td>Antal personer</td>
-                <td>Kundekontakt</td>
-                <td>button</td>
-            </tr>
-            <tr>
-                <td>Dato</td>
-                <td>Tid</td>
-                <td>Aktivitet</td>
-                <td>Medarbejder</td>
-                <td>Antal personer</td>
-                <td>Kundekontakt</td>
-                <td>button</td>
-            </tr>
+
             </tbody>
         </table>
     </div>
