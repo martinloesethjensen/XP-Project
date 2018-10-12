@@ -42,8 +42,8 @@ public class ReservationController {
 		Reservation r3 = new Reservation(3, "Mandag 14:00", "Mandag 15:00", 1, 5, 3, 1, 1);
 		Reservation r4 = new Reservation(4, "Mandag 15:00", "Mandag 16:00", 1, 6, 4, 2, 1);
 
-		Activity activity1 = new Activity(1, "Go-kart", 10, 2);
-		Activity activity2 = new Activity(2, "Paint-ball", 10, 2);
+		//Activity activity1 = new Activity(1, "Go-kart", 10, 2);
+		//Activity activity2 = new Activity(2, "Paint-ball", 10, 2);
         //Activity activity1 = new Activity(1, "Go-kart", 10, 2);
         //Activity activity2 = new Activity(2, "Paint-ball", 10, 2);
 
@@ -66,8 +66,8 @@ public class ReservationController {
 		hashMapCustomer.put(6, c2);
 		hashMapCustomer.put(3, c3);
 		hashMapCustomer.put(4, c4);
-		hashMapActivity.put(1, activity1);
-		hashMapActivity.put(2, activity2);
+		//hashMapActivity.put(1, activity1);
+		//hashMapActivity.put(2, activity2);
 		hashMapEmployee.put(1, employee);
 
 		System.out.println(hashMapActivity.get(reservations.get(1).getFk_activity_id()).getName());
@@ -102,15 +102,6 @@ public class ReservationController {
         return "/index";
     }
 
-
-	@GetMapping("/reservation/create")
-	public String create(HttpSession session) {
-		if (Authenticate.isLoggedIn(session)) {
-			//return "/reservation/create";
-		}
-		return "redirect:/";
-	}
-
     @GetMapping("/reservation/create")
     public String createStepOne(HttpSession session, Model model) {
         //if(Authenticate.isLoggedIn(session)) {
@@ -140,20 +131,5 @@ public class ReservationController {
 	@GetMapping("/landingpage_employer")
 	public String landingpageEmployer() {
 		return "/employer/landingpage_employer";
-	}
-
-	@PostMapping("/landingpage_employer")
-	public String landingpageEmployerToOverview() {
-		return "redirect:/"; //skal lave index om til oversigt html fil
-	}
-
-	@PostMapping("/createReservation")
-	public String landingpageEmployerToCreateReservation() {
-		return "redirect:/login"; //skal skiftes til rigtig redirect
-	}
-
-	@PostMapping("/createActivity")
-	public String landingpageEmployerToCreateActivity() {
-		return "redirect:/login"; //skal skiftes til rigtig redirect
 	}
 }
