@@ -21,12 +21,11 @@
     <div class="col-md-3"></div>
     <div class="col-md-3">
         <div class="form-group">
+            <!--/*@thymesVar id="dataMapAct" type="java.util.HashMap"*/-->
             <select class="form-control" id="sel1">
-                <!--for each activities-->
-                <option>Go-kart</option>
-                <option>Paint-card</option>
-                <option>Paint-ball</option>
-                <option>Trampolin - Muddi buttboy</option>
+                <th:block th:each="activity : ${activities_HashMap}">
+                    <option th:text="${activity.value.getName()}"></option>
+                </th:block>
             </select>
         </div>
     </div>
@@ -60,16 +59,16 @@
     <tbody>
 
     <!--/*@thymesVar id="dataList" type="java.util.ArrayList"*/-->
-    <tr th:each="data: ${dataList}">
+    <tr th:each="data: ${reservation_ArrayList}">
         <td th:text="${data.start}"></td>
         <td th:text="${data.end}"></td>
-        <td th:text="${dataMapAct.get(data.fk_activity_id).getName()}"></td>
-        <td th:text="${dataMapEmp.get(data.fk_user_id).getRealname()}"></td>
+        <td th:text="${activities_HashMap.get(data.fk_activity_id).getName()}"></td>
+        <td th:text="${employees_HashMap.get(data.fk_employee_id).getRealname()}"></td>
         <td th:text="${data.peopleAmount}"></td>
-        <td th:utext="${dataMapCustomer.get(data.fk_customer_id).getName()} + '<br/>' +
-                     ${dataMapCustomer.get(data.fk_customer_id).getTelephone()} + '<br/>' +
-                     ${dataMapCustomer.get(data.fk_customer_id).getEmail()} + '<br/>' +
-                     ${dataMapCustomer.get(data.fk_customer_id).getCompanyName()}">
+        <td th:utext="'Navn:&emsp;&emsp;' + ${customer_HashMap.get(data.fk_customer_id).getName()} + '<br/>' +
+                      'Telefon:&emsp;&thinsp;' + ${customer_HashMap.get(data.fk_customer_id).getTelephone()} + '<br/>' +
+                      'Email:&emsp;&emsp;' + ${customer_HashMap.get(data.fk_customer_id).getEmail()} + '<br/>' +
+                      'Firma:&emsp;&emsp;' + ${customer_HashMap.get(data.fk_customer_id).getCompanyName()}">
 
         </td>
         <td>
