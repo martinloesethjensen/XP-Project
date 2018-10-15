@@ -5,7 +5,6 @@ import com.adventures2.xpproject.base.Activity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class ActivityLogic {
     public static Activity[] getActivities() {
@@ -20,7 +19,7 @@ public class ActivityLogic {
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getDouble("price"),
-                        resultSet.getInt("time"),
+                  resultSet.getString("time"),
                         resultSet.getInt("discount"),
                         resultSet.getString("image"));
                 counter++;
