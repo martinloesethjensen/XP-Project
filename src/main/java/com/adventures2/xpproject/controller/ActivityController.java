@@ -23,4 +23,5 @@ public class ActivityController {
     public String orderActivity(Activity activity) {
         return "redirect:/VisAktivitet";
     }
+
 }

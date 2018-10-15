@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/layout.css">
+</head>
+<body>
+<div class="text-center mb-4">
+    <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo" style="width: 100%">
+    <h1 class="h3 mb-3 font-weight-normal">Adventure Alley</h1>
+</div>
+
+
+<form class="genericForm" method="post" th:action="@{/Editactivities}">
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>aktivitets navn: </label>
+            <input type="text" th:field="${Activity.name}"/>
+        </div>
+        <div class="form-group col-md-6">
+            <label>price: </label>
+            <input  type="text" th:field="${Activity.price}"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>tid</label>
+        <input type="text" th:field="${Activity.time}"/>
+    </div>
+    <div class="form-group">
+        <label>rabat</label>
+        <input type="text" th:field="${Activity.discount}"/>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>billed</label>
+            <input type="image" th:field="${Activity.image}"/>
+        </div>
+        <div class="form-group col-md-4">
+            <label>Regler</label>
+            <textarea type="text" th:field="${Activity.rules}"/>
+
+        </div>
+
+
+
+    </div>
+</form>
+</body>
+</html>
