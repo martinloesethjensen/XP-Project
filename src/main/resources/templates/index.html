@@ -23,6 +23,11 @@
         <div class="form-group">
             <!--/*@thymesVar id="dataMapAct" type="java.util.HashMap"*/-->
             <select class="form-control" id="sel1">
+                <!--Maybe apply an "All activities" on default. Single or multiple activity search?
+                Form should be around both search bars and be triggered on search button.
+                Could be an ajax post method and not be triggered on search button
+                Discuss others about this.-->
+
                 <th:block th:each="activity : ${activities_HashMap}">
                     <option th:text="${activity.value.getName()}"></option>
                 </th:block>
