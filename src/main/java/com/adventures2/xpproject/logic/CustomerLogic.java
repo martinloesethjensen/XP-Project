@@ -4,8 +4,10 @@ import com.adventures2.xpproject.DatabaseConnection;
 import com.adventures2.xpproject.base.Customer;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 
 public class CustomerLogic {
     public static int create(Customer customer) {
@@ -26,5 +28,26 @@ public class CustomerLogic {
         }
 
         return _id;
+    }
+
+    public static HashMap<Integer, Customer> getCustomersFromDatabaseToHashMap() {
+        HashMap<Integer, Customer> customerHashMap = new HashMap<>();
+        ResultSet resultSet = DatabaseConnection.query("SELECT * FROM customers");
+        try {
+            while (resultSet.next()) {
+                customerHashMap.put(resultSet.getInt("id"), new Customer(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("phone"),
+                        resultSet.getString("email"),
+                        resultSet.getBoolean("newsmail"),
+                        resultSet.getString("company")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return customerHashMap;
     }
 }

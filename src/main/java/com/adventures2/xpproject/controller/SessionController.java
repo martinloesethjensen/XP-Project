@@ -33,13 +33,12 @@ public class SessionController {
             @RequestParam("action") String action,
             HttpSession session) throws SQLException {
         if(action.equals("Log Ind"))
-            Authenticate.login(username, password, session);
-            if(!Authenticate.isLoggedIn(session)) {
+            if(!Authenticate.login(username, password, session)) {
                 loginFailed = true;
-                return "redirect:/login";
             } else {
                 loginFailed = false;
+                return (int) session.getAttribute("NIVEAU") == 2 ? "redirect:/reservation/create" : "redirect:/";
             }
-        return "redirect:/";
+        return "redirect:/login";
     }
 }
