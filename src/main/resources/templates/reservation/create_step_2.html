@@ -15,5 +15,61 @@
 <body>
 <div th:replace="/includes/menu::menu"></div>
 
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="h3 mb-3 font-weight-normal">Opret reservation</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="date">Dato:</label>
+            <input type="date" name="date" id="date" class="form-control">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="people">Antal deltagere:</label>
+            <input type="number" name="people" id="people" class="form-control" min="0">
+        </div>
+    </div>
+</div>
+    <div clas="text-center mb-4 pt-2 m-0">
+        <h2>Reservation</h2>
+    </div>
+    <table style="width:100%">
+        <tr>
+            <th>tid</th>
+            <th colspan="1">ledige medarbejder</th>
+            <th colspan="1">vælg</th>
+
+        </tr>
+
+        <tr>
+            <td>10-11</td>
+            <td>8</td>
+            <td>  <input type="checkbox" name="vehicle" value="Bike"><br></td>
+        <tr>
+            <td>11-12</td>
+            <td>8</td>
+            <td>  <input type="checkbox" name="vehicle" value="Bike"><br></td>  </tr>
+        <tr>
+            <td>12-13</td>
+            <td>8</td>
+            <td>  <input type="checkbox" name="vehicle" value="Bike"><br></td>
+
+
+
+
+        </tr>
+    </table>
+
+</div>
+</form>
+<button type="button" class="btn btn-primary" onclick="href">Tilbage</button>
+<button type="button" class="btn btn-success" onclick="href">Reserver</button>
+
+
+
 </body>
 </html>
