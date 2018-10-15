@@ -2,6 +2,7 @@ package com.adventures2.xpproject.controller;
 
 import com.adventures2.xpproject.auth.Authenticate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 
 @Controller
 public class SessionController {
+    private boolean loginFailed = false;
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -19,7 +21,8 @@ public class SessionController {
     }
 
     @GetMapping("/login")
-    public String viewLogin() {
+    public String viewLogin(Model model) {
+        model.addAttribute("loginFailed", loginFailed);
         return "/login";
     }
 
@@ -31,6 +34,12 @@ public class SessionController {
             HttpSession session) throws SQLException {
         if(action.equals("Log Ind"))
             Authenticate.login(username, password, session);
+            if(!Authenticate.isLoggedIn(session)) {
+                loginFailed = true;
+                return "redirect:/login";
+            } else {
+                loginFailed = false;
+            }
         return "redirect:/";
     }
 }
