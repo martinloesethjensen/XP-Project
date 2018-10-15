@@ -18,7 +18,7 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body p-0">
-                    <a th:href="${'/revervation/create/'+activities[i].id}" class="p-5">
+                    <a th:href="${'/reservation/create/'+activities[i].id}" class="p-5">
                         <img th:src="${'../../images/'+activities[i].image}" />
                         <h1 class="text-center" th:text="${activities[i].name}"></h1>
                     </a>
@@ -28,7 +28,7 @@
         <div class="col-md-3">
             <div class="card" th:if="${i+1} <= ${totalActivities}">
                 <div class="card-body p-0">
-                    <a th:href="${'/revervation/create/'+activities[i + 1].id}" class="p-5">
+                    <a th:href="${'/reservation/create/'+activities[i + 1].id}" class="p-5">
                         <img th:src="${'../../images/'+activities[i + 1].image}" />
                         <h1 class="text-center" th:text="${activities[i + 1].name}"></h1>
                     </a>
@@ -38,7 +38,7 @@
         <div class="col-md-3">
             <div class="card" th:if="${i+2} <= ${totalActivities}">
                 <div class="card-body p-0">
-                    <a th:href="${'/revervation/create/'+activities[i + 2].id}" class="p-5">
+                    <a th:href="${'/reservation/create/'+activities[i + 2].id}" class="p-5">
                         <img th:src="${'../../images/'+activities[i + 2].image}" />
                         <h1 class="text-center" th:text="${activities[i + 2].name}"></h1>
                     </a>
@@ -48,7 +48,7 @@
         <div class="col-md-3" th:if="${i+3} <= ${totalActivities}">
             <div class="card">
                 <div class="card-body p-0">
-                    <a th:href="${'/revervation/create/'+activities[i + 3].id}" class="p-5">
+                    <a th:href="${'/reservation/create/'+activities[i + 3].id}" class="p-5">
                         <img th:src="${'../../images/'+activities[i + 3].image}" />
                         <h1 class="text-center" th:text="${activities[i + 3].name}"></h1>
                     </a>

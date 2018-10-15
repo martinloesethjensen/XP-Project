@@ -9,9 +9,7 @@ import com.adventures2.xpproject.logic.ReservationLogic;
 import com.adventures2.xpproject.service.HandleDataFromDB;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -54,10 +52,11 @@ public class ReservationController {
     }
 
     @GetMapping("/reservation/create/{id}")
-    public String createStepTwo(HttpSession session, Model model) {
+    public String createStepTwo(HttpSession session, Model model, @PathVariable("id") int id) {
         //if(Authenticate.isLoggedIn(session)) {
         model.addAttribute("activities", ActivityLogic.getActivities());
         model.addAttribute("totalActivities", ActivityLogic.getTotalActivities() - 1);
+        model.addAttribute("chosenActivity", id);
         return "/reservation/create_step_2";
         //}
         //return "redirect:/";

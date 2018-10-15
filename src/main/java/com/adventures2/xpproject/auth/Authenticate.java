@@ -1,6 +1,7 @@
 package com.adventures2.xpproject.auth;
 
 import com.adventures2.xpproject.DatabaseConnection;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.servlet.http.HttpSession;
 import java.sql.ResultSet;
@@ -12,9 +13,9 @@ public class Authenticate {
     }
 
     public static boolean login(String username, String password, HttpSession session) throws SQLException {
-        ResultSet resultSet = DatabaseConnection.query("SELECT * FROM users WHERE username = '"+username+"' AND password = '"+password+"'");
+        ResultSet resultSet = DatabaseConnection.query("SELECT * FROM users WHERE username = '"+username+"'");
         resultSet.last();
-        if(resultSet.getRow() == 1) {
+        if(resultSet.getRow() == 1 && checkPassword(password, resultSet.getString("password"))) {
             session.setAttribute("ID", resultSet.getInt("id"));
             session.setAttribute("REALNAME", resultSet.getString("realname"));
             session.setAttribute("NIVEAU", resultSet.getInt("niveau"));
@@ -27,5 +28,9 @@ public class Authenticate {
         session.removeAttribute("ID");
         session.removeAttribute("REALNAME");
         session.removeAttribute("NIVEAU");
+    }
+
+    public static boolean checkPassword(String password, String hashed) {
+        return BCrypt.checkpw(password, hashed);
     }
 }
