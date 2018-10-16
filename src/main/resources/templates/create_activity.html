@@ -15,47 +15,55 @@
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <body>
-<form class="form-signin" method="post">
+
+
+
+<form class="form-signin" method="Post" th:action="@{/create_activity}">
     <div class="text-center mb-4">
         <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo" style="width: 100%">
         <h1 class="h3 mb-3 font-weight-normal">Adventure Alley | Tilføj aktivitet</h1>
         <div class="form-group">
+
+
+
             <label for="inputAktivitet">Aktivitet navn</label>
-            <input type="aktivitet" id="inputAktivitet" class="form-control">
+            <input type="aktivitet" id="inputAktivitet" class="form-control" th:field="${aktivitet.name}" />
         </div>
         <div class="form-group">
 
-
-            <label>Tid</label>
-            <input type="time" id="inputTime" class="form-control">
+            <label>antal minutter</label>
+            <input type="number" id="inputTime" class="form-control" th:field="${aktivitet.time}" />
         </div>
+
         <div class="form-group">
             <label>Pris for reservation</label>
-            <input type="price" id="inputPrice" class="form-control">
-            <div class="form-group">
+            <input type="price" id="inputPrice" class="form-control" th:field="${aktivitet.price}" />
+        </div>
+
+        <div class="form-group">
                 <label>Antal udstyr ledigt</label>
-                <input type="amount" id="inputAmount" class="form-control">
+                <input type="amount" id="inputAmount" class="form-control"th:field="${aktivitet.amountOfEquipment}"/>
             </div>
-            <div class="form-group">
-                <label>Angiv udstyr af type</label>
-                <input type="type" id="inputType" class="form-control">
-            </div>
-            <div class="form-group">
+
+           
+        <div class="form-group">
                 <label>Rabat ved antal reserveret udstyr</label>
-                <input type="Discount" id="inputDiscount" class="form-control">
+                <input type="Discount" id="inputDiscount" class="form-control" th:field="${aktivitet.discount}"/>
             </div>
+
             <div class="form-group">
                 <label>Retningslinjer</label>
-                <input type="Guidelines" id="inputRules" class="form-control">
+                <input type="Guidelines" id="inputRules" class="form-control" th:field="${rules.content}"/>
             </div>
+
             <div class="form-group">
                 <div class="text-left mb-4">
                     <button type="button" class="btn btn-info">Tilbage</button>
                 </div>
+
             </div>
 
         </div>
     </div>
-    <input type="submit" value="tilføj" style="color: greenyellow"/>
-
+    <button type="submit" class="btn btn-success">Tilføj</button>
 </form>

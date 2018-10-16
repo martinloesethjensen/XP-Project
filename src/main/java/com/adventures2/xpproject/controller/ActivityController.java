@@ -2,6 +2,7 @@ package com.adventures2.xpproject.controller;
 
 import com.adventures2.xpproject.auth.Authenticate;
 import com.adventures2.xpproject.base.Activity;
+import com.adventures2.xpproject.base.Limit;
 import com.adventures2.xpproject.logic.ActivityLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ public class ActivityController {
     model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
     model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
     model.addAttribute("aktivitet", new Activity());
+    model.addAttribute("rules", new Limit());
     return "create_activity";
     //}
     //return "redirect:/";
@@ -36,7 +38,7 @@ public class ActivityController {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-        return "redirect:/createActivity";
+        return "redirect:/create_activity";
         //}
         //return "redirect:/";
 
