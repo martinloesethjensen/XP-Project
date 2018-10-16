@@ -53,15 +53,20 @@
 
             <div class="form-group">
                 <label>Retningslinjer</label>
-                <input type="text" id="inputRules" class="form-control" th:field="${rules.content}"/>
+                <input type="text" id="image" class="form-control" th:field="${aktivitet.image}"/>
             </div>
+
+        <div class="form-group">
+            <label>Retningslinjer</label>
+            <input type="text" id="inputRules" class="form-control" th:field="${rules.content}"/>
+        </div>
+
 
             <div class="form-group">
                 <div class="text-left mb-4">
                     <button type="button" class="btn btn-info">Tilbage</button>
                 </div>
 
-            </div>
 
         </div>
     </div>
