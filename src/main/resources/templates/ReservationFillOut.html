@@ -1,0 +1,121 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title> Hotel Reservation Form </title>
+
+   <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" href="/css/ReservationFillOutCSS.css">
+
+    <script>
+        function finalCost(){
+            var roomType = document.getElementById("room_type").value;
+            var roomNum = document.getElementById("room_number").value;
+            var personNum = document.getElementById("person_number").value;
+            var childNum = document.getElementById("child_number").value;
+            var resFacilities = document.getElementById("res_facilities").value;
+
+            var total = (parseInt(roomType)*10) + ((roomNum)*2) + ((personNum)*3) + ((childNum)*2) + ((resFacilities)*5)
+
+            document.getElementById("result").innerHTML = total;
+        }
+    </script>
+
+
+</head>
+<body>
+<div th:replace="/includes/menu::menu"></div>
+<div class="container-fluid">
+    <br/>
+    <div class="row">
+        <h3 class="mx-auto"> Udfyld oplysninger</h3><br>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="form-group col-sm-5">
+            <label class="paragraph-center">Fornavn*</label>
+            <br/>
+            <input type="FirstName" class="form-control" id="inputFirstName">
+            </div>
+
+            <div class="form-group col-sm-5">
+                <label>Efternavn*</label>
+                <br/>
+                <input type="LastName" class="form-control" id="inputLastName">
+            </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="form-group col-sm-5">
+            <label>Telefon*</label>
+            <input type="tlf" class="form-control" id="inputTlfNumber">
+
+        </div>
+
+        <div class="form-group col-sm-5">
+            <label>Email*</label>
+            <input type="Email" class="form-control" id="inputEmail">
+
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="form-group col-sm-5">
+        <label>Firma</label>
+        <input type="firm" class="form-control" id="inputFirm">
+
+    </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4 vertical-center-checkbox">
+            <input type="checkbox" class="form-check-input" id="materialUnchecked">
+            <label class="form-check-label" for="materialUnchecked">Ønsker kunden at modtage mails fra os?</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+        <p class="text-center paragraph-center">Medarbejder ansvarlig for kunde*</p>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5"></div>
+    <div class="form-group col-sm-2">
+        <select class="form-control" id="assignWorker"/>
+        <option value="0" selected> </option>
+        </select>
+    </div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2">
+            <label>*Skal udfyldes</label>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+
+
+
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2">
+        <button class="btn btn-secondary">Tilbage</button>
+        </div>
+        <div class="col-sm-5"></div>
+        <div class="col-sm-2">
+            <button class="btn btn-success btn-right">Næste</button>
+            </div>
+    </div>
+</div>
+
+</body>
+</html>

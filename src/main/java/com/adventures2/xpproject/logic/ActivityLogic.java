@@ -3,69 +3,102 @@ package com.adventures2.xpproject.logic;
 import com.adventures2.xpproject.DatabaseConnection;
 import com.adventures2.xpproject.base.Activity;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.xml.crypto.Data;
+
 public class ActivityLogic {
-    public static Activity[] getActivities() {
-        Activity[] activities = new Activity[getTotalActivities()];
-        int counter = 0;
+  public static Activity[] getActivities() {
+    Activity[] activities = new Activity[getTotalActivities()];
+    int counter = 0;
 
-        ResultSet resultSet = DatabaseConnection.query("SELECT * FROM activities ORDER BY name ASC");
+    ResultSet resultSet = DatabaseConnection.query("SELECT * FROM activities ORDER BY name ASC");
 
-        try {
-            while (resultSet.next()) {
-                activities[counter] = new Activity(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getDouble("price"),
-                  resultSet.getString("time"),
-                        resultSet.getInt("discount"),
-                        resultSet.getString("image"));
-                counter++;
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return activities;
+    try {
+      while (resultSet.next()) {
+        activities[counter] = new Activity(
+          resultSet.getInt("id"),
+          resultSet.getString("name"),
+          resultSet.getDouble("price"),
+          resultSet.getString("time"),
+          resultSet.getInt("discount"),
+          resultSet.getString("image"));
+        counter++;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
 
-    public static int getTotalActivities() {
-        int total = 0;
+    return activities;
+  }
 
-        ResultSet resultSet = DatabaseConnection.query("SELECT * FROM activities");
+  public static int getTotalActivities() {
+    int total = 0;
 
-        try {
-            while (resultSet.next()) {
-                total++;
-            }
-        }catch (SQLException e) {
-            e.printStackTrace();
-        }
+    ResultSet resultSet = DatabaseConnection.query("SELECT * FROM activities");
 
-        return total;
+    try {
+      while (resultSet.next()) {
+        total++;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
 
-    public static HashMap<Integer, Activity> getActivitiesFromDatabaseToHashMap() {
-        HashMap<Integer, Activity> activityHashMap = new HashMap<>();
-        ResultSet resultSet = DatabaseConnection.query("SELECT * FROM activities");
-        try {
-            while (resultSet.next()) {
-                activityHashMap.put(resultSet.getInt("id"), new Activity(
-                  resultSet.getInt("id"),
-                  resultSet.getString("name"),
-                  resultSet.getDouble("price"),
-                  resultSet.getString("time"),
-                  resultSet.getInt("discount"),
-                  resultSet.getString("image")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    return total;
+  }
 
-        return activityHashMap;
+  public static HashMap<Integer, Activity> getActivitiesFromDatabaseToHashMap() {
+    HashMap<Integer, Activity> activityHashMap = new HashMap<>();
+    ResultSet resultSet = DatabaseConnection.query("SELECT * FROM activities");
+    try {
+      while (resultSet.next()) {
+        activityHashMap.put(resultSet.getInt("id"), new Activity(
+          resultSet.getInt("id"),
+          resultSet.getString("name"),
+          resultSet.getDouble("price"),
+          resultSet.getString("time"),
+          resultSet.getInt("discount"),
+          resultSet.getString("image")
+        ));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+
+    return activityHashMap;
+  }
+
+  public static void createActivity(Activity activity) {
+    try {
+      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("INSERT INTO activities ( name, price, time, discount, image) VALUES (?,?,?,?,?)");
+      preparedStatement.setString(1, activity.getName());
+      preparedStatement.setDouble(2, activity.getPrice());
+      preparedStatement.setString(3, activity.getTime());
+      preparedStatement.setInt(4, activity.getDiscount());
+      preparedStatement.setString(5, activity.getImage());
+      DatabaseConnection.insert(preparedStatement);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void updateActivity(Activity activity) {
+    try {
+      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("UPDATE activities SET name = ?, price = ?, time = ? , discount = ?, image = ? WHERE id = ? ");
+      preparedStatement.setString(1, activity.getName());
+      preparedStatement.setDouble(2, activity.getPrice());
+      preparedStatement.setString(3, activity.getTime());
+      preparedStatement.setInt(4, activity.getDiscount());
+      preparedStatement.setString(5, activity.getImage());
+      preparedStatement.setInt(6, activity.getId());
+      DatabaseConnection.update(preparedStatement);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+  }
 }
