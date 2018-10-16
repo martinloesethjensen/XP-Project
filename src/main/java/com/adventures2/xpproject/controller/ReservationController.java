@@ -17,11 +17,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ReservationController {
     private String successMessage = "";
-    HandleDataFromDB handleDataFromDB = new HandleDataFromDB();
 
     @GetMapping("/")
     public String view(HttpSession session, Model model) {
-        handleDataFromDB.populateLists();
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
