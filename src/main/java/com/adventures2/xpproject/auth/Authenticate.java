@@ -13,9 +13,9 @@ public class Authenticate {
     }
 
     public static boolean login(String username, String password, HttpSession session) throws SQLException {
-        ResultSet resultSet = DatabaseConnection.query("SELECT * FROM users WHERE username = '"+username+"'");
+	    ResultSet resultSet = DatabaseConnection.query("SELECT * FROM users WHERE username = '" + username + "'");
         resultSet.last();
-        if(resultSet.getRow() == 1 && checkPassword(password, resultSet.getString("password"))) {
+	    if (resultSet.getRow() == 1 && checkPassword(password, resultSet.getString("password"))) {
             session.setAttribute("ID", resultSet.getInt("id"));
             session.setAttribute("REALNAME", resultSet.getString("realname"));
             session.setAttribute("NIVEAU", resultSet.getInt("niveau"));

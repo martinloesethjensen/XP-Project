@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 @Controller
 public class SessionController {
-    private boolean loginFailed = false;
+	private boolean loginFailed = false;
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -22,7 +22,7 @@ public class SessionController {
 
     @GetMapping("/login")
     public String viewLogin(Model model) {
-        model.addAttribute("loginFailed", loginFailed);
+	    model.addAttribute("loginFailed", loginFailed);
         return "/login";
     }
 
@@ -33,12 +33,12 @@ public class SessionController {
             @RequestParam("action") String action,
             HttpSession session) throws SQLException {
         if(action.equals("Log Ind"))
-            if(!Authenticate.login(username, password, session)) {
-                loginFailed = true;
-            } else {
-                loginFailed = false;
-                return (int) session.getAttribute("NIVEAU") == 2 ? "redirect:/reservation/create" : "redirect:/";
-            }
-        return "redirect:/login";
+	        if (!Authenticate.login(username, password, session)) {
+		        loginFailed = true;
+	        } else {
+		        loginFailed = false;
+		        return (int) session.getAttribute("NIVEAU") == 2 ? "redirect:/reservation/create" : "redirect:/";
+	        }
+	    return "redirect:/login";
     }
 }

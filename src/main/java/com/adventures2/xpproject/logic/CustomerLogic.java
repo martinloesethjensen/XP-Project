@@ -36,12 +36,12 @@ public class CustomerLogic {
         try {
             while (resultSet.next()) {
                 customerHashMap.put(resultSet.getInt("id"), new Customer(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("phone"),
-                        resultSet.getString("email"),
-                        resultSet.getBoolean("newsmail"),
-                        resultSet.getString("company")
+                  resultSet.getInt("id"),
+                  resultSet.getString("name"),
+                  resultSet.getString("phone"),
+                  resultSet.getString("email"),
+                  resultSet.getBoolean("newsmail"),
+                  resultSet.getString("company")
                 ));
             }
         } catch (SQLException e) {

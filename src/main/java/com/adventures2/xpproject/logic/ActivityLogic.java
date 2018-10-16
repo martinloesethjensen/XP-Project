@@ -54,12 +54,12 @@ public class ActivityLogic {
         try {
             while (resultSet.next()) {
                 activityHashMap.put(resultSet.getInt("id"), new Activity(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getDouble("price"),
-                        resultSet.getString("time"),
-                        resultSet.getInt("discount"),
-                        resultSet.getString("image")
+                  resultSet.getInt("id"),
+                  resultSet.getString("name"),
+                  resultSet.getDouble("price"),
+                  resultSet.getString("time"),
+                  resultSet.getInt("discount"),
+                  resultSet.getString("image")
                 ));
             }
         } catch (SQLException e) {
