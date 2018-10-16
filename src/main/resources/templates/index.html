@@ -16,39 +16,34 @@
 </head>
 <body>
 <div th:replace="/includes/menu::menu"></div>
-<div class="row pt-3">
-    <div class="col-md-3"></div>
-    <div class="col-md-3"></div>
-    <div class="col-md-3">
-        <div class="form-group">
-            <!--/*@thymesVar id="dataMapAct" type="java.util.HashMap"*/-->
-            <select class="form-control" id="sel1">
-                <!--Maybe apply an "All activities" on default. Single or multiple activity search?
-                Form should be around both search bars and be triggered on search button.
-                Could be an ajax post method and not be triggered on search button
-                Discuss others about this.-->
-
-                <th:block th:each="activity : ${activities_HashMap}">
-                    <option th:text="${activity.value.getName()}"></option>
-                </th:block>
-            </select>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div id="imaginary_container">
-            <div class="input-group stylish-input-group">
-                <input type="date" class="form-control" placeholder="Søg på dag fx. mandag">
-                <span class="input-group-addon">
-                        <button class="btn" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                </span>
+<form method="post">
+    <div class="row pt-3">
+        <div class="col-md-3"></div>
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <!--/*@thymesVar id="dataMapAct" type="java.util.HashMap"*/-->
+                <select class="form-control" id="sel1" name="activity">
+                    <option value="0">Alle aktiviteter</option>
+                    <option th:each="activity : ${activities_HashMap}" th:value="${activity.value.getId()}"
+                            th:text="${activity.value.getName()}"></option>
+                </select>
             </div>
         </div>
-        <input class=" btn btn-success float-right" value="Opret Reservation" type="submit" name="action"
-               th:if="${IS_LOGGED_IN}">
+        <div class="col-md-3">
+            <div id="imaginary_container">
+                <div class="input-group stylish-input-group">
+                    <input type="date" class="form-control" placeholder="Søg på dag fx. mandag" name="date">
+                    <span class="input-group-addon">
+                        <input name="search" type="submit" value="Søg" class="btn btn-light">
+                    </span>
+                </div>
+            </div>
+            <input class=" btn btn-success float-right" value="Opret Reservation" type="submit" name="action"
+                   th:if="${IS_LOGGED_IN}">
+        </div>
     </div>
-</div>
+</form>
 <table class="table table-striped">
     <thead>
     <tr>

@@ -12,11 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpSession;
 
 @Controller
 public class ReservationController {
     private String successMessage = "";
+    private int activity = 0;
+    private String date = "";
 
     @GetMapping("/")
     public String view(HttpSession session, Model model) {
@@ -24,12 +27,30 @@ public class ReservationController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         model.addAttribute("customer_HashMap", CustomerLogic.getCustomersFromDatabaseToHashMap());
-        model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList());
+        model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList(activity, date));
         model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
         model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
 
         return "/index";
     }
+
+    @PostMapping("/")
+    public String view(HttpSession session,
+                       @RequestParam("search") String search,
+                       @RequestParam("activity") int actitvity,
+                       @RequestParam("date") String date) {
+        System.out.println(date);
+        if (search.equals("Søg")) {
+            this.activity = actitvity;
+            this.date = date;
+        }
+
+        return "redirect:/";
+    }
+
+
+    //postmapping parametre
+    //
 
     @GetMapping("/reservation/create")
     public String createStepOne(HttpSession session, Model model) {

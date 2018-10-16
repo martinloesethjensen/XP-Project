@@ -11,60 +11,93 @@ import javax.xml.transform.Result;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ReservationLogic {
-    public static void create(Reservation reservation, Customer customer, Employee employee, HttpSession session) {
-        int id = 0;
+	public static void create(Reservation reservation, Customer customer, Employee employee, HttpSession session) {
+		int id = 0;
 
-        //If a new customer is made
-        if(customer.getId() == 0)
-            id = CustomerLogic.create(customer);
-        else
-            id = customer.getId();
+		//If a new customer is made
+		if (customer.getId() == 0)
+			id = CustomerLogic.create(customer);
+		else
+			id = customer.getId();
 
-        try {
-            PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(
-                    "INSERT INTO reservations (start,end,customDiscount,peopleAmount,fk_customer_id,fk_activity_id,fk_user_id,fk_employee_id) " +
-                            "VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
-            );
-            preparedStatement.setString(1, reservation.getStart());
-            preparedStatement.setString(2, reservation.getEnd());
-            preparedStatement.setInt(3, reservation.getCustomDiscount());
-            preparedStatement.setInt(4, reservation.getPeopleAmount());
-            preparedStatement.setInt(5, id);
-            preparedStatement.setInt(6, reservation.getFk_activity_id());
-            preparedStatement.setInt(7, (int)session.getAttribute("ID"));
-            preparedStatement.setInt(8, employee.getId());
+		try {
+			PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(
+				"INSERT INTO reservations (start,end,customDiscount,peopleAmount,fk_customer_id,fk_activity_id,fk_user_id,fk_employee_id) " +
+					"VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
+			);
+			preparedStatement.setString(1, reservation.getStart());
+			preparedStatement.setString(2, reservation.getEnd());
+			preparedStatement.setInt(3, reservation.getCustomDiscount());
+			preparedStatement.setInt(4, reservation.getPeopleAmount());
+			preparedStatement.setInt(5, id);
+			preparedStatement.setInt(6, reservation.getFk_activity_id());
+			preparedStatement.setInt(7, (int) session.getAttribute("ID"));
+			preparedStatement.setInt(8, employee.getId());
 
-            DatabaseConnection.insert(preparedStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+			DatabaseConnection.insert(preparedStatement);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public static ArrayList<Reservation> getReservationsFromDatabaseToArrayList() {
-        ArrayList<Reservation> reservations = new ArrayList<>();
-        ResultSet resultSet = DatabaseConnection.query(  "SELECT * FROM reservations");
+	public static ArrayList<Reservation> getReservationsFromDatabaseToArrayList(int activity, String date) {
+		ArrayList<Reservation> reservations = new ArrayList<>();
 
-        try {
-            while (resultSet.next()) {
-                reservations.add(new Reservation(
-                        resultSet.getInt("id"),
-                        resultSet.getString("start"),
-                        resultSet.getString("end"),
-                        resultSet.getInt("customDiscount"),
-                        resultSet.getInt("peopleAmount"),
-                        resultSet.getInt("fk_customer_id"),
-                        resultSet.getInt("fk_activity_id"),
-                        resultSet.getInt("fk_user_id"),
-                       resultSet.getInt("fk_employee_id")
-                ));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		ResultSet resultSet = null;
 
-        return reservations;
-    }
+		if (!date.equals("") || activity != 0) {
+			long unixTimeStart = 0;
+			long unixTimeEnd = 0;
+
+			try {
+				if (!date.equals("")) {
+					DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+					Date tempDate = dateFormat.parse(date);
+					unixTimeStart = tempDate.getTime() / 1000;
+					unixTimeEnd = unixTimeStart + 86400;
+				}
+
+				PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(
+					"SELECT * FROM reservations WHERE fk_activity_id = ? OR (start >= ? AND end <= ?)");
+				preparedStatement.setInt(1, activity);
+				preparedStatement.setLong(2, unixTimeStart);
+				preparedStatement.setLong(3, unixTimeEnd);
+
+				resultSet = DatabaseConnection.queryWithParameters(preparedStatement);
+			} catch (SQLException | ParseException e) {
+				e.printStackTrace();
+			}
+		} else {
+			resultSet = DatabaseConnection.query("SELECT * FROM reservations");
+		}
+
+		try {
+			while (resultSet.next()) {
+				reservations.add(new Reservation(
+					resultSet.getInt("id"),
+					"Kl: " + new SimpleDateFormat("HH:mm").format(
+						new Date(Long.parseLong(resultSet.getString("start")) * 1000)),
+					"Kl: " + new SimpleDateFormat("HH:mm").format(
+						new Date(Long.parseLong(resultSet.getString("end")) * 1000)),
+					resultSet.getInt("customDiscount"),
+					resultSet.getInt("peopleAmount"),
+					resultSet.getInt("fk_customer_id"),
+					resultSet.getInt("fk_activity_id"),
+					resultSet.getInt("fk_user_id"),
+					resultSet.getInt("fk_employee_id")
+				));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return reservations;
+	}
 }
