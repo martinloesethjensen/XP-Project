@@ -6,9 +6,8 @@ import com.adventures2.xpproject.base.Employee;
 import com.adventures2.xpproject.base.Reservation;
 import com.adventures2.xpproject.logic.ActivityLogic;
 import com.adventures2.xpproject.logic.CustomerLogic;
+import com.adventures2.xpproject.logic.EmployeeLogic;
 import com.adventures2.xpproject.logic.ReservationLogic;
-import com.adventures2.xpproject.service.HandleDataFromDB;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +26,9 @@ public class ReservationController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         model.addAttribute("customer_HashMap", CustomerLogic.getCustomersFromDatabaseToHashMap());
-        model.addAttribute("reservation_ArrayList", handleDataFromDB.getReservationArrayList());
+        model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList());
         model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
-        model.addAttribute("employees_HashMap", handleDataFromDB.getEmployeeHashMap());
+        model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
 
         return "/index";
     }
