@@ -1,6 +1,8 @@
 package com.adventures2.xpproject.controller;
 
 import com.adventures2.xpproject.base.Activity;
+import com.adventures2.xpproject.logic.ActivityLogic;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,15 +14,26 @@ import java.util.ArrayList;
 public class ActivityController {
     public static ArrayList<Activity> actiList = new ArrayList<>();
 
-    @GetMapping("/ReserveAKT")
+    @GetMapping("/create_activity")
     public String orderActivity(Model model) {
         model.addAttribute("aktivitet", new Activity());
-        return "ReserveAKT";
-
+        return "createActivity";
     }
 
-    @PostMapping("/ReserveAKT")
+    @PostMapping("/create_activity")
     public String orderActivity(Activity activity) {
-        return "redirect:/VisAktivitet";
+      ActivityLogic.createActivity(activity);
+        return "redirect:/createActivity";
     }
+
+    @GetMapping("edit_activity")
+  public String editActivity(){
+      return "redigAkt";
+    }
+  @PostMapping("/edit_activity")
+  public String editActivity(Activity activity) {
+    ActivityLogic.updateActivity(activity);
+    return "redirect:/createActivity";
+  }
+
 }
