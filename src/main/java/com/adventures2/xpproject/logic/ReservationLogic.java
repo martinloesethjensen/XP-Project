@@ -42,4 +42,29 @@ public class ReservationLogic {
             e.printStackTrace();
         }
     }
+
+    public static ArrayList<Reservation> getReservationsFromDatabaseToArrayList() {
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        ResultSet resultSet = DatabaseConnection.query(  "SELECT * FROM reservations");
+
+        try {
+            while (resultSet.next()) {
+                reservations.add(new Reservation(
+                        resultSet.getInt("id"),
+                        resultSet.getString("start"),
+                        resultSet.getString("end"),
+                        resultSet.getInt("customDiscount"),
+                        resultSet.getInt("peopleAmount"),
+                        resultSet.getInt("fk_customer_id"),
+                        resultSet.getInt("fk_activity_id"),
+                        resultSet.getInt("fk_user_id"),
+                       resultSet.getInt("fk_employee_id")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reservations;
+    }
 }
