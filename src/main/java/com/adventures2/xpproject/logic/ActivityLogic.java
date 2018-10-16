@@ -3,6 +3,8 @@ package com.adventures2.xpproject.logic;
 import com.adventures2.xpproject.DatabaseConnection;
 import com.adventures2.xpproject.base.Activity;
 
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -96,6 +98,16 @@ public class ActivityLogic {
       preparedStatement.setString(5, activity.getImage());
       preparedStatement.setInt(6, activity.getId());
       DatabaseConnection.update(preparedStatement);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void deleteActivity(Activity activity){
+    try {
+      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("DELETE  FROM activities WHERE id = ? ");
+      preparedStatement.setInt(1, activity.getId());
+      DatabaseConnection.delete(preparedStatement);
     } catch (SQLException e) {
       e.printStackTrace();
     }
