@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Adventure Alley | Log ind</title>
@@ -15,30 +15,34 @@
     <div class="text-center mb-4">
         <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo" style="width: 100%">
         <h1 class="h3 mb-3 font-weight-normal">Adventure Alley | Login</h1>
-
+    </div>
+    <div class="form-group" th:if="${loginFailed}">
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                Ugyldigt login!
+            </div>
+        </div>
     </div>
     <div class="form-group">
-        <label for="inputEmail">Email</label>
-        <input type="email" id="inputEmail" class="form-control" name="username" placeholder="Email">
+        <div class="col-md-12">
+            <label for="inputEmail">Email</label>
+            <input type="email" id="inputEmail" class="form-control" name="username" placeholder="Email" autofocus="true" autocomplete="off" >
+        </div>
     </div>
     <div class="form-group">
-        <label for="inputPassword">Adgangskode</label>
-        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Adgangskode">
+        <div class="col-md-12">
+            <label for="inputPassword">Adgangskode</label>
+            <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Adgangskode">
+        </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="form-group">
-                <input name="action" class="btn btn-success btn-block" type="submit" value="Log Ind"/>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <input name="action" class="btn btn-primary btn-block" type="submit" value="Tilbage"/>
+                <input name="action" class="btn btn-success float-right" type="submit" value="Log Ind"/>
+                <input name="action" class="btn btn-primary" type="submit" value="Tilbage"/>
             </div>
         </div>
     </div>
-
 </form>
-
 </body>
 </html>

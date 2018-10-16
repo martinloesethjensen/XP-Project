@@ -15,8 +15,6 @@ public class HandleDataFromDB {
 
 	static final String SELECT_ALL_FROM_TABLE = "SELECT * FROM ";
 
-	private HashMap<Integer, Customer> customerHashMap = new HashMap<>();
-	private HashMap<Integer, Activity> activityHashMap = new HashMap<>();
 	private HashMap<Integer, Employee> employeeHashMap = new HashMap<>();
 	private ArrayList<Reservation> reservationArrayList = new ArrayList<>();
 
@@ -25,58 +23,17 @@ public class HandleDataFromDB {
 	}
 
 	public void populateLists() {
-		getActivitiesFromDatabaseToHashMap();
-		getCustomersFromDatabaseToHashMap();
+		clearLists();
 		getEmployeesFromDatabaseToHashMap();
 		getReservationsFromDatabaseToArrayList();
 	}
 
 	public void clearLists() {
-		activityHashMap.clear();
-		customerHashMap.clear();
 		employeeHashMap.clear();
 		reservationArrayList.clear();
 	}
 
-	private void getActivitiesFromDatabaseToHashMap() {
-		ResultSet resultSet = DatabaseConnection.query(SELECT_ALL_FROM_TABLE + "activities");
-		try {
-			while (resultSet.next()) {
-				Activity activity = new Activity();
 
-				activity.setId(resultSet.getInt("id"));
-				activity.setName(resultSet.getString("name"));
-				activity.setPrice(resultSet.getDouble("price"));
-				activity.setTime(resultSet.getString("time"));
-				activity.setDiscount(resultSet.getInt("discount"));
-				activity.setImage(resultSet.getString("image"));
-
-				activityHashMap.put(activity.getId(), activity);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void getCustomersFromDatabaseToHashMap() {
-		ResultSet resultSet = DatabaseConnection.query("SELECT * FROM customers");
-		try {
-			while (resultSet.next()) {
-				Customer customer = new Customer();
-
-				customer.setId(resultSet.getInt("id"));
-				customer.setCompanyName(resultSet.getString("company"));
-				customer.setName(resultSet.getString("name"));
-				customer.setTelephone(resultSet.getString("phone"));
-				customer.setEmail(resultSet.getString("email"));
-				customer.setNewsmail(resultSet.getBoolean("newsmail"));
-
-				customerHashMap.put(customer.getId(), customer);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 	private void getEmployeesFromDatabaseToHashMap() {
 		ResultSet resultSet = DatabaseConnection.query(SELECT_ALL_FROM_TABLE + "employees");
@@ -115,14 +72,6 @@ public class HandleDataFromDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public HashMap<Integer, Customer> getCustomerHashMap() {
-		return customerHashMap;
-	}
-
-	public HashMap<Integer, Activity> getActivityHashMap() {
-		return activityHashMap;
 	}
 
 	public HashMap<Integer, Employee> getEmployeeHashMap() {
