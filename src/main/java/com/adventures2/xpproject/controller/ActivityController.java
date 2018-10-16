@@ -33,7 +33,9 @@ public class ActivityController {
 
     @PostMapping("/create_activity")
     public String orderActivity(HttpSession session, Model model, Activity activity) {
+      System.out.println(activity);
         ActivityLogic.createActivity(activity);
+
         //if(Authenticate.isLoggedIn(session)) {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));

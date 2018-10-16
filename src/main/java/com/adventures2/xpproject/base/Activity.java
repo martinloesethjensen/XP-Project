@@ -35,14 +35,8 @@ public class Activity {
 
   @Override
   public String toString() {
-    return "Activity{" +
-      "id=" + id +
-      ", name='" + name + '\'' +
-      ", price=" + price +
-      ", time=" + time +
-      ", discount=" + discount +
-      ", image=" + image +
-      '}';
+    return String.format("id: %s name: %s price: %s time: %s discount: %s image: %s amountOfEquipment: %s "
+      , this.id, this.name, this.price, this.time, this.discount, this.image, this.amountOfEquipment);
   }
 
   public int getId() {
