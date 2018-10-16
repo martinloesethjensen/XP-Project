@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"/>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -27,7 +27,7 @@
 
 
             <label for="inputAktivitet">Aktivitet navn</label>
-            <input type="aktivitet" id="inputAktivitet" class="form-control" th:field="${aktivitet.name}" />
+            <input type="text" id="inputAktivitet" class="form-control" th:field="${aktivitet.name}" />
         </div>
         <div class="form-group">
 
@@ -37,23 +37,23 @@
 
         <div class="form-group">
             <label>Pris for reservation</label>
-            <input type="price" id="inputPrice" class="form-control" th:field="${aktivitet.price}" />
+            <input type="number" id="inputPrice" class="form-control" th:field="${aktivitet.price}" />
         </div>
 
         <div class="form-group">
                 <label>Antal udstyr ledigt</label>
-                <input type="amount" id="inputAmount" class="form-control"th:field="${aktivitet.amountOfEquipment}"/>
+                <input type="text" id="inputAmount" class="form-control"th:field="${aktivitet.amountOfEquipment}"/>
             </div>
 
-           
+
         <div class="form-group">
                 <label>Rabat ved antal reserveret udstyr</label>
-                <input type="Discount" id="inputDiscount" class="form-control" th:field="${aktivitet.discount}"/>
+                <input type="number" id="inputDiscount" class="form-control" th:field="${aktivitet.discount}"/>
             </div>
 
             <div class="form-group">
                 <label>Retningslinjer</label>
-                <input type="Guidelines" id="inputRules" class="form-control" th:field="${rules.content}"/>
+                <input type="text" id="inputRules" class="form-control" th:field="${rules.content}"/>
             </div>
 
             <div class="form-group">
