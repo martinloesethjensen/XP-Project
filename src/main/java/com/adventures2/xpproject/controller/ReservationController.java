@@ -11,7 +11,6 @@ import com.adventures2.xpproject.logic.ReservationLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -90,6 +89,11 @@ public class ReservationController {
             return "/chef/index";
         else
             return "redirect:/";
+    }
+
+    @GetMapping("/reservation/create_step_3")
+    public String createActivity3(){
+        return "reservation/create_step_3";
     }
 
 
