@@ -26,7 +26,7 @@ public class ReservationController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         model.addAttribute("customer_HashMap", CustomerLogic.getCustomersFromDatabaseToHashMap());
-        model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList());
+	    model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList(activity, date));
         model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
         model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
 
@@ -38,7 +38,6 @@ public class ReservationController {
                        @RequestParam("search") String search,
                        @RequestParam("activity") int actitvity,
                        @RequestParam("date") String date) {
-        System.out.println(date);
         if (search.equals("Søg")) {
             this.activity = actitvity;
             this.date = date;
@@ -46,10 +45,6 @@ public class ReservationController {
 
         return "redirect:/";
     }
-
-
-    //postmapping parametre
-    //
 
     @GetMapping("/reservation/create")
     public String createStepOne(HttpSession session, Model model) {
