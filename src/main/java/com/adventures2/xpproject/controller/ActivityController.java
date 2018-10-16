@@ -62,7 +62,7 @@ public class ActivityController {
     model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
     model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
     ActivityLogic.updateActivity(activity);
-    return "redirect:/createActivity";
+    return "redirect:/create_activity";
     //}
     //return "redirect:/";
 
@@ -105,7 +105,7 @@ public class ActivityController {
         public String applyActivity(Model model){
             model.addAttribute("aktivitet", new Activity());
 
-        return "tilføjAkt";
+        return "create_activity";
     }
 
     @PostMapping("/tilføjAkt")
