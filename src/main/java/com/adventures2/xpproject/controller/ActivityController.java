@@ -23,4 +23,9 @@ public class ActivityController {
     public String orderActivity(Activity activity) {
         return "redirect:/VisAktivitet";
     }
+
+    @GetMapping("/activity/create_activity")
+    public String createActivity(){
+        return "/activity/create_activity";
+    }
 }

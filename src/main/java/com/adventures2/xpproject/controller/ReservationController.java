@@ -76,5 +76,10 @@ public class ReservationController {
         return "/employer/landingpage_employer";
     }
 
+    @GetMapping("/reservation/create_step_3")
+    public String createActivity3(){
+        return "reservation/create_step_3";
+    }
+
 
 }
