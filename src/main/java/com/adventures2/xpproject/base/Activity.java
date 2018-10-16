@@ -7,7 +7,6 @@ public class Activity {
     private String time;
     private int discount;
     private String image;
-   private String rules;
     public Activity() {
     }
 

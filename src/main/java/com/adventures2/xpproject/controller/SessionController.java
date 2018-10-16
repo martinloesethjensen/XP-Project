@@ -37,7 +37,7 @@ public class SessionController {
                 loginFailed = true;
             } else {
                 loginFailed = false;
-                return (int) session.getAttribute("NIVEAU") == 2 ? "redirect:/reservation/create" : "redirect:/";
+                return (int) session.getAttribute("NIVEAU") == 2 ? "redirect:/reservation/create" : ((int) session.getAttribute("NIVEAU") == 1 ? "redirect:/chef/" : "redirect:/");
             }
         return "redirect:/login";
     }

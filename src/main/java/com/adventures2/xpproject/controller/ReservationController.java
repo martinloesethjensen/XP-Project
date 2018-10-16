@@ -6,28 +6,28 @@ import com.adventures2.xpproject.base.Employee;
 import com.adventures2.xpproject.base.Reservation;
 import com.adventures2.xpproject.logic.ActivityLogic;
 import com.adventures2.xpproject.logic.CustomerLogic;
-import com.adventures2.xpproject.service.HandleDataFromDB;
+import com.adventures2.xpproject.logic.EmployeeLogic;
+import com.adventures2.xpproject.logic.ReservationLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.http.HTTPBinding;
 
 @Controller
 public class ReservationController {
     private String successMessage = "";
-    HandleDataFromDB handleDataFromDB = new HandleDataFromDB();
 
     @GetMapping("/")
     public String view(HttpSession session, Model model) {
-        handleDataFromDB.populateLists();
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         model.addAttribute("customer_HashMap", CustomerLogic.getCustomersFromDatabaseToHashMap());
-        model.addAttribute("reservation_ArrayList", handleDataFromDB.getReservationArrayList());
+        model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList());
         model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
-        model.addAttribute("employees_HashMap", handleDataFromDB.getEmployeeHashMap());
+        model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
 
         return "/index";
     }
@@ -70,9 +70,12 @@ public class ReservationController {
         return "redirect:/reservation/create";
     }
 
-    @GetMapping("/landingpage_employer")
-    public String landingpageEmployer() {
-        return "/employer/landingpage_employer";
+    @GetMapping("/chef/")
+    public String chefPage(HttpSession session) {
+        if(Authenticate.isLoggedIn(session) && Authenticate.isChef(session))
+            return "/chef/index";
+        else
+            return "redirect:/";
     }
 
 
