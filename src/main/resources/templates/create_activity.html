@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+<form class="form-signin" method="post">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo" style="width: 100%">
+        <h1 class="h3 mb-3 font-weight-normal">Adventure Alley | Tilføj aktivitet</h1>
+        <button type="button" class="btn btn-success">Tilføj</button>
+        <div class="form-group">
+            <label for="inputAktivitet">Aktivitet navn</label>
+            <input type="aktivitet" id="inputAktivitet" class="form-control">
+        </div>
+        <div class="form-group">
+
+
+            <label>Tid</label>
+            <input type="time" id="inputTime" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Pris for reservation</label>
+            <input type="price" id="inputPrice" class="form-control">
+            <div class="form-group">
+                <label>Antal udstyr ledigt</label>
+                <input type="amount" id="inputAmount" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Angiv udstyr af type</label>
+                <input type="type" id="inputType" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Rabat ved antal reserveret udstyr</label>
+                <input type="Discount" id="inputDiscount" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Retningslinjer</label>
+                <input type="Guidelines" id="inputRules" class="form-control">
+            </div>
+            <div class="form-group">
+                <div class="text-left mb-4">
+                    <button type="button" class="btn btn-info">Tilbage</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
