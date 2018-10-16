@@ -103,7 +103,7 @@ public class ActivityLogic {
     }
   }
 
-  public static void deleteActivity(Activity activity){
+  public static void deleteActivity(Activity activity) {
     try {
       PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("DELETE  FROM activities WHERE id = ? ");
       preparedStatement.setInt(1, activity.getId());
@@ -112,5 +112,26 @@ public class ActivityLogic {
       e.printStackTrace();
     }
 
+  }
+
+  public static Activity getActivityById(String id) {
+    try {
+      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM activities WHERE id = ? ");
+
+      preparedStatement.setInt(1, Integer.parseInt(id));
+      ResultSet resultSet = DatabaseConnection.queryWithParameters(preparedStatement);
+      // int id, String name, double price, String time, int discount, String image
+      return new Activity(
+        resultSet.getInt(1),
+        resultSet.getString(2),
+        resultSet.getDouble(3),
+        resultSet.getString(4),
+        resultSet.getInt(5),
+        resultSet.getString(6)
+      );
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return new Activity();
   }
 }

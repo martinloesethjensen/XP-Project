@@ -6,6 +6,7 @@ import com.adventures2.xpproject.logic.ActivityLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
@@ -41,9 +42,10 @@ public class ActivityController {
 
   }
 
-  @GetMapping("edit_activity")
-  public String editActivity(HttpSession session, Model model) {
+  @GetMapping("edit_activity/{id}")
+  public String editActivity(HttpSession session, Model model, @PathVariable String id) {
     //if(Authenticate.isLoggedIn(session)) {
+    model.addAttribute("aktivity", ActivityLogic.getActivityById(id));
     model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
     model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
     model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
