@@ -1,11 +1,14 @@
 package com.adventures2.xpproject.controller;
 
+import com.adventures2.xpproject.auth.Authenticate;
 import com.adventures2.xpproject.base.Activity;
+import com.adventures2.xpproject.logic.ActivityLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
