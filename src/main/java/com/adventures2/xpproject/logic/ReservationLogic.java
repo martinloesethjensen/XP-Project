@@ -43,7 +43,7 @@ public class ReservationLogic {
         }
     }
 
-    public static ArrayList<Reservation> getReservationsFromDatabaseToArrayList() {
+/*    public static ArrayList<Reservation> getReservationsFromDatabaseToArrayList() {
         ArrayList<Reservation> reservations = new ArrayList<>();
         ResultSet resultSet = DatabaseConnection.query(  "SELECT * FROM reservations");
 
@@ -66,5 +66,6 @@ public class ReservationLogic {
         }
 
         return reservations;
-    }
+    }*/
+
 }

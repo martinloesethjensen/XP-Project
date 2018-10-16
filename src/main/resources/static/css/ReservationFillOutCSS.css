@@ -117,3 +117,9 @@
     margin-left: 20px;
     @important;
 }
+.th_aktivitet{
+    width: 90%;
+}
+.th_Vaelg{
+    width: 10%;
+}
