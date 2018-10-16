@@ -17,17 +17,17 @@ public class ActivityController {
     public static ArrayList<Activity> actiList = new ArrayList<>();
     String succesMessage = "";
 
-    @GetMapping("/create_activity")
-    public String orderActivity(HttpSession session, Model model) {
-        //if(Authenticate.isLoggedIn(session)) {
-        model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
-        model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
-        model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-        model.addAttribute("aktivitet", new Activity());
-        return "createActivity";
-        //}
-        //return "redirect:/";
-    }
+  @GetMapping("/create_activity")
+  public String orderActivity(HttpSession session, Model model) {
+    //if(Authenticate.isLoggedIn(session)) {
+    model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
+    model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
+    model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
+    model.addAttribute("aktivitet", new Activity());
+    return "create_activity";
+    //}
+    //return "redirect:/";
+  }
 
     @PostMapping("/create_activity")
     public String orderActivity(HttpSession session, Model model, Activity activity) {
@@ -49,7 +49,7 @@ public class ActivityController {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-        return "redigAkt";
+        return "edit_activity";
         //}
         //return "redirect:/";
 
@@ -62,7 +62,7 @@ public class ActivityController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         ActivityLogic.updateActivity(activity);
-        return "redirect:/create_activity";
+        return "redirect:/aktiviteterOversigt";
         //}
         //return "redirect:/";
 
@@ -101,18 +101,7 @@ public class ActivityController {
         return "redirect:/opretres";
     }
 
-    @GetMapping("/tilføjAkt")
-    public String applyActivity(Model model) {
-        model.addAttribute("aktivitet", new Activity());
 
-        return "create_activity";
-    }
-
-    @PostMapping("/tilføjAkt")
-    public String applyActivity(Activity activity) {
-
-        return "redirect:/tilføjAkt";
-    }
 
     @GetMapping("/aktiviteterOversigt")
     public String aktiviteterOversigt(){
