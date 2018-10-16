@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -38,25 +38,9 @@
                 </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Gokart</td>
-                <td><input type="radio" name="Vælg"></td>
-
-            </tr>
-            <tr>
-                <td>Sumobrydning</td>
-                <td><input type="radio" name="Vælg"></td>
-
-            </tr>
-            <tr>
-                <td>Paintball</td>
-                <td><input type="radio" name="Vælg"></td>
-
-            </tr>
-            <tr>
-                <td>Minigolf</td>
-                <td><input type="radio" name="Vælg"></td>
-
+            <tr th:each="activity: ${activities_HashMap}" >
+                <td th:text="${activity.value.getName()}"></td>
+                <td><input type="checkbox" th:value="${activity.value.getId()}"/></td>
             </tr>
             </tbody>
         </table>
@@ -71,8 +55,9 @@
         <div class="col-md-1"></div>
         <div class="col-md-7">
             <a href="/create_activity" class="btn btn-success">Tilføj</a>
-            <input type="submit" name="action" class="btn btn-primary" value="Rediger">
-            <input type="submit" name="action" class="btn btn-danger" value="Slet">
+            <!--<a th:href="@{'/edit_activity?id='+${activity.id}}" class="knap">Rediger</a>-->
+            <!--<a th:href="@{'/sletAktivitet?id='+${activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>-->
+
         </div>
     </div>
 

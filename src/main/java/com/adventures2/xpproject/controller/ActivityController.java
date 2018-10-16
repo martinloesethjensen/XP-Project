@@ -9,13 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
 public class ActivityController {
-    public static ArrayList<Activity> actiList = new ArrayList<>();
+    //public static ArrayList<Activity> actiList = lillemarcusertræt();
     String succesMessage = "";
 
   @GetMapping("/create_activity")
@@ -80,7 +81,7 @@ public class ActivityController {
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         ActivityLogic.deleteActivity(activity);
         succesMessage = "Aktiviten blev slettet";
-        return "redirect:/aktivitetogoversigt";
+        return "redirect:/aktiviteterOversigt";
         //}
         ///return "redirect:/";
 
@@ -107,9 +108,19 @@ public class ActivityController {
 //
 //
 //
-//    @GetMapping("/aktiviteterOversigt")
-//    public String aktiviteterOversigt(){
-//
-//        return "aktiviteterOversigt";
-//    }
+    @GetMapping("/aktiviteterOversigt")
+    public String aktiviteterOversigt(Model model){
+        model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
+        return "aktiviteterOversigt";
+
+
+    }
+
+    public static ArrayList<Activity> lillemarcusertræt () {
+       ArrayList<Activity> hallo= new ArrayList<>();
+       Activity h= new Activity("kjsdf",20,"20",20,"ldnsflk",20);
+       hallo.add(h);
+       return hallo;
+
+    }
 }
