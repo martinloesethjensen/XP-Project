@@ -11,92 +11,98 @@ import com.adventures2.xpproject.logic.ReservationLogic;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpSession;
 
 @Controller
 public class ReservationController {
-	private String successMessage = "";
-	private int activity = 0;
-	private String date = "";
+    private String successMessage = "";
+    private int activity = 0;
+    private String date = "";
 
-	@GetMapping("/")
-	public String view(HttpSession session, Model model) {
-		model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
-		model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
-		model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-		model.addAttribute("customer_HashMap", CustomerLogic.getCustomersFromDatabaseToHashMap());
-		model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList(activity, date));
-		model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
-		model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
-		//model.addAttribute("CURRENT_DATE")
+    @GetMapping("/")
+    public String view(HttpSession session, Model model) {
+        model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
+        model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
+        model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
+        model.addAttribute("customer_HashMap", CustomerLogic.getCustomersFromDatabaseToHashMap());
+	    model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList(activity, date));
+        model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
+        model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
 
-		return "/index";
-	}
+        return "/index";
+    }
 
-	@PostMapping("/")
-	public String view(HttpSession session,
-	                   @RequestParam("search") String search,
-	                   @RequestParam("activity") int actitvity,
-	                   @RequestParam("date") String date) {
-		if (search.equals("Søg")) {
-			this.activity = actitvity;
-			this.date = date;
-		}
+    @PostMapping("/")
+    public String view(HttpSession session,
+                       @RequestParam("search") String search,
+                       @RequestParam("activity") int actitvity,
+                       @RequestParam("date") String date) {
+        if (search.equals("Søg")) {
+            this.activity = actitvity;
+            this.date = date;
+        }
 
-		return "redirect:/";
-	}
+        return "redirect:/";
+    }
 
-	@GetMapping("/reservation/create")
-	public String createStepOne(HttpSession session, Model model) {
-		//if(Authenticate.isLoggedIn(session)) {
-		model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
-		model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
-		model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-		model.addAttribute("activities", ActivityLogic.getActivities());
-		model.addAttribute("totalActivities", ActivityLogic.getTotalActivities() - 1);
-		return "/reservation/create_step_1";
-		//}
-		//return "redirect:/";
-	}
+    @GetMapping("/reservation/create")
+    public String createStepOne(HttpSession session, Model model) {
+        //if(Authenticate.isLoggedIn(session)) {
+            model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
+            model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
+            model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
+            model.addAttribute("activities", ActivityLogic.getActivities());
+            model.addAttribute("totalActivities", ActivityLogic.getTotalActivities() - 1);
+            return "/reservation/create_step_1";
+        //}
+        //return "redirect:/";
+    }
 
-	@GetMapping("/reservation/create/{id}")
-	public String createStepTwo(HttpSession session, Model model, @PathVariable("id") int id) {
-		//if(Authenticate.isLoggedIn(session)) {
-		model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
-		model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
-		model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-		model.addAttribute("activities", ActivityLogic.getActivities());
-		model.addAttribute("totalActivities", ActivityLogic.getTotalActivities() - 1);
-		model.addAttribute("chosenActivity", id);
-		return "/reservation/create_step_2";
-		//}
-		//return "redirect:/";
-	}
+    @GetMapping("/reservation/create/{id}")
+    public String createStepTwo(HttpSession session, Model model, @PathVariable("id") int id) {
+        //if(Authenticate.isLoggedIn(session)) {
+        model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
+        model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
+        model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
+        model.addAttribute("activities", ActivityLogic.getActivities());
+        model.addAttribute("totalActivities", ActivityLogic.getTotalActivities() - 1);
+        model.addAttribute("chosenActivity", id);
+        return "/reservation/create_step_2";
+        //}
+        //return "redirect:/";
+    }
 
-	@PostMapping("/reservation/create/{id}")
-	public String create(HttpSession session, Reservation reservation, Customer customer, Employee employee, @RequestParam("action") String action) {
-		//ReservationLogic.create(reservation, customer, employee, session);
-		if (action.equals("Tilbage")) {
-			return "redirect: /reservation/create";
-		} else if (action.equals("Næste")) {
+    @PostMapping("/reservation/create/{id}")
+    public String create(HttpSession session, Reservation reservation, Customer customer, Employee employee, @RequestParam("action") String action) {
+        //ReservationLogic.create(reservation, customer, employee, session);
+        if(action.equals("Tilbage")) {
+            return "redirect: /reservation/create";
+        } else if(action.equals("Næste")) {
+            return "redirect:/reservation/create_step_3";
+        }
+        return "redirect:/reservation/create";
+    }
 
-		}
-		return "redirect:/reservation/create";
-	}
+    @GetMapping("/chef/")
+    public String chefPage(HttpSession session) {
+        if(Authenticate.isLoggedIn(session) && Authenticate.isChef(session))
+            return "/chef/index";
+        else
+            return "redirect:/";
+    }
 
-	@GetMapping("/chef/")
-	public String chefPage(HttpSession session) {
-		if (Authenticate.isLoggedIn(session) && Authenticate.isChef(session))
-			return "/chef/index";
-		else
-			return "redirect:/";
-	}
+    @GetMapping("/reservation/create_step_3")
+    public String createActivity3(){
+        return "reservation/create_step_3";
+    }
 
-	@GetMapping("/reservation/create_step_3")
-	public String createActivity3() {
-		return "reservation/create_step_3";
-	}
+    @PostMapping("/reservation/create_step_3")
+    public String createActivity3(@RequestParam("action") String action){
+        if(action.equals("Tilbage")) {
+            return "redirect:/reservation/create";
+        }
+        return "redirect:/reservation/create_step_3";
+    }
 
 
 }
