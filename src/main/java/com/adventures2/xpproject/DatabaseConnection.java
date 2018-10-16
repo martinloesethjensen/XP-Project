@@ -51,6 +51,18 @@ public class DatabaseConnection {
         return null;
     }
 
+    public static ResultSet queryWithParameters(PreparedStatement preparedStatement) {
+        createConnection();
+
+        try {
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     public static int insertReturnId (PreparedStatement preparedStatement) {
         createConnection();
 
@@ -68,7 +80,27 @@ public class DatabaseConnection {
         return 0;
     }
 
-    public static void insert (PreparedStatement preparedStatement) {
+    public static void insert(PreparedStatement preparedStatement) {
+        createConnection();
+
+        try {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void update(PreparedStatement preparedStatement) {
+        createConnection();
+
+        try {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void delete(PreparedStatement preparedStatement) {
         createConnection();
 
         try {
