@@ -4,14 +4,14 @@ public class Activity {
     private int id;
     private String name;
     private double price;
-    private int time;
+    private String time;
     private int discount;
     private String image;
-
+   private String rules;
     public Activity() {
     }
 
-    public Activity(int id, String name, double price, int time, int discount, String image) {
+    public Activity(int id, String name, double price, String time, int discount, String image) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -20,7 +20,7 @@ public class Activity {
         this.image = image;
     }
 
-    public Activity(String name, double price, int time, int discount, String image) {
+    public Activity(String name, double price, String time, int discount, String image) {
         this.name = name;
         this.price = price;
         this.time = time;
@@ -44,6 +44,10 @@ public class Activity {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -60,11 +64,11 @@ public class Activity {
         this.price = price;
     }
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

@@ -5,7 +5,7 @@ import com.adventures2.xpproject.base.Activity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ActivityLogic {
     public static Activity[] getActivities() {
@@ -20,7 +20,7 @@ public class ActivityLogic {
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getDouble("price"),
-                        resultSet.getInt("time"),
+                  resultSet.getString("time"),
                         resultSet.getInt("discount"),
                         resultSet.getString("image"));
                 counter++;
@@ -46,5 +46,26 @@ public class ActivityLogic {
         }
 
         return total;
+    }
+
+    public static HashMap<Integer, Activity> getActivitiesFromDatabaseToHashMap() {
+        HashMap<Integer, Activity> activityHashMap = new HashMap<>();
+        ResultSet resultSet = DatabaseConnection.query("SELECT * FROM activities");
+        try {
+            while (resultSet.next()) {
+                activityHashMap.put(resultSet.getInt("id"), new Activity(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getDouble("price"),
+                        resultSet.getString("time"),
+                        resultSet.getInt("discount"),
+                        resultSet.getString("image")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return activityHashMap;
     }
 }

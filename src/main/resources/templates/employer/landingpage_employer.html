@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Adventure Alley | Startpage</title>
+    <title>Adventure Alley | Start side</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
@@ -16,20 +16,13 @@
         <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo" style="width: 100%">
         <h1 class="h3 mb-3 font-weight-normal">Adventure Alley</h1>
     </div>
-</form>
-<div class="form-group">
-    <form class="form-signin" method="post" th:action="${'landingpage_employer'}">
-        <button type="submit" class="btn btn-lg btn-block">Oversigt</button>
-    </form>
-    <form class="form-signin" method="post" th:action="${'createReservation'}">
-        <button type="submit" class="btn btn-lg btn-block">Opret reservation</button>
-    </form>
-    <form class="form-signin" method="post" th:action="${'createActivity'}">
-        <button type="submit" class="btn btn-lg btn-block">Aktiviteter</button>
-    </form>
-</div>
-<br/>
-<form class="form-signin">
+
+    <div class="form-group">
+        <a href="/" class="btn btn-lg btn-block btn-light">Oversigt</a>
+        <a href="#" class="btn btn-lg btn-block btn-light">Opret reservation</a>
+        <a href="#" class="btn btn-lg btn-block btn-light">Aktiviteter</a>
+    </div>
+    <br/>
     <div class="form-group">
         <button type="submit" class="btn btn-lg btn-block btn-secondary">Log ud</button>
     </div>

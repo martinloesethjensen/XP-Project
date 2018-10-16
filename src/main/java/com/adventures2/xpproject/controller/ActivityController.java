@@ -10,28 +10,17 @@ import java.util.ArrayList;
 
 @Controller
 public class ActivityController {
-
     public static ArrayList<Activity> actiList = new ArrayList<>();
-
-
-
 
     @GetMapping("/ReserveAKT")
     public String orderActivity(Model model) {
-      model.addAttribute("aktivitet",new Activity());
-
-
-      return "ReserveAKT";
-
-           }
-
-           @PostMapping("/ReserveAKT")
-    public String orderActivity(Activity activity){
-
-    return "redirect:/VisAktivitet";
-    }
-
-
-
+        model.addAttribute("aktivitet", new Activity());
+        return "ReserveAKT";
 
     }
+
+    @PostMapping("/ReserveAKT")
+    public String orderActivity(Activity activity) {
+        return "redirect:/VisAktivitet";
+    }
+}
