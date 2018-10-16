@@ -34,7 +34,6 @@ public class Reservation  {
     this.fk_customer_id = fk_customer_id;
     this.fk_activity_id = fk_activity_id;
     this.fk_user_id = fk_user_id;
-    this.fk_employee_id = fk_employee_id;
   }
 
   @Override
