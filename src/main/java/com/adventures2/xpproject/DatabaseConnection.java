@@ -68,7 +68,17 @@ public class DatabaseConnection {
         return 0;
     }
 
-    public static void insert (PreparedStatement preparedStatement) {
+    public static void insert(PreparedStatement preparedStatement) {
+        createConnection();
+
+        try {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void update(PreparedStatement preparedStatement) {
         createConnection();
 
         try {
