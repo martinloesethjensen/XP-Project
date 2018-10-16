@@ -16,6 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class ReservationLogic {
 	public static void create(Reservation reservation, Customer customer, Employee employee, HttpSession session) {
@@ -74,7 +76,9 @@ public class ReservationLogic {
 			} catch (SQLException | ParseException e) {
 				e.printStackTrace();
 			}
-		} else {
+		}
+
+		else {
 			resultSet = DatabaseConnection.query("SELECT * FROM reservations");
 		}
 
@@ -83,9 +87,9 @@ public class ReservationLogic {
 				reservations.add(new Reservation(
 					resultSet.getInt("id"),
 					"Kl: " + new SimpleDateFormat("HH:mm").format(
-						new Date(Long.parseLong(resultSet.getString("start")) * 1000)),
+						new Date(Long.parseLong(resultSet.getString("start")) * 1000 - (3600 * 1000))),
 					"Kl: " + new SimpleDateFormat("HH:mm").format(
-						new Date(Long.parseLong(resultSet.getString("end")) * 1000)),
+						new Date(Long.parseLong(resultSet.getString("end")) * 1000 - (3600 * 1000))),
 					resultSet.getInt("customDiscount"),
 					resultSet.getInt("peopleAmount"),
 					resultSet.getInt("fk_customer_id"),

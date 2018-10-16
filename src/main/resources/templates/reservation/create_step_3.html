@@ -1,7 +1,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -17,106 +17,102 @@
     <link rel="stylesheet" href="/css/ReservationFillOutCSS.css">
 
     <script>
-      function finalCost() {
-        var roomType = document.getElementById("room_type").value;
-        var roomNum = document.getElementById("room_number").value;
-        var personNum = document.getElementById("person_number").value;
-        var childNum = document.getElementById("child_number").value;
-        var resFacilities = document.getElementById("res_facilities").value;
+        function finalCost() {
+            var roomType = document.getElementById("room_type").value;
+            var roomNum = document.getElementById("room_number").value;
+            var personNum = document.getElementById("person_number").value;
+            var childNum = document.getElementById("child_number").value;
+            var resFacilities = document.getElementById("res_facilities").value;
 
-        var total = (parseInt(roomType) * 10) + ((roomNum) * 2) + ((personNum) * 3) + ((childNum) * 2) + ((resFacilities) * 5)
+            var total = (parseInt(roomType) * 10) + ((roomNum) * 2) + ((personNum) * 3) + ((childNum) * 2) + ((resFacilities) * 5)
 
-        document.getElementById("result").innerHTML = total;
-      }
+            document.getElementById("result").innerHTML = total;
+        }
     </script>
 
 
 </head>
 <body>
 <div th:replace="/includes/menu::menu"></div>
-<div class="container-fluid">
-    <br/>
-    <div class="row">
-        <h3 class="mx-auto"> Udfyld oplysninger</h3><br>
-    </div>
-    <br/>
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="form-group col-sm-5">
-            <label class="paragraph-center">Fornavn*</label>
-            <br/>
-            <input type="FirstName" class="form-control" id="inputFirstName">
+<form method="post">
+    <div class="container-fluid">
+        <br/>
+        <div class="row">
+            <h3 class="mx-auto"> Udfyld oplysninger</h3><br>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="form-group col-sm-10">
+                <label class="paragraph-center">Navn*</label>
+                <br/>
+                <input type="text" class="form-control" id="inputFirstName" required="required" th:field="${customer.name}">
+            </div>
+
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="form-group col-sm-5">
+                <label>Telefon*</label>
+                <input type="tel" class="form-control" id="inputTlfNumber" required="required" th:field="${customer.telephone}">
+
+            </div>
+
+            <div class="form-group col-sm-5">
+                <label>Email*</label>
+                <input type="email" class="form-control" id="inputEmail" required="required" th:field="${customer.email}">
+
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="form-group col-sm-5">
+                <label>Firma</label>
+                <input type="text" class="form-control" id="inputFirm" th:field="${customer.companyName}">
+
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4 vertical-center-checkbox">
+                <input type="checkbox" class="form-check-input" id="materialUnchecked" th:value="true" th:field="${customer.newsmail}">
+                <label class="form-check-label" for="materialUnchecked">Ønsker kunden at modtage mails
+                    fra os?</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="text-center paragraph-center">Medarbejder ansvarlig for kunde*</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5"></div>
+            <div class="form-group col-sm-2">
+                <select class="form-control" id="assignWorker" name="employeeAssigned">
+                    <option th:each="employee : ${employees_HashMap}" th:value="${employee.key}"
+                            th:text="${employee.value.getRealname()}"></option>
+                </select>
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2">
+                <label>*Skal udfyldes</label>
+            </div>
+            <div class="col-sm-1"></div>
         </div>
 
-        <div class="form-group col-sm-5">
-            <label>Efternavn*</label>
-            <br/>
-            <input type="LastName" class="form-control" id="inputLastName">
-        </div>
-        <div class="col-sm-1"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="form-group col-sm-5">
-            <label>Telefon*</label>
-            <input type="tlf" class="form-control" id="inputTlfNumber">
-
-        </div>
-
-        <div class="form-group col-sm-5">
-            <label>Email*</label>
-            <input type="Email" class="form-control" id="inputEmail">
-
-        </div>
-        <div class="col-sm-1"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="form-group col-sm-5">
-            <label>Firma</label>
-            <input type="firm" class="form-control" id="inputFirm">
-
-        </div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-4 vertical-center-checkbox">
-            <input type="checkbox" class="form-check-input" id="materialUnchecked">
-            <label class="form-check-label" for="materialUnchecked">Ønsker kunden at modtage mails
-                fra os?</label>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <p class="text-center paragraph-center">Medarbejder ansvarlig for kunde*</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-5"></div>
-        <div class="form-group col-sm-2">
-            <select class="form-control" id="assignWorker"/>
-            <option value="0" selected></option>
-            </select>
-        </div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-2">
-            <label>*Skal udfyldes</label>
-        </div>
-        <div class="col-sm-1"></div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-2">
-            <form method="post">
-                <input type="submit" name="action" class="btn btn-primary" value="Tilbage">
-            </form>
-        </div>
-        <div class="col-sm-5"></div>
-        <div class="col-sm-2">
-
-            <button class="btn btn-success btn-right">Næste</button>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2">
+                <form method="post">
+                    <input type="submit" name="action" class="btn btn-primary" value="Tilbage">
+                </form>
+            </div>
+            <div class="col-sm-5"></div>
+            <div class="col-sm-2">
+                <button type="submit" name="action" class="btn btn-success btn-right">Næste</button>
+            </div>
         </div>
     </div>
-</div>
-
+</form>
 </body>
 </html>
