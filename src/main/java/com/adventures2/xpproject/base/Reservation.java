@@ -9,11 +9,12 @@ public class Reservation  {
   private int fk_customer_id;
   private int fk_activity_id;
   private int fk_user_id;
+  private int fk_employee_id;
 
   public Reservation() {
   }
 
-  public Reservation(String start, String end, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
+  public Reservation(String start, String end, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id, int fk_employee_id) {
     this.start = start;
     this.end = end;
     this.customDiscount = customDiscount;
@@ -21,9 +22,10 @@ public class Reservation  {
     this.fk_customer_id = fk_customer_id;
     this.fk_activity_id = fk_activity_id;
     this.fk_user_id = fk_user_id;
+    this.fk_employee_id = fk_employee_id;
   }
 
-  public Reservation(int id, String start, String end, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id) {
+  public Reservation(int id, String start, String end, int customDiscount, int peopleAmount, int fk_customer_id, int fk_activity_id, int fk_user_id, int fk_employee_id) {
     this.id = id;
     this.start = start;
     this.end = end;
@@ -32,6 +34,7 @@ public class Reservation  {
     this.fk_customer_id = fk_customer_id;
     this.fk_activity_id = fk_activity_id;
     this.fk_user_id = fk_user_id;
+    this.fk_employee_id = fk_employee_id;
   }
 
   @Override
@@ -45,6 +48,7 @@ public class Reservation  {
             ", fk_customer_id=" + fk_customer_id +
             ", fk_activity_id=" + fk_activity_id +
             ", fk_user_id=" + fk_user_id +
+			", fk_employee_id=" + fk_employee_id +
             '}';
   }
 
@@ -107,5 +111,13 @@ public class Reservation  {
   public void setFk_user_id(int fk_user_id) {
     this.fk_user_id = fk_user_id;
   }
+
+	public int getFk_employee_id() {
+		return fk_employee_id;
+	}
+
+	public void setFk_employee_id(int fk_employee_id) {
+		this.fk_employee_id = fk_employee_id;
+	}
 }
 

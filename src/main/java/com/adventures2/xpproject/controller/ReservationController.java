@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.http.HTTPBinding;
 
 @Controller
 public class ReservationController {
@@ -69,9 +70,12 @@ public class ReservationController {
         return "redirect:/reservation/create";
     }
 
-    @GetMapping("/landingpage_employer")
-    public String landingpageEmployer() {
-        return "/employer/landingpage_employer";
+    @GetMapping("/chef/")
+    public String chefPage(HttpSession session) {
+        if(Authenticate.isLoggedIn(session) && Authenticate.isChef(session))
+            return "/chef/index";
+        else
+            return "redirect:/";
     }
 
 
