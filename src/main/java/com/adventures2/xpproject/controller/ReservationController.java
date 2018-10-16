@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -27,7 +26,7 @@ public class ReservationController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         model.addAttribute("customer_HashMap", CustomerLogic.getCustomersFromDatabaseToHashMap());
-        model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList(activity, date));
+        model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList());
         model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
         model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
 
@@ -90,9 +89,12 @@ public class ReservationController {
         return "redirect:/reservation/create";
     }
 
-    @GetMapping("/landingpage_employer")
-    public String landingpageEmployer() {
-        return "/employer/landingpage_employer";
+    @GetMapping("/chef/")
+    public String chefPage(HttpSession session) {
+        if(Authenticate.isLoggedIn(session) && Authenticate.isChef(session))
+            return "/chef/index";
+        else
+            return "redirect:/";
     }
 
 

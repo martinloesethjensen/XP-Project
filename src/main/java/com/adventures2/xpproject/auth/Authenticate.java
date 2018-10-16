@@ -33,4 +33,8 @@ public class Authenticate {
     public static boolean checkPassword(String password, String hashed) {
         return BCrypt.checkpw(password, hashed);
     }
+
+    public static boolean isChef(HttpSession session) {
+        return (int)session.getAttribute("NIVEAU") == 1;
+    }
 }

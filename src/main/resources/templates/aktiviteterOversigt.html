@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="en">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <title>aktviteterOversigt</title>
+    <link rel="stylesheet" href="/css/ReservationFillOutCSS.css">
+
+</head>
+<body>
+<div th:replace="/includes/menu::menu"></div>
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-12">
+        <h1 class="header-center"> Aktivitetshåndtering</h1>
+    </div>
+</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="paragraph-center"> Nuværende aktiviteter</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="th_aktivitet">Aktivitet</th>
+                    <th class="th_Vaelg">Vælg</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Gokart</td>
+                <td><input type="radio" name="Vælg"></td>
+
+            </tr>
+            <tr>
+                <td>Sumobrydning</td>
+                <td><input type="radio" name="Vælg"></td>
+
+            </tr>
+            <tr>
+                <td>Paintball</td>
+                <td><input type="radio" name="Vælg"></td>
+
+            </tr>
+            <tr>
+                <td>Minigolf</td>
+                <td><input type="radio" name="Vælg"></td>
+
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <input type="submit" name="action" class="btn btn-secondary" value="Tilbage">
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-7">
+            <input type="submit" name="action" class="btn btn-success" value="Tilføj">
+            <input type="submit" name="action" class="btn btn-primary" value="Rediger">
+            <input type="submit" name="action" class="btn btn-danger" value="Slet">
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
