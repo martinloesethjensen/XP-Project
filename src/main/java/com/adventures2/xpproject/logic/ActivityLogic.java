@@ -114,7 +114,7 @@ public class ActivityLogic {
 
   }
 
-  public static Activity getActivityById(String id) {
+  public static Activity getActivityById(int id) {
     try {
       PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM activities WHERE id = ? ");
 

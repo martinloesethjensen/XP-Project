@@ -43,9 +43,9 @@ public class ActivityController {
   }
 
   @GetMapping("edit_activity/{id}")
-  public String editActivity(HttpSession session, Model model, @PathVariable String id) {
+  public String editActivity(HttpSession session, Model model, @PathVariable int id) {
     //if(Authenticate.isLoggedIn(session)) {
-    model.addAttribute("aktivity", ActivityLogic.getActivityById(id));
+    model.addAttribute("activity", ActivityLogic.getActivityById(id));
     model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
     model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
     model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
