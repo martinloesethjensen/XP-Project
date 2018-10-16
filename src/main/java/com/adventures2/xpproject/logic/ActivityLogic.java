@@ -118,7 +118,7 @@ public class ActivityLogic {
     try {
       PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM activities WHERE id = ? ");
 
-      preparedStatement.setInt(1, Integer.parseInt(id));
+      preparedStatement.setInt(1, id);
       ResultSet resultSet = DatabaseConnection.queryWithParameters(preparedStatement);
       // int id, String name, double price, String time, int discount, String image
       return new Activity(
