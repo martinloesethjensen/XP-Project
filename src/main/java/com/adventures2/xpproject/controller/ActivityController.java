@@ -13,6 +13,7 @@ import java.util.ArrayList;
 @Controller
 public class ActivityController {
     public static ArrayList<Activity> actiList = new ArrayList<>();
+    String succesMessage = "";
 
     @GetMapping("/create_activity")
     public String orderActivity(Model model) {
@@ -34,6 +35,13 @@ public class ActivityController {
   public String editActivity(Activity activity) {
     ActivityLogic.updateActivity(activity);
     return "redirect:/createActivity";
+  }
+
+  @PostMapping("/delete_activity")
+  public String deleteActivity(Activity activity){
+      ActivityLogic.deleteActivity(activity);
+      succesMessage = "Aktiviten blev slettet";
+      return "redirect:/aktivitetogoversigt";
   }
 
 }
