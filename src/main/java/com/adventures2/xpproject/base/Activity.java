@@ -1,89 +1,103 @@
 package com.adventures2.xpproject.base;
 
 public class Activity {
-    private int id;
-    private String name;
-    private double price;
-    private String time;
-    private int discount;
-    private String image;
-    public Activity() {
-    }
+  private int id;
+  private String name;
+  private double price;
+  private String time;
+  private int discount;
+  private String image;
+  private int amountOfEquipment;
 
-    public Activity(int id, String name, double price, String time, int discount, String image) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.time = time;
-        this.discount = discount;
-        this.image = image;
-    }
 
-    public Activity(String name, double price, String time, int discount, String image) {
-        this.name = name;
-        this.price = price;
-        this.time = time;
-        this.discount = discount;
-        this.image = image;
-    }
+  public Activity() {
+  }
 
-    @Override
-    public String toString() {
-        return "Activity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", time=" + time +
-                ", discount=" + discount +
-                ", image=" + image +
-                '}';
-    }
+  public Activity(int id, String name, double price, String time, int discount, String image, int amountOfEquipment) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.time = time;
+    this.discount = discount;
+    this.image = image;
+    this.amountOfEquipment = amountOfEquipment;
+  }
 
-    public int getId() {
-        return id;
-    }
+  public Activity(String name, double price, String time, int discount, String image, int amountOfEquipment) {
+    this.name = name;
+    this.price = price;
+    this.time = time;
+    this.discount = discount;
+    this.image = image;
+    this.amountOfEquipment = amountOfEquipment;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  }
 
-    public String getName() {
-        return name;
-    }
+  @Override
+  public String toString() {
+    return "Activity{" +
+      "id=" + id +
+      ", name='" + name + '\'' +
+      ", price=" + price +
+      ", time=" + time +
+      ", discount=" + discount +
+      ", image=" + image +
+      '}';
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public double getPrice() {
-        return price;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getTime() {
-        return time;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
+  public double getPrice() {
+    return price;
+  }
 
-    public int getDiscount() {
-        return discount;
-    }
+  public void setPrice(double price) {
+    this.price = price;
+  }
 
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
+  public String getTime() {
+    return time;
+  }
 
-    public String getImage() {
-        return image;
-    }
+  public void setTime(String time) {
+    this.time = time;
+  }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+  public int getDiscount() {
+    return discount;
+  }
+
+  public void setDiscount(int discount) {
+    this.discount = discount;
+  }
+
+  public String getImage() {
+    return image;
+  }
+
+  public void setImage(String image) {
+    this.image = image;
+  }
+
+  public int getAmountOfEquipment() {
+    return amountOfEquipment;
+  }
+
+  public void setAmountOfEquipment(int amountOfEquipment) {
+    this.amountOfEquipment = amountOfEquipment;
+  }
 }

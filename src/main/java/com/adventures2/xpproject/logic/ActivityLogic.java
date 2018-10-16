@@ -27,7 +27,8 @@ public class ActivityLogic {
           resultSet.getDouble("price"),
           resultSet.getString("time"),
           resultSet.getInt("discount"),
-          resultSet.getString("image"));
+          resultSet.getString("image"),
+          resultSet.getInt("amountOfEquipment"));
         counter++;
       }
     } catch (SQLException e) {
@@ -64,7 +65,8 @@ public class ActivityLogic {
           resultSet.getDouble("price"),
           resultSet.getString("time"),
           resultSet.getInt("discount"),
-          resultSet.getString("image")
+          resultSet.getString("image"),
+          resultSet.getInt("amountOfEquipment")
         ));
       }
     } catch (SQLException e) {
@@ -76,12 +78,13 @@ public class ActivityLogic {
 
   public static void createActivity(Activity activity) {
     try {
-      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("INSERT INTO activities ( name, price, time, discount, image) VALUES (?,?,?,?,?)");
+      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("INSERT INTO activities ( name, price, time, discount, image, amountOfEquipment) VALUES (?,?,?,?,?,?)");
       preparedStatement.setString(1, activity.getName());
       preparedStatement.setDouble(2, activity.getPrice());
       preparedStatement.setString(3, activity.getTime());
       preparedStatement.setInt(4, activity.getDiscount());
       preparedStatement.setString(5, activity.getImage());
+      preparedStatement.setInt(6, activity.getAmountOfEquipment());
       DatabaseConnection.insert(preparedStatement);
     } catch (SQLException e) {
       e.printStackTrace();
@@ -90,13 +93,14 @@ public class ActivityLogic {
 
   public static void updateActivity(Activity activity) {
     try {
-      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("UPDATE activities SET name = ?, price = ?, time = ? , discount = ?, image = ? WHERE id = ? ");
+      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("UPDATE activities SET name = ?, price = ?, time = ? , discount = ?, image = ?, amountOfEquipment = ? WHERE id = ? ");
       preparedStatement.setString(1, activity.getName());
       preparedStatement.setDouble(2, activity.getPrice());
       preparedStatement.setString(3, activity.getTime());
       preparedStatement.setInt(4, activity.getDiscount());
       preparedStatement.setString(5, activity.getImage());
-      preparedStatement.setInt(6, activity.getId());
+      preparedStatement.setInt(6, activity.getAmountOfEquipment());
+      preparedStatement.setInt(7, activity.getId());
       DatabaseConnection.update(preparedStatement);
     } catch (SQLException e) {
       e.printStackTrace();
@@ -127,7 +131,8 @@ public class ActivityLogic {
         resultSet.getDouble(3),
         resultSet.getString(4),
         resultSet.getInt(5),
-        resultSet.getString(6)
+        resultSet.getString(6),
+        resultSet.getInt(7)
       );
     } catch (SQLException e) {
       e.printStackTrace();

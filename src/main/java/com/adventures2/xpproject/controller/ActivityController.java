@@ -82,30 +82,30 @@ public class ActivityController {
 
     }
 
-    @PostMapping("/ReserveAKT")
-    public String orderActivity(Activity activity) {
-        return "redirect:/VisAktivitet";
-    }
-
-
-    @GetMapping("/opretres")
-    public String createActivity(Model model) {
-        model.addAttribute("aktivitet", new Activity());
-        return "opretres";
-    }
-
-    @PostMapping("/opretres")
-    public String createActivity(Activity activity) {
-
-
-        return "redirect:/opretres";
-    }
-
-
-
-    @GetMapping("/aktiviteterOversigt")
-    public String aktiviteterOversigt(){
-
-        return "aktiviteterOversigt";
-    }
+//    @PostMapping("/ReserveAKT")
+//    public String orderActivity(Activity activity) {
+//        return "redirect:/VisAktivitet";
+//    }
+//
+//
+//    @GetMapping("/opretres")
+//    public String createActivity(Model model) {
+//        model.addAttribute("aktivitet", new Activity());
+//        return "opretres";
+//    }
+//
+//    @PostMapping("/opretres")
+//    public String createActivity(Activity activity) {
+//
+//
+//        return "redirect:/opretres";
+//    }
+//
+//
+//
+//    @GetMapping("/aktiviteterOversigt")
+//    public String aktiviteterOversigt(){
+//
+//        return "aktiviteterOversigt";
+//    }
 }
