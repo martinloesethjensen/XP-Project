@@ -78,7 +78,7 @@ public class ActivityController {
     succesMessage = "Aktiviten blev slettet";
     return "redirect:/aktivitetogoversigt";
     //}
-    //return "redirect:/";
+    ///return "redirect:/";
 
   }
 
