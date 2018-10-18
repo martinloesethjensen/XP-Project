@@ -132,7 +132,7 @@ public class ReservationController {
 		model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
 		model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
 		model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
-		model.addAttribute("employee", employee);
+		model.addAttribute("employee",  employee);
 		model.addAttribute("customer", customer);
 		model.addAttribute("reservation", reservation);
 		return "reservation/create_step_3";

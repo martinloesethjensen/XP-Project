@@ -41,7 +41,7 @@ public class ActivityController {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-        return "redirect:/create_activity";
+        return "redirect:/aktiviteterOversigt";
         //}
         //return "redirect:/";
 
