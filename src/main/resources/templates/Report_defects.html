@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+
+
+
+<form class="form-signin" method="Post" th:action="@{/Report_defects}">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo" style="width: 100%">
+        <h1 class="h3 mb-3 font-weight-normal">Adventure Alley | anmeld udstyr</h1>
+
+
+        <div class="form-group">
+
+            <label>navn på udstyr</label>
+            <input type="text" id="inputToolname" class="form-control" th:field="${defects.toolname}" />
+        </div>
+
+        <div class="form-group">
+            <label>detaljer</label>
+            <textarea type="text" id="inputPrice" class="form-control" th:field="${defects.decription}" />
+        </div>
+
+
+
+
+
+
+        <div class="text-left mb-4">
+            <a href="/aktiviteterOversigt" role="button"
+               class="btn btn-info">Tilbage</a>
+            <input type="submit" class="btn btn-success float-right" value="Gem"/>
+        </div>
+
+
+    </div>
+    </div>
+</form>
+
