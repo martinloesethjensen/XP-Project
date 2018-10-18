@@ -39,8 +39,8 @@
                     </span>
                 </div>
             </div>
-            <input class=" btn btn-success float-right" value="Opret Reservation" type="submit" name="action"
-                   th:if="${IS_LOGGED_IN}">
+            <a  href="/reservation/create" class=" btn btn-success float-right"
+                th:if="${IS_LOGGED_IN}">Opret Reservation </a>
         </div>
     </div>
 </form>

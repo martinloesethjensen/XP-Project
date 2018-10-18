@@ -104,4 +104,28 @@ public class ReservationLogic {
 
 		return reservations;
 	}
+
+    public static Reservation getReservationById(int id) {
+        try {
+            PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM reservations WHERE id = ? ");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = DatabaseConnection.queryWithParameters(preparedStatement);
+            if(resultSet.next()){
+                return new Reservation(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getInt(4),
+                        resultSet.getInt(5),
+                        resultSet.getInt(6),
+                        resultSet.getInt(7),
+                        resultSet.getInt(8),
+                        resultSet.getInt(9)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
