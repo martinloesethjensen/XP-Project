@@ -120,20 +120,22 @@ public class ActivityLogic {
 
   public static Activity getActivityById(int id) {
     try {
+      System.out.println(id);
       PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM activities WHERE id = ? ");
-
       preparedStatement.setInt(1, id);
       ResultSet resultSet = DatabaseConnection.queryWithParameters(preparedStatement);
-      // int id, String name, double price, String time, int discount, String image
-      return new Activity(
-        resultSet.getInt(1),
-        resultSet.getString(2),
-        resultSet.getDouble(3),
-        resultSet.getString(4),
-        resultSet.getInt(5),
-        resultSet.getString(6),
-        resultSet.getInt(7)
-      );
+      if (resultSet.next()) {
+        // int id, String name, double price, String time, int discount, String image
+        return new Activity(
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getDouble(3),
+                resultSet.getString(4),
+                resultSet.getInt(5),
+                resultSet.getString(6),
+                resultSet.getInt(7)
+        );
+      }
     } catch (SQLException e) {
       e.printStackTrace();
     }

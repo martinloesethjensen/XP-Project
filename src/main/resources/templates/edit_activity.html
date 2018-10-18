@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+
+
+
+<form class="form-signin" method="Post" th:action="@{/edit_activity}">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo" style="width: 100%">
+        <h1 class="h3 mb-3 font-weight-normal">Adventure Alley | redigere aktivitet</h1>
+        <div class="form-group">
+
+
+
+            <label for="inputAktivitet">Aktivitet navn</label>
+            <input type="text" id="inputAktivitet" class="form-control" th:field="${activity.name}" />
+        </div>
+        <div class="form-group">
+
+            <label>antal minutter</label>
+            <input type="number" id="inputTime" class="form-control" th:field="${activity.time}" />
+        </div>
+
+        <div class="form-group">
+            <label>Pris for reservation</label>
+            <input type="number" id="inputPrice" class="form-control" th:field="${activity.price}" />
+        </div>
+
+        <div class="form-group">
+            <label>Antal udstyr ledigt</label>
+            <input type="text" id="inputAmount" class="form-control"th:field="${activity.amountOfEquipment}"/>
+        </div>
+
+
+        <div class="form-group">
+            <label>Rabat ved antal reserveret udstyr</label>
+            <input type="number" id="inputDiscount" class="form-control" th:field="${activity.discount}"/>
+        </div>
+
+        <div class="form-group">
+            <label>billed</label>
+            <input type="text" id="image" class="form-control" th:field="${activity.image}"/>
+        </div>
+
+        <!--<div class="form-group">-->
+            <!--<label>Retningslinjer</label>-->
+            <!--<input type="text" id="inputRules" class="form-control" th:field="${rules.content}"/>-->
+        <!--</div>-->
+
+
+        <div class="form-group">
+            <div class="text-left mb-4">
+                <button type="button" class="btn btn-info">Tilbage</button>
+            </div>
+
+
+        </div>
+    </div>
+    <input type="submit" class="btn btn-success">redigere</input>
+</form>
