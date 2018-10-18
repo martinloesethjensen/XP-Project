@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
 
-            <label>antal minutter</label>
+            <label>Antal minutter</label>
             <input type="number" id="inputTime" class="form-control" th:field="${aktivitet.time}" />
         </div>
 
@@ -52,7 +52,7 @@
             </div>
 
             <div class="form-group">
-                <label>billed</label>
+                <label>Billede</label>
                 <input type="text" id="image" class="form-control" th:field="${aktivitet.image}"/>
             </div>
 
@@ -64,11 +64,13 @@
 
             <div class="form-group">
                 <div class="text-left mb-4">
+
                     <button type="button" class="btn btn-info">Tilbage</button>
+                    <input type="submit" value="Tilføj" class="btn btn-success float-right ">
                 </div>
 
 
         </div>
     </div>
-    <input type="submit" class="btn btn-success">Tilføj</input>
+
 </form>
