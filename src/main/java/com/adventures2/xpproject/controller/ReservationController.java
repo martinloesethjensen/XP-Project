@@ -2,7 +2,6 @@ package com.adventures2.xpproject.controller;
 
 import com.adventures2.xpproject.DatabaseConnection;
 import com.adventures2.xpproject.auth.Authenticate;
-import com.adventures2.xpproject.base.Activity;
 import com.adventures2.xpproject.base.Customer;
 import com.adventures2.xpproject.base.Employee;
 import com.adventures2.xpproject.base.Reservation;
@@ -18,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.AttributedString;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,9 +31,9 @@ public class ReservationController {
     private String date = "";
     //kan ikke
     // bruges
-    private Reservation reservation = new Reservation();
-    private Customer customer = new Customer();
-    private Employee employee = new Employee();
+    private Reservation reservation;
+    private Customer customer;
+    private Employee employee;
 
     @GetMapping("/")
     public String view(HttpSession session, Model model) {
@@ -120,13 +120,12 @@ public class ReservationController {
                 }
             }
 
-
             this.reservation = reservation;
             this.customer = customer;
             this.employee = employee;
-            System.out.println(reservation);
-            System.out.println(customer);
-            System.out.println(employee);
+            System.out.println(this.reservation);
+            System.out.println(this.customer);
+            System.out.println(this.employee);
             return "redirect:/reservation/create_step_3";
         }
         return "redirect:/reservation/create";
@@ -141,6 +140,10 @@ public class ReservationController {
         model.addAttribute("employee", employee);
         model.addAttribute("customer", customer);
         model.addAttribute("reservation", reservation);
+        System.out.println(this.reservation);
+        System.out.println(this.customer);
+        System.out.println(this.employee);
+
         return "reservation/create_step_3";
     }
 
@@ -152,14 +155,41 @@ public class ReservationController {
             return "redirect:/reservation/create";
         }
         System.out.println(employee_id);
+        this.employee.setId(employee_id);
+	    this.employee.setRealname(EmployeeLogic.getEmployeesFromDatabaseToHashMap().get(employee_id).getRealname());
+	    this.reservation.setFk_employee_id(employee_id);
+	    System.out.println(this.employee.getRealname());
 
-        System.out.println(reservation);
+
+		//this.customer = customer;
+
+	    try {
+		    PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(
+		    		"INSERT INTO customers (company, name, phone, email, newsmail) VALUES (?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
+		    preparedStatement.setString(1, customer.getCompanyName());
+		    preparedStatement.setString(2, customer.getName());
+		    preparedStatement.setString(3, customer.getTelephone());
+		    preparedStatement.setString(4, customer.getEmail());
+		    preparedStatement.setInt(5, customer.isNewsmail() ? 1 : 0);
+
+		    int customer_id = DatabaseConnection.insertReturnId(preparedStatement);
+
+		    //this.customer.setId(customer_id);
+		    this.reservation.setFk_customer_id(customer_id);
+	    } catch (SQLException e) {
+		    e.printStackTrace();
+	    }
+
+
+        System.out.println(this.reservation);
         System.out.println(customer);
         System.out.println(employee);
 
         //ReservationLogic.create(reservation, customer, employee, session);
 
-        return "redirect:/reservation/create_step_3";
+
+
+        return "redirect:/reservation/create";
     }
 
     @GetMapping("/chef/")
