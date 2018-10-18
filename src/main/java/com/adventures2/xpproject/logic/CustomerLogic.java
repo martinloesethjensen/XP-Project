@@ -12,7 +12,6 @@ import java.util.HashMap;
 public class CustomerLogic {
     public static int create(Customer customer) {
         int _id = 0;
-
         try {
             PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(
                     "INSERT INTO customers (company,name,phone,email,newsmail) VALUES(?, ? , ?, ? ,?)", Statement.RETURN_GENERATED_KEYS);

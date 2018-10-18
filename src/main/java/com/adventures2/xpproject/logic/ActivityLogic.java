@@ -120,7 +120,6 @@ public class ActivityLogic {
 
   public static Activity getActivityById(int id) {
     try {
-      System.out.println(id);
       PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM activities WHERE id = ? ");
       preparedStatement.setInt(1, id);
       ResultSet resultSet = DatabaseConnection.queryWithParameters(preparedStatement);

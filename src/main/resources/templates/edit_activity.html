@@ -65,14 +65,10 @@
                     <input type="text" id="image" class="form-control"
                            th:field="${activity.image}"/>
                 </div>
-
-                <!--<div class="form-group">-->
-                <!--<label>Retningslinjer</label>-->
-                <!--<input type="text" id="inputRules" class="form-control" th:field="${rules.content}"/>-->
-                <!--</div>-->
                 <div class="form-group">
                     <div class="text-left mb-4">
-                        <button type="button" class="btn btn-info">Tilbage</button>
+                        <a href="/aktiviteterOversigt" role="button"
+                           class="btn btn-info">Tilbage</a>
                         <input type="submit" class="btn btn-success float-right" value="Gem"/>
                     </div>
 
