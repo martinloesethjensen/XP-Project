@@ -107,10 +107,10 @@ public class ActivityLogic {
     }
   }
 
-  public static void deleteActivity(Activity activity) {
+  public static void deleteActivity(int id) {
     try {
       PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("DELETE  FROM activities WHERE id = ? ");
-      preparedStatement.setInt(1, activity.getId());
+      preparedStatement.setInt(1, id);
       DatabaseConnection.delete(preparedStatement);
     } catch (SQLException e) {
       e.printStackTrace();

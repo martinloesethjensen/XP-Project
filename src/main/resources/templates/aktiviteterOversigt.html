@@ -6,20 +6,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
-
+    
     <meta charset="UTF-8">
     <title>aktviteterOversigt</title>
     <link rel="stylesheet" href="/css/ReservationFillOutCSS.css">
 
 </head>
 <body>
+
 <div th:replace="/includes/menu::menu"></div>
 <div class="container-fluid">
-<div class="row">
-    <div class="col-sm-12">
-        <h1 class="header-center"> Aktivitetshåndtering</h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="header-center"> Aktivitetshåndtering</h1>
+        </div>
     </div>
-</div>
     <div class="row">
         <div class="col-sm-12">
             <p class="paragraph-center"> Nuværende aktiviteter</p>
@@ -29,21 +30,26 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
 
-        <table class="table table-striped">
-            <thead>
+            <table class="table">
+                <thead>
                 <tr>
-                    <th class="th_aktivitet">Aktivitet</th>
-                    <th class="th_Vaelg">Vælg</th>
-
+                    <th scope="col">Aktivitet</th>
+                    <th scope="col" class="text-right">Vælg</th>
                 </tr>
-            </thead>
-            <tbody>
-            <tr th:each="activity: ${activities_HashMap}" >
-                <td th:text="${activity.value.getName()}"></td>
-                <td><input type="checkbox" th:value="${activity.value.getId()}"/></td>
-            </tr>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <tr th:each="activity: ${activities_HashMap}">
+                    <td th:text="${activity.value.getName()}"></td>
+                    <td class="text-right">
+                        <form method="get">
+                            <a th:href="@{'/edit_activity/' + ${activity.value.getId()}}" class="btn btn-primary">Rediger</a>
+                            <a th:href="@{'/delete_activity/'+${activity.value.getId()}}"
+                               onclick="return confirm('Bekræft sletning')" class="btn btn-danger">Slet</a>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -52,16 +58,11 @@
         <div class="col-md-2">
             <a href="/chef/" class="btn btn-secondary">Tilbage</a>
         </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-7">
+        <div class="col-md-5"></div>
+        <div class="col-md-1">
             <a href="/create_activity" class="btn btn-success">Tilføj</a>
-            <!--<a th:href="@{'/edit_activity?id='+${activity.id}}" class="knap">Rediger</a>-->
-            <!--<a th:href="@{'/sletAktivitet?id='+${activity.id}}" onclick="return confirm('Bekræft sletning')" class="knap">Slet</a>-->
-
         </div>
     </div>
-
 </div>
-
 </body>
 </html>

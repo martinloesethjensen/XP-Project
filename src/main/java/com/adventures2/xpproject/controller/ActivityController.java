@@ -48,12 +48,13 @@ public class ActivityController {
     }
 
     @GetMapping("edit_activity/{id}")
-    public String editActivity(HttpSession session, Model model, @PathVariable int id) {
+    public String editActivity(HttpSession session, Model model, @PathVariable("id") int id) {
         //if(Authenticate.isLoggedIn(session)) {
         model.addAttribute("activity", ActivityLogic.getActivityById(id));
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
+        model.addAttribute("chosenActivity", id);
         return "edit_activity";
         //}
         //return "redirect:/";
@@ -74,19 +75,21 @@ public class ActivityController {
 
     }
 
-    @PostMapping("/delete_activity")
-    public String deleteActivity(HttpSession session, Model model, Activity activity) {
+    @GetMapping("/delete_activity/{id}")
+    public String deleteAct(HttpSession session, Model model, Activity activity, @PathVariable("id") int id){
         //if(Authenticate.isLoggedIn(session)) {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-        ActivityLogic.deleteActivity(activity);
-        succesMessage = "Aktiviten blev slettet";
+
+        ActivityLogic.deleteActivity(id);
+
+        succesMessage = "Aktiviteten blev slettet";
         return "redirect:/aktiviteterOversigt";
         //}
-        ///return "redirect:/";
-
+        //return "redirect:/";
     }
+
 
 //    @PostMapping("/ReserveAKT")
 //    public String orderActivity(Activity activity) {
