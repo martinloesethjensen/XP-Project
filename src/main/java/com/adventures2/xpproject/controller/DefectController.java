@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import static com.adventures2.xpproject.logic.DefectLogic.deletedefects;
 
 @Controller
 public class DefectController {
@@ -21,7 +24,7 @@ public String reportDefects(Model model) {
  public String reportDefects(DefectTools defects) {
     System.out.println(defects);
     DefectLogic.writeDefectToDatabase(defects);
-    return "redirect:/Report_defects";
+    return "redirect:/show_defects";
  }
 @GetMapping("/show_defects")
  public String showDefects(Model model){
@@ -29,9 +32,9 @@ model.addAttribute("DefectArray",DefectLogic.ReadDefects());
     return "show_defects";
     }
 
-@PostMapping("delete_defects{ID}")
-    public String deledefects(@PathVariable int ID){
-
+@GetMapping("delete_defects/{ID}")
+    public String deledefects(@PathVariable("ID") int ID,DefectLogic defects){
+    DefectLogic.deletedefects(ID);
     return "redirect:/show_defects";
     }
 }

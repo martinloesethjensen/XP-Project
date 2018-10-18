@@ -47,4 +47,18 @@ DatabaseConnection.insert(con);
 
         return defectToolsArrayList;
     }
+
+
+    public static void deletedefects(int id) {
+        try {
+            PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("DELETE  FROM defects WHERE id = ? ");
+            preparedStatement.setInt(1, id);
+            DatabaseConnection.delete(preparedStatement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
