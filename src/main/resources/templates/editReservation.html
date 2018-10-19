@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -18,7 +18,7 @@
 <body>
 
 
-<form class="form-signin" method="Post" th:action="@{/edit_reservation}">
+<form class="form-signin" method="Post" th:action="@{/editReservation}">
     <div class="text-center mb-4">
         <div class="row">
             <div class="col-3"></div>
@@ -27,45 +27,53 @@
                 <h1 class="h3 mb-3 font-weight-normal">Adventure Alley | redigere reservation</h1>
                 <div class="form-group">
 
-                    <label >Aktivitet navn</label>
-                    <input type="text" >
-
-                </div>
-                <div class="form-group">
-
-                    <label>antal minutter</label>
-
-                </div>
-
-                <div class="form-group">
-                    <label>Pris for reservation</label>
-
+                    <input type="text" name="reservation_id" hidden id="inputID" class="form-control"
+                           th:value="${reservation.getId()}"/>
+                    <label class="float-left" for="inputReservationStart">Reservation start</label>
+                    <input type="text" id="inputReservationStart" class="form-control"
+                           th:field="${reservation.start}"/>
+                    <label class="float-left" for="inputReservationSlut">Reservation slut</label>
+                    <input type="text" id="inputReservationSlut" class="form-control"
+                           th:field="${reservation.end}"/>
                 </div>
 
                 <div class="form-group">
-                    <label>Antal udstyr ledigt</label>
-
+                    <label class="float-left">Rabat</label>
+                    <input type="number" id="inputPrice" class="form-control"
+                           th:field="${reservation.customDiscount}"/>
                 </div>
-
-
+                <br>
                 <div class="form-group">
-                    <label>Rabat ved antal reserveret udstyr</label>
-
-
+                    <label class="float-left">Antal personer</label>
+                    <input type="text" id="inputAmount" class="form-control"
+                           th:field="${reservation.peopleAmount}"/>
                 </div>
+                <br>
+                <label class="float-left">Kunde</label>
+                <select class="form-control" name="customer_id" >
+                    <option th:each="customer : ${customer_HashMap}" th:value="${customer.value.getId()}"
+                            th:text="${customer.value.getName()}"></option>
+                </select>
+                    <br>
+                <label class="float-left">Medarbejder</label>
+                <select class="form-control" name="employee_id">
+                    <option th:each="employee : ${employees_HashMap}" th:value="${employee.value.getId()}"
+                            th:text="${employee.value.getRealname()}"></option>
+                </select>
+                <br>
+                <label class="float-left">Aktiviteter</label>
 
-                <div class="form-group">
-                    <label>billed</label>
+                <select class="form-control" name="activity_id">
+                    <option th:each="activity : ${activities_HashMap}" th:value="${activity.value.getId()}"
+                            th:text="${activity.value.getName()}"></option>
+                </select>
 
-                </div>
 
-                <!--<div class="form-group">-->
-                <!--<label>Retningslinjer</label>-->
-                <!--<input type="text" id="inputRules" class="form-control" th:field="${rules.content}"/>-->
-                <!--</div>-->
+            </div>
                 <div class="form-group">
                     <div class="text-left mb-4">
-                        <button type="button" class="btn btn-info">Tilbage</button>
+                        <a href="/aktiviteterOversigt" role="button"
+                           class="btn btn-info">Tilbage</a>
                         <input type="submit" class="btn btn-success float-right" value="Gem"/>
                     </div>
 

@@ -29,41 +29,41 @@
 
 
                     <input type="text" hidden id="inputID" class="form-control"
-                           th:field="${activity.id}"/>
+                           th:field="${reservation.id}"/>
                     <label for="inputAktivitet">Aktivitet navn</label>
                     <input type="text" id="inputAktivitet" class="form-control"
-                           th:field="${activity.name}"/>
+                           th:field="${reservation.name}"/>
                 </div>
                 <div class="form-group">
 
                     <label>antal minutter</label>
                     <input type="number" id="inputTime" class="form-control"
-                           th:field="${activity.time}"/>
+                           th:field="${reservation.time}"/>
                 </div>
 
                 <div class="form-group">
                     <label>Pris for reservation</label>
                     <input type="number" id="inputPrice" class="form-control"
-                           th:field="${activity.price}"/>
+                           th:field="${reservation.price}"/>
                 </div>
 
                 <div class="form-group">
                     <label>Antal udstyr ledigt</label>
                     <input type="text" id="inputAmount" class="form-control"
-                           th:field="${activity.amountOfEquipment}"/>
+                           th:field="${reservation.amountOfEquipment}"/>
                 </div>
 
 
                 <div class="form-group">
                     <label>Rabat ved antal reserveret udstyr</label>
                     <input type="number" id="inputDiscount" class="form-control"
-                           th:field="${activity.discount}"/>
+                           th:field="${reservation.discount}"/>
                 </div>
 
                 <div class="form-group">
                     <label>billed</label>
                     <input type="text" id="image" class="form-control"
-                           th:field="${activity.image}"/>
+                           th:field="${reservation.image}"/>
                 </div>
                 <div class="form-group">
                     <div class="text-left mb-4">

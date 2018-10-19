@@ -97,6 +97,8 @@ public class ActivityController {
 
     }
 
+
+
     public static ArrayList<Activity> lillemarcusertræt () {
        ArrayList<Activity> hallo= new ArrayList<>();
        Activity h= new Activity("kjsdf",20,"20",20,"ldnsflk",20);

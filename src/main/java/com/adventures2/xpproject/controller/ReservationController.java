@@ -201,33 +201,48 @@ public class ReservationController {
     }
 
     @GetMapping("/editReservation/{id}")
-    public String editReservation(HttpSession session, Model model, @PathVariable int id) {
+    public String editReservation(HttpSession session, Model model, @PathVariable("id") int id) {
 //        if (Authenticate.isLoggedIn(session)) {
         model.addAttribute("reservation", ReservationLogic.getReservationById(id));
-//        model.addAttribute("reservation", ReservationLogic.getReservationsFromDatabaseToArrayList(activity, date));
-        model.addAttribute("activity", ActivityLogic.getActivitiesFromDatabaseToHashMap());
 //            return "/chef/index";
 //        }
 
         System.out.println(ReservationLogic.getReservationById(id));
+
+
+        model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
+        model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
+        model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
+        model.addAttribute("customer_HashMap", CustomerLogic.getCustomersFromDatabaseToHashMap());
+        model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
+        model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
+
         return "/editReservation";
-
-
     }
 
-    @PostMapping("/editReservation/{id}")
-    public String editReservation(Reservation reservation, @PathVariable("id") int id) {
-//        updateReservation(reservation, id);
+    @PostMapping("/editReservation")
+    public String editReservation(Reservation reservation,
+                                  @RequestParam("customer_id") int customer_id,
+                                  @RequestParam("reservation_id") int reservation_id,
+                                  @RequestParam("activity_id") int activity_id,
+                                  @RequestParam("employee_id") int employee_id
+                                  ) {
+
+        reservation.setFk_customer_id(customer_id);
+        reservation.setFk_activity_id(activity_id);
+        reservation.setFk_employee_id(employee_id);
+        System.out.println(reservation);
+//        updateReservation(reservation, reservation_id);
         return "redirect:/";
     }
 
 
-    public void updateReservation(Reservation reservation, int id) {
+    public void updateReservation(Reservation reservation, int reservation_id) {
         DatabaseConnection databaseConnection = (DatabaseConnection) DatabaseConnection.getConnection();
         Connection connection = databaseConnection.getConnection();
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = connection.prepareStatement("UPDATE reservations SET reservations_start = ?, reservations_end =?, " +
+            preparedStatement = connection.prepareStatement("UPDATE reservations INNER JOIN employees on id INNER JOIN customers on id SET reservations_start = ?, reservations_end =?, " +
                     "reservations_customDiscount = ?, reservations_peopleAmount = ?, reservations_fk_activity_id = ?, " +
                     "reservations.fk_customer_id = ?, reservations_fk_user_id = ?, reservations_k_employee_id = ?");
             preparedStatement.setString(1, reservation.getStart());
@@ -237,7 +252,7 @@ public class ReservationController {
             preparedStatement.setInt(5, reservation.getFk_activity_id());
             preparedStatement.setInt(6, reservation.getFk_customer_id());
             preparedStatement.setInt(7, reservation.getFk_user_id());
-            preparedStatement.setInt(8, id);
+            preparedStatement.setInt(8, reservation_id);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
