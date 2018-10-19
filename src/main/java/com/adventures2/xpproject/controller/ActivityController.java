@@ -18,7 +18,7 @@ public class ActivityController {
     //public static ArrayList<Activity> actiList = lillemarcusertræt();
     String succesMessage = "";
 
-  @GetMapping("activity/create")
+  @GetMapping("/activity/create")
   public String orderActivity(HttpSession session, Model model) {
     //if(Authenticate.isLoggedIn(session)) {
     model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
@@ -26,12 +26,12 @@ public class ActivityController {
     model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
     model.addAttribute("aktivitet", new Activity());
     model.addAttribute("rules", new Limit());
-    return "activity/create_activity";
+    return "/activity/create_activity";
     //}
     //return "redirect:/";
   }
 
-    @PostMapping("activity/create")
+    @PostMapping("/activity/create")
     public String orderActivity(HttpSession session, Model model, Activity activity) {
       System.out.println(activity);
         ActivityLogic.createActivity(activity);
@@ -40,13 +40,13 @@ public class ActivityController {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-        return "redirect:/activity/index";
+        return "redirect:/activity/";
         //}
         //return "redirect:/";
 
     }
 
-    @GetMapping("activity/edit/{id}")
+    @GetMapping("/activity/edit/{id}")
     public String editActivity(HttpSession session, Model model, @PathVariable("id") int id) {
         //if(Authenticate.isLoggedIn(session)) {
         model.addAttribute("activity", ActivityLogic.getActivityById(id));
@@ -54,27 +54,27 @@ public class ActivityController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         model.addAttribute("chosenActivity", id);
-        return "activity/edit_activity";
+        return "/activity/edit_activity";
         //}
         //return "redirect:/";
 
     }
 
-    @PostMapping("activity/edit")
-    public String editActivity(HttpSession session, Model model, Activity activity) {
+    @PostMapping("/activity/edit/{id}")
+    public String editActivity(HttpSession session, Model model, Activity activity, @PathVariable("id") int id) {
       System.out.println(activity);
         //if(Authenticate.isLoggedIn(session)) {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         ActivityLogic.updateActivity(activity);
-        return "redirect:/activity/index";
+        return "redirect:/activity/";
         //}
         //return "redirect:/";
 
     }
 
-    @GetMapping("activity/delete/{id}")
+    @GetMapping("/activity/delete/{id}")
     public String deleteAct(HttpSession session, Model model, Activity activity, @PathVariable("id") int id){
         //if(Authenticate.isLoggedIn(session)) {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
@@ -84,37 +84,15 @@ public class ActivityController {
         ActivityLogic.deleteActivity(id);
 
         succesMessage = "Aktiviteten blev slettet";
-        return "redirect:/activity/index";
+        return "redirect:/activity/";
         //}
         //return "redirect:/";
     }
 
-
-//    @PostMapping("/ReserveAKT")
-//    public String orderActivity(Activity activity) {
-//        return "redirect:/VisAktivitet";
-//    }
-//
-//
-//    @GetMapping("/opretres")
-//    public String createActivity(Model model) {
-//        model.addAttribute("aktivitet", new Activity());
-//        return "opretres";
-//    }
-//
-//    @PostMapping("/opretres")
-//    public String createActivity(Activity activity) {
-//
-//
-//        return "redirect:/opretres";
-//    }
-//
-//
-//
-    @GetMapping("activity/")
+    @GetMapping("/activity/")
     public String aktiviteterOversigt(Model model){
         model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
-        return "activity/index";
+        return "/activity/index";
 
 
     }

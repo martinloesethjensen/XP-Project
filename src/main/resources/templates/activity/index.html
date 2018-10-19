@@ -29,12 +29,11 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-
             <table class="table">
                 <thead>
                 <tr>
                     <th scope="col">Aktivitet</th>
-                    <th scope="col" class="text-right">Vælg</th>
+                    <th scope="col" class="text-right">&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,26 +41,25 @@
                     <td th:text="${activity.value.getName()}"></td>
                     <td class="text-right">
                         <form method="get">
-                            <a th:href="@{'activity/edit/' + ${activity.value.getId()}}" class="btn btn-primary">Rediger</a>
-                            <a th:href="@{'activity/delete/'+${activity.value.getId()}}"
-                               onclick="return confirm('Bekræft sletning')" class="btn btn-danger">Slet</a>
+                            <a th:href="@{'/activity/edit/' + ${activity.value.getId()}}" class="btn btn-primary btn-sm">Rediger</a>
+                            <a th:href="@{'/activity/delete/'+${activity.value.getId()}}"
+                               onclick="return confirm('Er du sikker?')" class="btn btn-danger btn-sm">Slet</a>
                         </form>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
+        <div class="col-md-2"></div>
     </div>
 
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-2">
+        <div class="col-md-8">
             <a href="/chef/" class="btn btn-secondary">Tilbage</a>
+            <a href="/activity/create" class="btn btn-success float-right">Tilføj</a>
         </div>
-        <div class="col-md-5"></div>
-        <div class="col-md-1">
-            <a href="activity/create" class="btn btn-success">Tilføj</a>
-        </div>
+        <div class="col-md-2"></div>
     </div>
 </div>
 </body>
