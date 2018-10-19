@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adventure Alley | Oversigt</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body>
+    <div th:replace="/includes/menu::menu"></div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" id="updateTable">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Medarbejder</th>
+                        <th scope="col">Mandag</th>
+                        <th scope="col">Tirsdag</th>
+                        <th scope="col">Onsdag</th>
+                        <th scope="col">Torsdag</th>
+                        <th scope="col">Fredag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="employee: ${employees}" th:attr="data-id=${employee.id}">
+                        <td th:text="${employee.realname}"></td>
+                        <td data-day="monday" th:style="${employee.monday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                        <td data-day="tuesday" th:style="${employee.tuesday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                        <td data-day="wednesday" th:style="${employee.wednesday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                        <td data-day="thursday" th:style="${employee.thursday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                        <td data-day="friday" th:style="${employee.friday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+          $("#updateTable table tbody").on("click", "tr td:not(:first-child)", function () {
+            var thisClick = $(this);
+            $.ajax({
+              url: "http://localhost:8080/api/changeScheme",
+              method: "POST",
+              data: {id: thisClick.parent().data("id"), day: thisClick.data("day")},
+              success: function (data) {
+                $("#updateTable table tbody").empty().append(data);
+              }
+            });
+          });
+        });
+    </script>
+</body>
+</html>

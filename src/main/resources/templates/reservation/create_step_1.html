@@ -15,7 +15,7 @@
 <body>
     <div th:replace="/includes/menu::menu"></div>
     <div class="row" th:each="i: ${#numbers.sequence(0, totalActivities, 4)}">
-        <div class="col-md-3">
+        <div class="col-md-3 mt-4">
             <div class="card">
                 <div class="card-body p-0">
                     <a th:href="${'/reservation/create/'+activities[i].id}" class="p-5">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-4">
             <div class="card" th:if="${i+1} <= ${totalActivities}">
                 <div class="card-body p-0">
                     <a th:href="${'/reservation/create/'+activities[i + 1].id}" class="p-5">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 mt-4">
             <div class="card" th:if="${i+2} <= ${totalActivities}">
                 <div class="card-body p-0">
                     <a th:href="${'/reservation/create/'+activities[i + 2].id}" class="p-5">
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3" th:if="${i+3} <= ${totalActivities}">
+        <div class="col-md-3 mt-4" th:if="${i+3} <= ${totalActivities}">
             <div class="card">
                 <div class="card-body p-0">
                     <a th:href="${'/reservation/create/'+activities[i + 3].id}" class="p-5">

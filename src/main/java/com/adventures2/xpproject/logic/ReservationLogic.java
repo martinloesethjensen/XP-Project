@@ -116,27 +116,49 @@ public class ReservationLogic {
 		return reservations;
 	}
 
-	public static Reservation getReservationById(int id) {
+    public static Reservation getReservationById(int id) {
+        try {
+            PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM reservations WHERE id = ? ");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = DatabaseConnection.queryWithParameters(preparedStatement);
+            if(resultSet.next()){
+                return new Reservation(
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getInt(4),
+                        resultSet.getInt(5),
+                        resultSet.getInt(6),
+                        resultSet.getInt(7),
+                        resultSet.getInt(8),
+                        resultSet.getInt(9)
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+	public static void updateReservation(Reservation reservation, int reservation_id) {
+		PreparedStatement preparedStatement = null;
 		try {
-			PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM reservations WHERE id = ? ");
-			preparedStatement.setInt(1, id);
-			ResultSet resultSet = DatabaseConnection.queryWithParameters(preparedStatement);
-			if (resultSet.next()) {
-				return new Reservation(
-						resultSet.getInt(1),
-						resultSet.getString(2),
-						resultSet.getString(3),
-						resultSet.getInt(4),
-						resultSet.getInt(5),
-						resultSet.getInt(6),
-						resultSet.getInt(7),
-						resultSet.getInt(8),
-						resultSet.getInt(9)
-				);
-			}
+			preparedStatement = DatabaseConnection.getConnection().prepareStatement("UPDATE reservations  SET start = ?, end =?, " +
+					"customDiscount = ?, peopleAmount = ?, fk_customer_id = ?, " +
+					"fk_activity_id = ?, fk_user_id = ?, fk_employee_id = ? where reservations.id = ?");
+			preparedStatement.setString(1, reservation.getStart());
+			preparedStatement.setString(2, reservation.getEnd());
+			preparedStatement.setInt(3, reservation.getCustomDiscount());
+			preparedStatement.setInt(4, reservation.getPeopleAmount());
+			preparedStatement.setInt(5, reservation.getFk_customer_id());
+			preparedStatement.setInt(6, reservation.getFk_activity_id());
+			preparedStatement.setInt(7, reservation.getFk_user_id());
+			preparedStatement.setInt(8, reservation.getFk_employee_id());
+			preparedStatement.setInt(9, reservation_id);
+
+			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+
 	}
 }

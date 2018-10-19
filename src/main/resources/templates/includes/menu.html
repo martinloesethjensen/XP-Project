@@ -7,11 +7,20 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item" th:if="${IS_LOGGED_IN} AND ${NIVEAU} == 1">
+                <a class="nav-link" href="/chef/">Startside</a>
+            </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/">Kalender <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Kalender</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/show_defects">Defekt Udstyr</a>
             </li>
             <li class="nav-item" th:if="${IS_LOGGED_IN} AND ${NIVEAU} == 1">
-                <a class="nav-link" href="/aktiviteterOversigt">Aktiviteter</a>
+                <a class="nav-link" href="/activity/">Aktiviteter</a>
+            </li>
+            <li class="nav-item" th:if="${IS_LOGGED_IN} AND ${NIVEAU} == 1">
+                <a class="nav-link" href="/scheme/">Vagtplan</a>
             </li>
         </ul>
         <ul class="navbar-nav">

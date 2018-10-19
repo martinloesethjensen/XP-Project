@@ -29,9 +29,9 @@ DatabaseConnection.insert(con);
     public static ArrayList<DefectTools> ReadDefects() {
         ResultSet rs = DatabaseConnection.query("select * from defects");
         ArrayList<DefectTools> defectToolsArrayList = new ArrayList<>();
-        DefectTools defect = new DefectTools();
         try {
             while (rs.next()) {
+                DefectTools defect = new DefectTools();
                 defect.setID(rs.getInt("id"));
                 defect.setToolname(
                         rs.getString("name"));
