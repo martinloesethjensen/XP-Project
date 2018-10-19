@@ -15,39 +15,20 @@
           integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
 <body>
-
-
-
 <form class="form-signin" method="Post" th:action="@{/Report_defects}">
     <div class="text-center mb-4">
-        <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo" style="width: 100%">
-        <h1 class="h3 mb-3 font-weight-normal">Adventure Alley | anmeld udstyr</h1>
-
-
+        <img class="mb-4" src="images/logo.png" alt="Adventure Alley Logo">
+        <h1 class="h3 mb-3 font-weight-normal">Anmeld udstyr</h1>
         <div class="form-group">
-
-            <label>navn på udstyr</label>
-            <input type="text" id="inputToolname" class="form-control" th:field="${defects.toolname}" />
+            <label for="inputToolname">Udstyrs navn</label>
+            <input  required type="text" id="inputToolname" class="form-control mb-3" th:field="${defects.toolname}" />
+            <label for="inputPrice">Detaljer</label>
+            <textarea required type="text" id="inputPrice" class="form-control" th:field="${defects.decription}" />
         </div>
-
-        <div class="form-group">
-            <label>detaljer</label>
-            <textarea type="text" id="inputPrice" class="form-control" th:field="${defects.decription}" />
-        </div>
-
-
-
-
-
-
         <div class="text-left mb-4">
-            <a href="/aktiviteterOversigt" role="button"
-               class="btn btn-info">Tilbage</a>
+            <a href="/show_defects" role="button" class="btn btn-info">Tilbage</a>
             <input type="submit" class="btn btn-success float-right" value="Gem"/>
         </div>
-
-
-    </div>
     </div>
 </form>
 
