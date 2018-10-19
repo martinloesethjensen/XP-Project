@@ -232,33 +232,11 @@ public class ReservationController {
         reservation.setFk_activity_id(activity_id);
         reservation.setFk_employee_id(employee_id);
         System.out.println(reservation);
-//        updateReservation(reservation, reservation_id);
+    ReservationLogic.updateReservation(reservation, reservation_id);
         return "redirect:/";
     }
 
 
-    public void updateReservation(Reservation reservation, int reservation_id) {
-        DatabaseConnection databaseConnection = (DatabaseConnection) DatabaseConnection.getConnection();
-        Connection connection = databaseConnection.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement("UPDATE reservations INNER JOIN employees on id INNER JOIN customers on id SET reservations_start = ?, reservations_end =?, " +
-                    "reservations_customDiscount = ?, reservations_peopleAmount = ?, reservations_fk_activity_id = ?, " +
-                    "reservations.fk_customer_id = ?, reservations_fk_user_id = ?, reservations_k_employee_id = ?");
-            preparedStatement.setString(1, reservation.getStart());
-            preparedStatement.setString(2, reservation.getEnd());
-            preparedStatement.setInt(3, reservation.getCustomDiscount());
-            preparedStatement.setInt(4, reservation.getPeopleAmount());
-            preparedStatement.setInt(5, reservation.getFk_activity_id());
-            preparedStatement.setInt(6, reservation.getFk_customer_id());
-            preparedStatement.setInt(7, reservation.getFk_user_id());
-            preparedStatement.setInt(8, reservation_id);
 
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 }
