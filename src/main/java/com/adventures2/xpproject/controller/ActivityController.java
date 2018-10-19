@@ -15,7 +15,6 @@ import java.util.ArrayList;
 
 @Controller
 public class ActivityController {
-    //public static ArrayList<Activity> actiList = lillemarcusertræt();
     String succesMessage = "";
 
   @GetMapping("/activity/create")
@@ -94,16 +93,6 @@ public class ActivityController {
         model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
         return "/activity/index";
 
-
-    }
-
-
-
-    public static ArrayList<Activity> lillemarcusertræt () {
-       ArrayList<Activity> hallo= new ArrayList<>();
-       Activity h= new Activity("kjsdf",20,"20",20,"ldnsflk",20);
-       hallo.add(h);
-       return hallo;
 
     }
 }
