@@ -37,6 +37,7 @@ public class EmployeeLogic {
         try {
             while (resultSet.next()) {
                 employees.add(new Employee(
+                  resultSet.getInt("id"),
                   resultSet.getString("realname"),
                   resultSet.getInt("monday") == 1,
                   resultSet.getInt("tuesday") == 1,

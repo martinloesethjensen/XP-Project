@@ -18,31 +18,47 @@
     <div th:replace="/includes/menu::menu"></div>
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Medarbejder</th>
-                    <th scope="col">Mandag</th>
-                    <th scope="col">Tirsdag</th>
-                    <th scope="col">Onsdag</th>
-                    <th scope="col">Torsdag</th>
-                    <th scope="col">Fredag</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="employee: ${employees}">
-                    <td th:text="${employee.realname}"></td>
-                    <td th:style="${employee.monday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
-                    <td th:style="${employee.tuesday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
-                    <td th:style="${employee.wednesday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
-                    <td th:style="${employee.thursday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
-                    <td th:style="${employee.friday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-md-8" id="updateTable">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Medarbejder</th>
+                        <th scope="col">Mandag</th>
+                        <th scope="col">Tirsdag</th>
+                        <th scope="col">Onsdag</th>
+                        <th scope="col">Torsdag</th>
+                        <th scope="col">Fredag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="employee: ${employees}" th:attr="data-id=${employee.id}">
+                        <td th:text="${employee.realname}"></td>
+                        <td data-day="monday" th:style="${employee.monday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                        <td data-day="tuesday" th:style="${employee.tuesday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                        <td data-day="wednesday" th:style="${employee.wednesday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                        <td data-day="thursday" th:style="${employee.thursday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                        <td data-day="friday" th:style="${employee.friday == true ? 'background: #0f0;' : 'background: #f00;'}">&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="col-md-2"></div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+          $("#updateTable table tbody").on("click", "tr td:not(:first-child)", function () {
+            var thisClick = $(this);
+            $.ajax({
+              url: "http://localhost:8080/api/changeScheme",
+              method: "POST",
+              data: {id: thisClick.parent().data("id"), day: thisClick.data("day")},
+              success: function (data) {
+                $("#updateTable table tbody").empty().append(data);
+              }
+            });
+          });
+        });
+    </script>
 </body>
 </html>

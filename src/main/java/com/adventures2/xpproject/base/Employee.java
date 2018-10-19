@@ -18,7 +18,8 @@ public class Employee {
 	}
 
 	//Constructor for scheme
-	public Employee(String realname, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday) {
+	public Employee(int id, String realname, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday) {
+		this.id = id;
 		this.realname = realname;
 		this.monday = monday;
 		this.tuesday = tuesday;
