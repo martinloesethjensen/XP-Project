@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class ActivityController {
     //public static ArrayList<Activity> actiList = lillemarcusertræt();
     String succesMessage = "";
 
-  @GetMapping("/create_activity")
+  @GetMapping("activity/create")
   public String orderActivity(HttpSession session, Model model) {
     //if(Authenticate.isLoggedIn(session)) {
     model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
@@ -27,12 +26,12 @@ public class ActivityController {
     model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
     model.addAttribute("aktivitet", new Activity());
     model.addAttribute("rules", new Limit());
-    return "create_activity";
+    return "activity/create_activity";
     //}
     //return "redirect:/";
   }
 
-    @PostMapping("/create_activity")
+    @PostMapping("activity/create")
     public String orderActivity(HttpSession session, Model model, Activity activity) {
       System.out.println(activity);
         ActivityLogic.createActivity(activity);
@@ -41,13 +40,13 @@ public class ActivityController {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-        return "redirect:/aktiviteterOversigt";
+        return "redirect:/activity/";
         //}
         //return "redirect:/";
 
     }
 
-    @GetMapping("edit_activity/{id}")
+    @GetMapping("activity/edit/{id}")
     public String editActivity(HttpSession session, Model model, @PathVariable("id") int id) {
         //if(Authenticate.isLoggedIn(session)) {
         model.addAttribute("activity", ActivityLogic.getActivityById(id));
@@ -55,13 +54,13 @@ public class ActivityController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         model.addAttribute("chosenActivity", id);
-        return "edit_activity";
+        return "activity/edit_activity";
         //}
         //return "redirect:/";
 
     }
 
-    @PostMapping("/edit_activity")
+    @PostMapping("activity/edit")
     public String editActivity(HttpSession session, Model model, Activity activity) {
       System.out.println(activity);
         //if(Authenticate.isLoggedIn(session)) {
@@ -69,13 +68,13 @@ public class ActivityController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         ActivityLogic.updateActivity(activity);
-        return "redirect:/aktiviteterOversigt";
+        return "redirect:/activity/";
         //}
         //return "redirect:/";
 
     }
 
-    @GetMapping("/delete_activity/{id}")
+    @GetMapping("activity/delete/{id}")
     public String deleteAct(HttpSession session, Model model, Activity activity, @PathVariable("id") int id){
         //if(Authenticate.isLoggedIn(session)) {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
@@ -85,7 +84,7 @@ public class ActivityController {
         ActivityLogic.deleteActivity(id);
 
         succesMessage = "Aktiviteten blev slettet";
-        return "redirect:/aktiviteterOversigt";
+        return "redirect:/activity/";
         //}
         //return "redirect:/";
     }

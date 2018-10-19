@@ -42,8 +42,8 @@
                     <td th:text="${activity.value.getName()}"></td>
                     <td class="text-right">
                         <form method="get">
-                            <a th:href="@{'/edit_activity/' + ${activity.value.getId()}}" class="btn btn-primary">Rediger</a>
-                            <a th:href="@{'/delete_activity/'+${activity.value.getId()}}"
+                            <a th:href="@{'activity/edit/' + ${activity.value.getId()}}" class="btn btn-primary">Rediger</a>
+                            <a th:href="@{'activity/delete/'+${activity.value.getId()}}"
                                onclick="return confirm('Bekræft sletning')" class="btn btn-danger">Slet</a>
                         </form>
                     </td>
@@ -60,7 +60,7 @@
         </div>
         <div class="col-md-5"></div>
         <div class="col-md-1">
-            <a href="/create_activity" class="btn btn-success">Tilføj</a>
+            <a href="activity/create" class="btn btn-success">Tilføj</a>
         </div>
     </div>
 </div>
