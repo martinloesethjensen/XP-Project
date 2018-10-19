@@ -40,7 +40,7 @@ public class ActivityController {
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
-        return "redirect:/activity/";
+        return "redirect:/activity/index";
         //}
         //return "redirect:/";
 
@@ -68,7 +68,7 @@ public class ActivityController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         ActivityLogic.updateActivity(activity);
-        return "redirect:/activity/";
+        return "redirect:/activity/index";
         //}
         //return "redirect:/";
 
@@ -84,7 +84,7 @@ public class ActivityController {
         ActivityLogic.deleteActivity(id);
 
         succesMessage = "Aktiviteten blev slettet";
-        return "redirect:/activity/";
+        return "redirect:/activity/index";
         //}
         //return "redirect:/";
     }
@@ -111,10 +111,10 @@ public class ActivityController {
 //
 //
 //
-    @GetMapping("/aktiviteterOversigt")
+    @GetMapping("activity/")
     public String aktiviteterOversigt(Model model){
         model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
-        return "aktiviteterOversigt";
+        return "activity/index";
 
 
     }
