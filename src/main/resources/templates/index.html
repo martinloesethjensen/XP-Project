@@ -12,7 +12,8 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
-          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+          crossorigin="anonymous">
 </head>
 <body>
 <div th:replace="/includes/menu::menu"></div>
@@ -25,7 +26,8 @@
                 <!--/*@thymesVar id="dataMapAct" type="java.util.HashMap"*/-->
                 <select class="form-control" id="sel1" name="activity">
                     <option value="0">Alle aktiviteter</option>
-                    <option th:each="activity : ${activities_HashMap}" th:value="${activity.value.getId()}"
+                    <option th:each="activity : ${activities_HashMap}"
+                            th:value="${activity.value.getId()}"
                             th:text="${activity.value.getName()}"></option>
                 </select>
             </div>
@@ -33,14 +35,15 @@
         <div class="col-md-3">
             <div id="imaginary_container">
                 <div class="input-group stylish-input-group">
-                    <input type="date" class="form-control" placeholder="Søg på dag fx. mandag" name="date">
+                    <input type="date" class="form-control" placeholder="Søg på dag fx. mandag"
+                           name="date">
                     <span class="input-group-addon">
                         <input name="search" type="submit" value="Søg" class="btn btn-light">
                     </span>
                 </div>
             </div>
-            <a  href="/reservation/create" class=" btn btn-success float-right"
-                th:if="${IS_LOGGED_IN}">Opret Reservation </a>
+            <a href="/reservation/create" class=" btn btn-success float-right mt-2 mb-2"
+               th:if="${IS_LOGGED_IN}">Opret Reservation </a>
         </div>
     </div>
 </form>
@@ -79,7 +82,8 @@
                                 name="deleteReservation">
                             Slet
                         </button>
-                        <button class="btn btn-primary float-right" type="submit" name="editReservation">
+                        <button class="btn btn-primary float-right" type="submit"
+                                name="editReservation">
                             Rediger
                         </button>
                     </form>
@@ -87,7 +91,6 @@
             </div>
         </td>
     </tr>
-
     </tbody>
 </table>
 </body>
