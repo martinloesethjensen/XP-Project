@@ -109,7 +109,7 @@ public class ActivityLogic {
 
   public static void deleteActivity(int id) {
     try {
-      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("DELETE  FROM activities WHERE id = ? ");
+      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("DELETE activity, reservation FROM activities activity INNER JOIN reservations reservation WHERE activity.id = ? AND reservation.fk_activity_id = activity.id ");
       preparedStatement.setInt(1, id);
       DatabaseConnection.delete(preparedStatement);
     } catch (SQLException e) {
