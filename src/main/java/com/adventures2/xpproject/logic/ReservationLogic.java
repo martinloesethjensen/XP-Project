@@ -20,14 +20,15 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class ReservationLogic {
-	public static void create(Reservation reservation, Customer customer, Employee employee, HttpSession session) {
-		int id = 0;
+	public static void create(Reservation reservation, Customer customer, HttpSession session)
+	{
+		int customer_id = 0;
 
 		//If a new customer is made
 		if (customer.getId() == 0)
-			id = CustomerLogic.create(customer);
+			customer_id = CustomerLogic.create(customer);
 		else
-			id = customer.getId();
+			customer_id = customer.getId();
 
 		try {
 			PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(
@@ -38,10 +39,10 @@ public class ReservationLogic {
 			preparedStatement.setString(2, reservation.getEnd());
 			preparedStatement.setInt(3, reservation.getCustomDiscount());
 			preparedStatement.setInt(4, reservation.getPeopleAmount());
-			preparedStatement.setInt(5, id);
+			preparedStatement.setInt(5, customer_id);
 			preparedStatement.setInt(6, reservation.getFk_activity_id());
 			preparedStatement.setInt(7, (int) session.getAttribute("ID"));
-			preparedStatement.setInt(8, employee.getId());
+			preparedStatement.setInt(8, reservation.getFk_employee_id());
 
 			DatabaseConnection.insert(preparedStatement);
 		} catch (SQLException e) {
@@ -139,12 +140,13 @@ public class ReservationLogic {
         }
         return null;
     }
+
 	public static void updateReservation(Reservation reservation, int reservation_id) {
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = DatabaseConnection.getConnection().prepareStatement("UPDATE reservations  SET start = ?, end =?, " +
 					"customDiscount = ?, peopleAmount = ?, fk_customer_id = ?, " +
-					"fk_activity_id = ?, fk_user_id = ?, fk_employee_id = ? where reservations.id = ?");
+					"fk_activity_id = ?, fk_user_id = ?, fk_employee_id = ? WHERE reservations.id = ?");
 			preparedStatement.setString(1, reservation.getStart());
 			preparedStatement.setString(2, reservation.getEnd());
 			preparedStatement.setInt(3, reservation.getCustomDiscount());
@@ -159,6 +161,5 @@ public class ReservationLogic {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 }

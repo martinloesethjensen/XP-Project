@@ -29,11 +29,9 @@ public class ReservationController {
     private String successMessage = "";
     private int activity = 0;
     private String date = "";
-    //kan ikke
-    // bruges
+
     private Reservation reservation;
-    private Customer customer;
-    private Employee employee;
+	private Customer customer = new Customer();
 
     @GetMapping("/")
     public String view(HttpSession session, Model model) {
@@ -44,7 +42,6 @@ public class ReservationController {
         model.addAttribute("reservation_ArrayList", ReservationLogic.getReservationsFromDatabaseToArrayList(activity, date));
         model.addAttribute("activities_HashMap", ActivityLogic.getActivitiesFromDatabaseToHashMap());
         model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
-
         return "/index";
     }
 
@@ -57,7 +54,6 @@ public class ReservationController {
             this.activity = actitvity;
             this.date = date;
         }
-
         return "redirect:/";
     }
 
@@ -84,15 +80,13 @@ public class ReservationController {
         model.addAttribute("totalActivities", ActivityLogic.getTotalActivities() - 1);
         model.addAttribute("chosenActivity", id);
         model.addAttribute("reservation", new Reservation());
-        model.addAttribute("customer", new Customer());
-        model.addAttribute("employee", new Employee());
         return "/reservation/create_step_2";
         //}
         //return "redirect:/";
     }
 
     @PostMapping("/reservation/create/{id}")
-    public String create(HttpSession session, Reservation reservation, Customer customer, Employee employee,
+    public String create(HttpSession session, Reservation reservation,
                          @RequestParam("action") String action,
                          @RequestParam("date") String date,
                          @RequestParam("activity") int activity_id) {
@@ -105,27 +99,21 @@ public class ReservationController {
             if (!date.equals("")) {
                 try {
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
                     Date date_temp = dateFormat.parse(date);
-
                     long unixTimeStart = date_temp.getTime() / 1000;
                     long unixTimeEnd = unixTimeStart + 86400;
 
+	                //Populate reservation with time and activity_id
                     reservation.setStart(String.valueOf(unixTimeStart));
                     reservation.setEnd(String.valueOf(unixTimeEnd));
                     reservation.setFk_activity_id(activity_id);
                 } catch (ParseException e) {
                     e.printStackTrace();
-
                 }
             }
 
             this.reservation = reservation;
-            this.customer = customer;
-            this.employee = employee;
-            System.out.println(this.reservation);
-            System.out.println(this.customer);
-            System.out.println(this.employee);
+
             return "redirect:/reservation/create_step_3";
         }
         return "redirect:/reservation/create";
@@ -137,57 +125,24 @@ public class ReservationController {
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
         model.addAttribute("employees_HashMap", EmployeeLogic.getEmployeesFromDatabaseToHashMap());
-        model.addAttribute("employee", employee);
         model.addAttribute("customer", customer);
         model.addAttribute("reservation", reservation);
-        System.out.println(this.reservation);
-        System.out.println(this.customer);
-        System.out.println(this.employee);
 
         return "reservation/create_step_3";
     }
 
     @PostMapping("/reservation/create_step_3")
-    public String createActivity3(Reservation reservation, Customer customer, Employee employee,
+    public String createActivity3(HttpSession session, Customer customer,
                                   @RequestParam("action") String action,
                                   @RequestParam("employeeAssigned") int employee_id) {
         if (action.equals("Tilbage")) {
             return "redirect:/reservation/create";
         }
-        System.out.println(employee_id);
-        this.employee.setId(employee_id);
-	    this.employee.setRealname(EmployeeLogic.getEmployeesFromDatabaseToHashMap().get(employee_id).getRealname());
+
+	    //populate reservation object employee id
 	    this.reservation.setFk_employee_id(employee_id);
-	    System.out.println(this.employee.getRealname());
 
-
-		//this.customer = customer;
-
-	    try {
-		    PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement(
-		    		"INSERT INTO customers (company, name, phone, email, newsmail) VALUES (?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
-		    preparedStatement.setString(1, customer.getCompanyName());
-		    preparedStatement.setString(2, customer.getName());
-		    preparedStatement.setString(3, customer.getTelephone());
-		    preparedStatement.setString(4, customer.getEmail());
-		    preparedStatement.setInt(5, customer.isNewsmail() ? 1 : 0);
-
-		    int customer_id = DatabaseConnection.insertReturnId(preparedStatement);
-
-		    //this.customer.setId(customer_id);
-		    this.reservation.setFk_customer_id(customer_id);
-	    } catch (SQLException e) {
-		    e.printStackTrace();
-	    }
-
-
-        System.out.println(this.reservation);
-        System.out.println(customer);
-        System.out.println(employee);
-
-        //ReservationLogic.create(reservation, customer, employee, session);
-
-
+	    ReservationLogic.create(this.reservation, customer, session);
 
         return "redirect:/reservation/create";
     }
@@ -235,8 +190,4 @@ public class ReservationController {
     ReservationLogic.updateReservation(reservation, reservation_id);
         return "redirect:/";
     }
-
-
-
-
 }
