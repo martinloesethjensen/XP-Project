@@ -1,9 +1,7 @@
 package com.adventures2.xpproject.controller;
 
-import com.adventures2.xpproject.DatabaseConnection;
 import com.adventures2.xpproject.auth.Authenticate;
 import com.adventures2.xpproject.base.Customer;
-import com.adventures2.xpproject.base.Employee;
 import com.adventures2.xpproject.base.Reservation;
 import com.adventures2.xpproject.logic.ActivityLogic;
 import com.adventures2.xpproject.logic.CustomerLogic;
@@ -14,11 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.AttributedString;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -161,10 +154,6 @@ public class ReservationController {
         model.addAttribute("reservation", ReservationLogic.getReservationById(id));
 //            return "/chef/index";
 //        }
-
-        System.out.println(ReservationLogic.getReservationById(id));
-
-
         model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
         model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
         model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
@@ -182,12 +171,19 @@ public class ReservationController {
                                   @RequestParam("activity_id") int activity_id,
                                   @RequestParam("employee_id") int employee_id
                                   ) {
-
+	    //populating reservation object with id's for customer, employee, and activity
         reservation.setFk_customer_id(customer_id);
         reservation.setFk_activity_id(activity_id);
         reservation.setFk_employee_id(employee_id);
-        System.out.println(reservation);
-    ReservationLogic.updateReservation(reservation, reservation_id);
+
+	    ReservationLogic.updateReservation(reservation, reservation_id);
         return "redirect:/";
     }
+
+	@GetMapping("reservation/delete/{id}")
+	public String deleteReservation(HttpSession session, Model model, @PathVariable("id") int id)
+	{
+		ReservationLogic.deleteReservation(id);
+		return "redirect:/";
+	}
 }

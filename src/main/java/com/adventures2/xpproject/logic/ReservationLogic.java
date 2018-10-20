@@ -113,7 +113,6 @@ public class ReservationLogic {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return reservations;
 	}
 
@@ -125,8 +124,10 @@ public class ReservationLogic {
             if(resultSet.next()){
                 return new Reservation(
                         resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
+		                new SimpleDateFormat("yyyy-MM-dd HH:mm").format(
+				                new Date(Long.parseLong(resultSet.getString("start")) * 1000 - (3600 * 1000))),
+		                new SimpleDateFormat("yyyy-MM-dd HH:mm").format(
+				                new Date(Long.parseLong(resultSet.getString("end")) * 1000 - (3600 * 1000))),
                         resultSet.getInt(4),
                         resultSet.getInt(5),
                         resultSet.getInt(6),
@@ -143,10 +144,14 @@ public class ReservationLogic {
 
 	public static void updateReservation(Reservation reservation, int reservation_id) {
 		PreparedStatement preparedStatement = null;
+//		long unixTimeStart = 0;
+//		long unixTimeEnd = 0;
+//		DateFormat dateFormat = null;
 		try {
 			preparedStatement = DatabaseConnection.getConnection().prepareStatement("UPDATE reservations  SET start = ?, end =?, " +
 					"customDiscount = ?, peopleAmount = ?, fk_customer_id = ?, " +
 					"fk_activity_id = ?, fk_user_id = ?, fk_employee_id = ? WHERE reservations.id = ?");
+			//implement so it becomes unix timestamp
 			preparedStatement.setString(1, reservation.getStart());
 			preparedStatement.setString(2, reservation.getEnd());
 			preparedStatement.setInt(3, reservation.getCustomDiscount());
@@ -159,6 +164,20 @@ public class ReservationLogic {
 
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void deleteReservation(int reservation_id)
+	{
+		try
+		{
+			PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("DELETE reservations FROM reservations WHERE id = ?");
+			preparedStatement.setInt(1, reservation_id);
+
+			DatabaseConnection.delete(preparedStatement);
+		} catch (SQLException e)
+		{
 			e.printStackTrace();
 		}
 	}
