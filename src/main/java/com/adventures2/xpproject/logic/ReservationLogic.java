@@ -144,16 +144,17 @@ public class ReservationLogic {
 
 	public static void updateReservation(Reservation reservation, int reservation_id) {
 		PreparedStatement preparedStatement = null;
-//		long unixTimeStart = 0;
-//		long unixTimeEnd = 0;
-//		DateFormat dateFormat = null;
 		try {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date dateStart = dateFormat.parse(reservation.getStart());
+			Date dateEnd = dateFormat.parse(reservation.getEnd());
+			long unixTimeStart = dateStart.getTime()/1000 + 3600;
+			long unixTimeEnd = dateEnd.getTime()/1000 + 3600;
 			preparedStatement = DatabaseConnection.getConnection().prepareStatement("UPDATE reservations  SET start = ?, end =?, " +
 					"customDiscount = ?, peopleAmount = ?, fk_customer_id = ?, " +
 					"fk_activity_id = ?, fk_user_id = ?, fk_employee_id = ? WHERE reservations.id = ?");
-			//implement so it becomes unix timestamp
-			preparedStatement.setString(1, reservation.getStart());
-			preparedStatement.setString(2, reservation.getEnd());
+			preparedStatement.setString(1, String.valueOf(unixTimeStart));
+			preparedStatement.setString(2, String.valueOf(unixTimeEnd));
 			preparedStatement.setInt(3, reservation.getCustomDiscount());
 			preparedStatement.setInt(4, reservation.getPeopleAmount());
 			preparedStatement.setInt(5, reservation.getFk_customer_id());
@@ -163,7 +164,7 @@ public class ReservationLogic {
 			preparedStatement.setInt(9, reservation_id);
 
 			preparedStatement.executeUpdate();
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			e.printStackTrace();
 		}
 	}
