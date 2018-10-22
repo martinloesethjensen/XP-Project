@@ -1,0 +1,105 @@
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title> Store </title>
+
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" href="/css/ReservationFillOutCSS.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+
+</head>
+<body>
+<div th:replace="/includes/menu::menu"></div>
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div class="row mt-5">
+            <div class="col-7" data-spy="scroll">
+                <h1 >Products</h1>
+
+                <table class="table text-center">
+                    <thead>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>Product</td>
+                        <td>Product</td>
+                        <td>Product</td>
+                        <td>Product</td>
+                    </tr>
+                    <tr>
+                        <td>Product</td>
+                        <td>Product</td>
+                        <td>Product</td>
+                        <td>Product</td>
+                    </tr>
+                    <tr>
+                        <td>Product</td>
+                        <td>Product</td>
+                        <td>Product</td>
+                        <td>Product</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="col-1"></div>
+            <div class="col-4">
+                <h1>Basket</h1>
+                <table class="table">
+                    <thead>
+                    <th>Product</th>
+                    <th>price</th>
+                    <th>Amount</th>
+                    <th>Remove</th>
+                    </thead>
+                    <tbody>
+                    <tr class="text-center">
+                        <td>Product1</td>
+                        <td>20kr</td>
+                        <td>4</td>
+                        <td><a  class="fas fa-minus mx-auto"></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-1"></div>
+
+</div>
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-5">
+        <button class="btn btn-info mt-4">Tilbage</button>
+
+    </div>
+    <div class="col-5" >
+        <button class="btn btn-success float-right mt-4">Checkout</button>
+    </div>
+        <div class="col-1"></div>
+
+    </div>
+</body>
+</html>
