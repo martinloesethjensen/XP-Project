@@ -16,8 +16,11 @@
     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">-->
     <link rel="stylesheet" href="/css/ReservationFillOutCSS.css">
 
-    <script>
-        function finalCost() {
+    <script>function goBack() {
+      window.history.back();
+    }
+
+    function finalCost() {
             var roomType = document.getElementById("room_type").value;
             var roomNum = document.getElementById("room_number").value;
             var personNum = document.getElementById("person_number").value;
@@ -103,16 +106,16 @@
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-2">
-                <form method="post">
-                    <input type="submit" name="action" class="btn btn-primary" value="Tilbage">
-                </form>
+                <button onclick="goBack()" class="btn btn-primary">Tilbage</button>
             </div>
-            <div class="col-sm-5"></div>
+            <div class="col-sm-6"></div>
             <div class="col-sm-2">
                 <button type="submit" name="action" class="btn btn-success btn-right">Næste</button>
             </div>
         </div>
     </div>
 </form>
+
+
 </body>
 </html>
