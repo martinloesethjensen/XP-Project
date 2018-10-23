@@ -1,3 +1,6 @@
+body{
+    background-image: linear-gradient(yellow, greenyellow);
+}
 .form-signin {
 
     width: 100%;
