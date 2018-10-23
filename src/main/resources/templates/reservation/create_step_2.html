@@ -25,7 +25,9 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="date">Dato:</label>
-                    <input type="time" name="date" id="date" class="form-control">
+                    <input type="date" name="date" id="date" class="form-control">
+                    <input type="time" name="date" id="start" value="10:00:00" step="1800" min="10:00" max="18:00" class="form-control">
+                    <input type="time" name="date" id="end" value="11:00:00" step="1800" min="10:00" max="18:00" class="form-control">
                 </div>
             </div>
             <div class="col-md-4">
@@ -44,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div clas="row">
             <table class="table table-striped">
                 <thead>
                     <tr>
