@@ -14,6 +14,7 @@ public class SchemeController {
 
   @GetMapping("/scheme/")
   public String overview(HttpSession session, Model model) {
+    if(!Authenticate.isLoggedIn(session)) return "redirect:/";
     model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
     model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
     model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
