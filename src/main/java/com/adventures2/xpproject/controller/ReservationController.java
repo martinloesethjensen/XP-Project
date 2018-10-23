@@ -82,7 +82,9 @@ public class ReservationController {
     public String create(HttpSession session, Reservation reservation,
                          @RequestParam("action") String action,
                          @RequestParam("date") String date,
-                         @RequestParam("activity") int activity_id) {
+                         @RequestParam("activity") int activity_id,
+                         @RequestParam("time") String time)
+    {
 
         if (action.equals("Tilbage")) {
             return "redirect:/reservation/create";
@@ -91,10 +93,15 @@ public class ReservationController {
 
             if (!date.equals("")) {
                 try {
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    Date date_temp = dateFormat.parse(date);
-                    long unixTimeStart = date_temp.getTime() / 1000;
-                    long unixTimeEnd = unixTimeStart + 86400;
+	                String[] timeSplit = time.split(" ");
+	                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	                Date date_temp_start = dateFormat.parse(date + " " + timeSplit[0]);
+	                Date date_temp_end = dateFormat.parse(date + " " + timeSplit[1]);
+	                long unixTimeStart = date_temp_start.getTime() / 1000;
+	                long unixTimeEnd = date_temp_end.getTime() / 1000;
+
+	                System.out.println(unixTimeStart);
+	                System.out.println(unixTimeEnd);
 
 	                //Populate reservation with time and activity_id
                     reservation.setStart(String.valueOf(unixTimeStart));

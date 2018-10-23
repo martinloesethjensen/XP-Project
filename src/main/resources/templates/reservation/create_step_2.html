@@ -49,18 +49,29 @@
                 <thead>
                     <tr>
                         <th scope="col">Tid</th>
-                        <th scope="col">Ledige medarbejdere</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>10-11</td>
-                        <!--for each array of available instructors-->
-                        <td> <!--th:utext="'Navn:&emsp;&emsp;' + ${customer_HashMap.get(data.fk_customer_id).getName()} + '<br/>'" -->>
-                            Her skal ledige instruktører listes.
+                        <td>
+                            10:00 til 10:30<br>
+                            10:00 til 10:30<br>
+                            10:00 til 10:30<br>
+                            10:00 til 10:30<br>
+                            10:00 til 10:30<br>
+                            10:00 til 10:30<br>
                         </td>
-                        <td><input type="radio"><br></td>
+                        <td>
+                            <input name="time" type="checkbox" value="10:00 10:30"><br>
+                            <input name="time" type="checkbox" value="10:30 11:00"><br>
+                            <input name="time" type="checkbox" value="11:00 11:30"><br>
+                            <input name="time" type="checkbox" value="11:30 12:00"><br>
+                            <input name="time" type="checkbox" value="12:00 12:30"><br>
+                            <input name="time" type="checkbox" value="12:30 13:00"><br>
+                            <input name="time" type="checkbox" value="13:00 13:30"><br>
+                            <input name="time" type="checkbox" value="13:30 14:00"><br>
+                        </td>
                     <tr>
                 </tbody>
             </table>
