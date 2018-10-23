@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -17,26 +17,41 @@
 <form method="post">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 <h1>Opret reservation</h1>
             </div>
+            <div class="col-md-2"></div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="date">Dato:</label>
                     <input type="date" name="date" id="date" class="form-control">
-                    <input type="time" name="start" id="start" value="10:00:00" step="1800" min="10:00" max="18:00" class="form-control">
-                    <input type="time" name="end" id="end" value="11:00:00" step="1800" min="10:00" max="18:00" class="form-control">
+                    <label for="start">Start:</label>
+                    <input type="time" name="start" id="start" value="10:00:00" step="1800" min="10:00" max="18:00"
+                           class="form-control">
+                    <label for="end">Slut:</label>
+                    <input type="time" name="end" id="end" value="11:00:00" step="1800" min="10:00" max="18:00"
+                           class="form-control">
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="people">Antal deltagere:</label>
-                    <input type="number" name="peopleAmount" id="people" class="form-control" min="0" th:field="${reservation.peopleAmount}">
+                    <input type="number" name="peopleAmount" id="people" class="form-control" min="0"
+                           th:field="${reservation.peopleAmount}">
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="activity">Aktivitet:</label>
                     <select name="activity" id="activity" class="form-control">
@@ -45,44 +60,16 @@
                     </select>
                 </div>
             </div>
+            <div class="col-md-2"></div>
         </div>
-        <div clas="row">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Tid</th>
-                        <th scope="col">&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            10:00 til 10:30<br>
-                            10:00 til 10:30<br>
-                            10:00 til 10:30<br>
-                            10:00 til 10:30<br>
-                            10:00 til 10:30<br>
-                            10:00 til 10:30<br>
-                        </td>
-                        <td>
-                            <input name="time" type="checkbox" value="10:00 10:30"><br>
-                            <input name="time" type="checkbox" value="10:30 11:00"><br>
-                            <input name="time" type="checkbox" value="11:00 11:30"><br>
-                            <input name="time" type="checkbox" value="11:30 12:00"><br>
-                            <input name="time" type="checkbox" value="12:00 12:30"><br>
-                            <input name="time" type="checkbox" value="12:30 13:00"><br>
-                            <input name="time" type="checkbox" value="13:00 13:30"><br>
-                            <input name="time" type="checkbox" value="13:30 14:00"><br>
-                        </td>
-                    <tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="col-md-2"></div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 <input type="submit" name="action" class="btn btn-primary" value="Tilbage">
                 <input type="submit" name="action" class="btn btn-success float-right" value="Næste">
             </div>
+            <div class="col-md-2"></div>
         </div>
     </div>
 </form>

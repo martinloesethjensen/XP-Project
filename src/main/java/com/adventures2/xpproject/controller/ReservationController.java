@@ -83,7 +83,8 @@ public class ReservationController {
                          @RequestParam("action") String action,
                          @RequestParam("date") String date,
                          @RequestParam("activity") int activity_id,
-                         @RequestParam("time") String time)
+                         @RequestParam("start") String startTime,
+                         @RequestParam("end") String endTime)
     {
 
         if (action.equals("Tilbage")) {
@@ -93,15 +94,11 @@ public class ReservationController {
 
             if (!date.equals("")) {
                 try {
-	                String[] timeSplit = time.split(" ");
 	                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	                Date date_temp_start = dateFormat.parse(date + " " + timeSplit[0]);
-	                Date date_temp_end = dateFormat.parse(date + " " + timeSplit[1]);
-	                long unixTimeStart = date_temp_start.getTime() / 1000;
-	                long unixTimeEnd = date_temp_end.getTime() / 1000;
-
-	                System.out.println(unixTimeStart);
-	                System.out.println(unixTimeEnd);
+	                Date date_temp_start = dateFormat.parse(date + " " + startTime);
+	                Date date_temp_end = dateFormat.parse(date + " " + endTime);
+	                long unixTimeStart = date_temp_start.getTime() / 1000 + (3600 * 2);
+	                long unixTimeEnd = date_temp_end.getTime() / 1000 + (3600 * 2);
 
 	                //Populate reservation with time and activity_id
                     reservation.setStart(String.valueOf(unixTimeStart));
