@@ -1,5 +1,6 @@
 package com.adventures2.xpproject.controller;
 
+import com.adventures2.xpproject.auth.Authenticate;
 import com.adventures2.xpproject.base.DefectTools;
 import com.adventures2.xpproject.logic.DefectLogic;
 
@@ -9,12 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class DefectController {
 
 
   @GetMapping("/Report_defects")
-  public String reportDefects(Model model) {
+  public String reportDefects(HttpSession session, Model model) {
+    model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
+    model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
+    model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
     model.addAttribute("defects", new DefectTools());
     return "defects/Report_defects";
   }
@@ -26,7 +32,10 @@ public class DefectController {
   }
 
   @GetMapping("/show_defects")
-  public String showDefects(Model model) {
+  public String showDefects( HttpSession session, Model model) {
+    model.addAttribute("IS_LOGGED_IN", Authenticate.isLoggedIn(session));
+    model.addAttribute("NIVEAU", session.getAttribute("NIVEAU"));
+    model.addAttribute("REALNAME", session.getAttribute("REALNAME"));
     model.addAttribute("DefectArray", DefectLogic.ReadDefects());
     return "defects/show_defects";
   }
