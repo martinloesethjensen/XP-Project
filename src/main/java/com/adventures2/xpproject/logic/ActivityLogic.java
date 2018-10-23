@@ -109,9 +109,12 @@ public class ActivityLogic {
 
   public static void deleteActivity(int id) {
     try {
-      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("DELETE activity, reservation FROM activities activity INNER JOIN reservations reservation WHERE activity.id = ? AND reservation.fk_activity_id = activity.id ");
+      PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("DELETE  FROM activities WHERE id = ?");
+      PreparedStatement preparedStatement2 = DatabaseConnection.getConnection().prepareStatement("DELETE  FROM reservations WHERE fk_activity_id = ?");
       preparedStatement.setInt(1, id);
+      preparedStatement2.setInt(1, id);
       DatabaseConnection.delete(preparedStatement);
+      DatabaseConnection.delete(preparedStatement2);
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -126,13 +129,13 @@ public class ActivityLogic {
       if (resultSet.next()) {
         // int id, String name, double price, String time, int discount, String image
         return new Activity(
-                resultSet.getInt(1),
-                resultSet.getString(2),
-                resultSet.getDouble(3),
-                resultSet.getString(4),
-                resultSet.getInt(5),
-                resultSet.getString(6),
-                resultSet.getInt(7)
+          resultSet.getInt(1),
+          resultSet.getString(2),
+          resultSet.getDouble(3),
+          resultSet.getString(4),
+          resultSet.getInt(5),
+          resultSet.getString(6),
+          resultSet.getInt(7)
         );
       }
     } catch (SQLException e) {
