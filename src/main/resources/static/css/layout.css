@@ -1,5 +1,10 @@
-body{
-    background-image: linear-gradient(yellow, greenyellow);
+
+body {
+    background: linear-gradient(yellow, greenyellow) ;
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 .form-signin {
 
